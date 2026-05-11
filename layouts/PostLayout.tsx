@@ -9,6 +9,7 @@ import Image from '@/components/Image'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
+import AdUnit from '@/components/AdUnit'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -68,8 +69,63 @@ export default function PostLayout({
     (pricing && pricingColors[pricing]) ||
     'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400'
 
-  // JSON-LD Schema for SoftwareApplication
-  const jsonLd = isToolReview
+  // JSON-LD Structured Data
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description: summary,
+    url: `${siteMetadata.siteUrl}/${path}`,
+    datePublished: date,
+    dateModified: lastUpdated || date,
+    author: authorDetails
+      .filter((a) => a.name)
+      .map((a) => ({
+        '@type': 'Person',
+        name: a.name,
+        ...(a.avatar ? { image: `${siteMetadata.siteUrl}${a.avatar}` } : {}),
+      })),
+    publisher: {
+      '@type': 'Organization',
+      name: siteMetadata.title,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteMetadata.siteUrl}${siteMetadata.siteLogo}`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteMetadata.siteUrl}/${path}`,
+    },
+    ...(tags && tags.length > 0 ? { articleSection: tags[0] } : {}),
+  }
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: siteMetadata.siteUrl,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Reviews',
+        item: `${siteMetadata.siteUrl}/blog`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: title,
+        item: `${siteMetadata.siteUrl}/${path}`,
+      },
+    ],
+  }
+
+  const softwareJsonLd = isToolReview
     ? {
         '@context': 'https://schema.org',
         '@type': 'SoftwareApplication',
@@ -99,11 +155,19 @@ export default function PostLayout({
 
   return (
     <SectionContainer>
-      {/* JSON-LD Schema */}
-      {jsonLd && (
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {softwareJsonLd && (
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
         />
       )}
       <ScrollTopAndComment />
@@ -381,23 +445,27 @@ export default function PostLayout({
             <div
               className={`${isToolReview ? '' : 'xl:col-span-3 xl:row-span-2 xl:pb-0'}`}
             >
-              {/* Ad Placeholder - In-Content */}
+              {/* In-Content Ad */}
               {isToolReview && (
-                <div className="my-6 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 px-4 py-10 text-center dark:border-gray-700 dark:bg-gray-800/50">
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                    Advertisement
-                  </p>
+                <div className="my-6">
+                  <AdUnit
+                    adSlot="1234567890"
+                    adFormat="rectangle"
+                    className="min-h-[250px]"
+                  />
                 </div>
               )}
               <div className="prose dark:prose-invert max-w-none pt-8 pb-8">
                 {children}
               </div>
-              {/* Ad Placeholder - Bottom */}
+              {/* Bottom Ad */}
               {isToolReview && (
-                <div className="mb-6 rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 px-4 py-10 text-center dark:border-gray-700 dark:bg-gray-800/50">
-                  <p className="text-xs font-medium uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                    Advertisement
-                  </p>
+                <div className="mb-6">
+                  <AdUnit
+                    adSlot="2345678901"
+                    adFormat="rectangle"
+                    className="min-h-[250px]"
+                  />
                 </div>
               )}
               <div className="pt-4 pb-6 text-sm text-gray-700 dark:text-gray-300">
@@ -418,12 +486,14 @@ export default function PostLayout({
             </div>
             <footer>
               <div className="divide-gray-200 text-sm leading-5 font-medium xl:divide-y dark:divide-gray-700">
-                {/* Ad Placeholder - Sidebar */}
+                {/* Sidebar Ad */}
                 {isToolReview && (
-                  <div className="rounded-xl border-2 border-dashed border-gray-200 bg-gray-50 px-4 py-10 text-center dark:border-gray-700 dark:bg-gray-800/50">
-                    <p className="text-xs font-medium uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                      Advertisement
-                    </p>
+                  <div className="mb-4">
+                    <AdUnit
+                      adSlot="3456789012"
+                      adFormat="rectangle"
+                      className="min-h-[250px]"
+                    />
                   </div>
                 )}
                 {tags && tags.length > 0 && (
