@@ -6,8 +6,8 @@ const siteMetadata = {
   description: 'Curated AI tools with in-depth reviews. Find the right AI for your needs — from writing and coding to design and productivity.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
-  siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
+  siteUrl: 'https://next-happy.com',
+  siteRepo: 'https://github.com/pengyunzhaoisme1207-bit/ai-tool-directory',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   mastodon: 'https://mastodon.social/@mastodonuser',
