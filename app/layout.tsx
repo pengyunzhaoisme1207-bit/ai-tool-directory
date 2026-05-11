@@ -101,14 +101,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
       <link rel="alternate" type="application/rss+xml" href={`${basePath}/feed.xml`} />
-      {/* Theme initialization script - runs before hydration to prevent flash/mismatch */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-!function(){try{var t=localStorage.getItem('theme');if(t)return void document.documentElement.classList.toggle('dark',t==='dark');var m=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',m)}catch(e){}}();
-          `.trim(),
-        }}
-      />
       <body
         className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white"
         suppressHydrationWarning
