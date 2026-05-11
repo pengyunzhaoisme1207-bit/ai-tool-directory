@@ -23,7 +23,7 @@ const CATEGORIES = [
 
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
   grid: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -33,7 +33,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   chat: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -43,7 +43,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   image: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -53,7 +53,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   code: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -63,7 +63,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   sparkle: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -73,7 +73,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   video: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -83,7 +83,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   audio: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -93,7 +93,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   search: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -103,7 +103,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   palette: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -113,7 +113,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   pen: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -123,7 +123,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   wand: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -133,7 +133,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
     </svg>
   ),
   robot: (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -151,21 +151,6 @@ const PRICING_FILTERS = [
   { key: 'Paid', label: 'Paid' },
 ]
 
-const CATEGORY_COLORS: Record<string, string> = {
-  All: 'from-blue-500 to-blue-600',
-  LLM: 'from-violet-500 to-purple-600',
-  'Image Gen': 'from-pink-500 to-rose-600',
-  Coding: 'from-emerald-500 to-green-600',
-  Productivity: 'from-amber-500 to-orange-600',
-  Video: 'from-red-500 to-red-600',
-  Audio: 'from-cyan-500 to-blue-600',
-  Search: 'from-indigo-500 to-blue-600',
-  Design: 'from-fuchsia-500 to-purple-600',
-  Writing: 'from-teal-500 to-cyan-600',
-  Creative: 'from-yellow-500 to-amber-600',
-  'AI Agent': 'from-slate-500 to-gray-600',
-}
-
 export default function Home({ posts }) {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
@@ -175,19 +160,8 @@ export default function Home({ posts }) {
   const totalTools = posts.length
   const freeCount = posts.filter((p) => p.pricing === 'Free').length
   const freemiumCount = posts.filter((p) => p.pricing === 'Freemium').length
-  const categories = useMemo(
-    () => [...new Set(posts.map((p) => p.category).filter(Boolean))],
-    [posts]
-  )
-  const categoryCount = categories.length
-
-  // Top rated tools (rating >= 4.5)
-  const topPicks = useMemo(
-    () =>
-      posts
-        .filter((p) => p.rating && p.rating >= 4.5)
-        .sort((a, b) => (b.rating || 0) - (a.rating || 0))
-        .slice(0, 3),
+  const categoryCount = useMemo(
+    () => new Set(posts.map((p) => p.category).filter(Boolean)).size,
     [posts]
   )
 
@@ -202,6 +176,17 @@ export default function Home({ posts }) {
     return counts
   }, [posts])
 
+  // Top rated tools (rating >= 4.5)
+  const topPicks = useMemo(
+    () =>
+      posts
+        .filter((p) => p.rating && p.rating >= 4.5)
+        .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+        .slice(0, 3),
+    [posts]
+  )
+
+  // Filtered posts
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
       const q = searchQuery.toLowerCase()
@@ -212,249 +197,298 @@ export default function Home({ posts }) {
         (post.summary && post.summary.toLowerCase().includes(q))
 
       const matchesCategory = activeCategory === 'All' || post.category === activeCategory
-
       const matchesPricing = activePricing === 'all' || post.pricing === activePricing
 
       return matchesSearch && matchesCategory && matchesPricing
     })
   }, [posts, searchQuery, activeCategory, activePricing])
 
+  // Visible categories (All + categories that have tools)
+  const visibleCategories = CATEGORIES.filter(
+    (cat) => cat.key === 'All' || categoryCounts[cat.key] > 0
+  )
+
   return (
     <>
       {/* Hero Section */}
-      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 px-6 py-12 md:py-16 dark:from-blue-800 dark:via-blue-900 dark:to-indigo-950">
+      <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 px-6 py-10 md:py-14 dark:from-blue-800 dark:via-blue-900 dark:to-indigo-950">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
         <div className="relative mx-auto max-w-3xl text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white/80 backdrop-blur-sm">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white/80 backdrop-blur-sm">
             <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
               <path d="M11.3 1.046A1.5 1.5 0 0113 2v5h4a1.5 1.5 0 01.707 2.821l-9 5.25a1.5 1.5 0 01-2.407-1.643L7.44 8H3a1.5 1.5 0 01-1.33-2.198l9.5-5.25z" />
             </svg>
             Curated AI Tools Directory
           </div>
-          <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-white md:text-5xl">
+          <h1 className="mb-3 text-3xl font-extrabold tracking-tight text-white md:text-4xl">
             Find the Right AI Tool
           </h1>
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-blue-100 md:text-xl">
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-blue-100 md:text-lg">
             {siteMetadata.description}
           </p>
+          {/* Stats inline */}
+          <div className="mt-5 flex items-center justify-center gap-6 text-sm text-blue-200">
+            <span>
+              <strong className="text-white">{totalTools}</strong> Tools
+            </span>
+            <span className="text-blue-300">·</span>
+            <span>
+              <strong className="text-white">{categoryCount}</strong> Categories
+            </span>
+            <span className="text-blue-300">·</span>
+            <span>
+              <strong className="text-white">{freeCount + freemiumCount}</strong> Free
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* Stats Bar */}
-      <div className="mb-10 grid grid-cols-3 gap-4 md:gap-6">
-        {[
-          { label: 'Tools Reviewed', value: totalTools, icon: 'grid' },
-          { label: 'Categories', value: categoryCount, icon: 'sparkle' },
-          { label: 'Free & Freemium', value: freeCount + freemiumCount, icon: 'sparkle' },
-        ].map((stat) => (
-          <div
-            key={stat.label}
-            className="rounded-2xl border border-gray-100 bg-white px-4 py-5 text-center shadow-sm dark:border-gray-800 dark:bg-gray-900"
-          >
-            <div className="text-2xl font-extrabold text-gray-900 md:text-3xl dark:text-gray-100">
-              {stat.value}
-            </div>
-            <div className="mt-1 text-xs font-medium tracking-wide text-gray-500 uppercase dark:text-gray-400">
-              {stat.label}
-            </div>
+      {/* Two-column layout: sidebar + content */}
+      <div className="flex gap-8">
+        {/* Sidebar — Category Navigation */}
+        <aside className="hidden w-48 shrink-0 lg:block">
+          <div className="sticky top-24">
+            <h2 className="mb-3 text-sm font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+              Categories
+            </h2>
+            <nav className="space-y-0.5">
+              {visibleCategories.map((cat) => {
+                const count = cat.key === 'All' ? totalTools : categoryCounts[cat.key] || 0
+                const isActive = activeCategory === cat.key
+                return (
+                  <button
+                    key={cat.key}
+                    onClick={() => {
+                      setActiveCategory(cat.key)
+                      setActivePricing('all')
+                      setSearchQuery('')
+                    }}
+                    className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm transition-colors duration-150 ${
+                      isActive
+                        ? 'bg-blue-50 font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200'
+                    }`}
+                  >
+                    <span
+                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md ${
+                        isActive
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
+                      }`}
+                    >
+                      {CATEGORY_ICONS[cat.icon]}
+                    </span>
+                    <span className="flex-1 truncate">{cat.label}</span>
+                    <span
+                      className={`text-xs tabular-nums ${
+                        isActive
+                          ? 'text-blue-500 dark:text-blue-400'
+                          : 'text-gray-400 dark:text-gray-500'
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                )
+              })}
+            </nav>
           </div>
-        ))}
-      </div>
+        </aside>
 
-      {/* Top Picks */}
-      {topPicks.length > 0 && (
-        <div className="mb-10">
-          <div className="mb-4 flex items-center gap-2">
-            <svg className="h-5 w-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-            <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">Top Rated Picks</h2>
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            {topPicks.map((post) => (
-              <Link
-                key={post.slug}
-                href={`/${post.path}`}
-                className="group rounded-2xl border border-gray-100 bg-gradient-to-br from-yellow-50 to-amber-50 px-5 py-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-gray-800 dark:from-gray-900 dark:to-gray-800"
-              >
-                <div className="flex items-center gap-3">
-                  {post.logo && (
-                    <img src={post.logo} alt="" className="h-10 w-10 rounded-lg object-contain" />
-                  )}
-                  <div className="min-w-0 flex-1">
-                    <div className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100">
-                      {post.title}
-                    </div>
-                    <div className="flex items-center gap-1 text-xs text-yellow-600 dark:text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className={`h-3.5 w-3.5 ${i < Math.floor(post.rating) ? 'text-yellow-400' : 'text-gray-200 dark:text-gray-700'}`}
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                      <span className="ml-1 font-medium">{post.rating}</span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Category Cards */}
-      <div className="mb-10">
-        <h2 className="mb-4 text-lg font-bold text-gray-900 dark:text-gray-100">
-          Browse by Category
-        </h2>
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
-          {CATEGORIES.filter((cat) => cat.key === 'All' || categoryCounts[cat.key] > 0).map(
-            (cat) => (
-              <button
-                key={cat.key}
-                onClick={() => {
-                  setActiveCategory(cat.key)
-                  setActivePricing('all')
-                  setSearchQuery('')
-                }}
-                className={`group flex flex-col items-center gap-2 rounded-2xl border px-3 py-4 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
-                  activeCategory === cat.key
-                    ? 'border-blue-200 bg-blue-50 shadow-sm dark:border-blue-700 dark:bg-blue-900/30'
-                    : 'border-gray-100 bg-white hover:border-gray-200 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700'
-                }`}
-              >
-                <div
-                  className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${CATEGORY_COLORS[cat.key] || 'from-gray-400 to-gray-500'} text-white shadow-sm transition-transform duration-200 group-hover:scale-110`}
+        {/* Main content area */}
+        <div className="min-w-0 flex-1">
+          {/* Mobile category scroll */}
+          <div className="mb-4 flex gap-2 overflow-x-auto pb-2 lg:hidden">
+            {visibleCategories.map((cat) => {
+              const count = cat.key === 'All' ? totalTools : categoryCounts[cat.key] || 0
+              const isActive = activeCategory === cat.key
+              return (
+                <button
+                  key={cat.key}
+                  onClick={() => {
+                    setActiveCategory(cat.key)
+                    setActivePricing('all')
+                    setSearchQuery('')
+                  }}
+                  className={`flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                    isActive
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400'
+                  }`}
                 >
                   {CATEGORY_ICONS[cat.icon]}
-                </div>
-                <div className="text-xs font-medium text-gray-700 dark:text-gray-300">
-                  {cat.label}
-                </div>
-                <div className="text-[10px] text-gray-400 dark:text-gray-500">
-                  {cat.key === 'All' ? totalTools : categoryCounts[cat.key] || 0}
-                </div>
-              </button>
-            )
-          )}
-        </div>
-      </div>
+                  <span>{cat.label}</span>
+                  <span className={isActive ? 'text-blue-200' : 'text-gray-400'}>{count}</span>
+                </button>
+              )
+            })}
+          </div>
 
-      {/* Filter Bar */}
-      <div className="mb-8 space-y-4">
-        {/* Search Bar */}
-        <div className="relative">
-          <svg
-            className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-gray-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-          <input
-            type="text"
-            placeholder="Search tools by name, tag, or keyword..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-xl border border-gray-200 bg-white py-3 pr-4 pl-12 text-sm text-gray-900 shadow-sm transition-shadow focus:border-blue-400 focus:shadow-md focus:ring-2 focus:ring-blue-100 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-blue-600 dark:focus:ring-blue-900/30"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => {
-                setSearchQuery('')
-                setActiveCategory('All')
-                setActivePricing('all')
-              }}
-              className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300"
-            >
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          {/* Top Rated Picks */}
+          {topPicks.length > 0 && activeCategory === 'All' && !searchQuery && (
+            <div className="mb-8">
+              <div className="mb-3 flex items-center gap-2">
+                <svg className="h-4 w-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <h2 className="text-sm font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                  Top Rated Picks
+                </h2>
+              </div>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {topPicks.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/${post.path}`}
+                    className="group rounded-xl border border-gray-100 bg-gradient-to-br from-yellow-50 to-amber-50 px-4 py-3 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-gray-800 dark:from-gray-900 dark:to-gray-800"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      {post.logo && (
+                        <img src={post.logo} alt="" className="h-8 w-8 rounded-lg object-contain" />
+                      )}
+                      <div className="min-w-0 flex-1">
+                        <div className="truncate text-xs font-semibold text-gray-900 dark:text-gray-100">
+                          {post.title}
+                        </div>
+                        <div className="flex items-center gap-0.5 text-xs text-yellow-600 dark:text-yellow-400">
+                          {[...Array(5)].map((_, i) => (
+                            <svg
+                              key={i}
+                              className={`h-3 w-3 ${i < Math.floor(post.rating) ? 'text-yellow-400' : 'text-gray-200 dark:text-gray-700'}`}
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                          <span className="ml-1 font-medium">{post.rating}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Search & Pricing */}
+          <div className="mb-6 space-y-3">
+            <div className="relative">
+              <svg
+                className="absolute top-1/2 left-3.5 h-4.5 w-4.5 -translate-y-1/2 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-            </button>
+              <input
+                type="text"
+                placeholder="Search tools by name, tag, or keyword..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full rounded-lg border border-gray-200 bg-white py-2.5 pr-4 pl-10 text-sm text-gray-900 shadow-sm transition-shadow focus:border-blue-400 focus:shadow-md focus:ring-2 focus:ring-blue-100 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-blue-600 dark:focus:ring-blue-900/30"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => {
+                    setSearchQuery('')
+                    setActiveCategory('All')
+                    setActivePricing('all')
+                  }}
+                  className="absolute top-1/2 right-2.5 -translate-y-1/2 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+                >
+                  <svg
+                    className="h-3.5 w-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium tracking-wider text-gray-400 uppercase dark:text-gray-500">
+                Pricing:
+              </span>
+              {PRICING_FILTERS.map((f) => (
+                <button
+                  key={f.key}
+                  onClick={() => setActivePricing(f.key)}
+                  className={`rounded-full px-2.5 py-1 text-xs font-medium transition-colors ${
+                    activePricing === f.key
+                      ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
+                      : 'bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Tool Grid */}
+          <div className="mb-8">
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-base font-bold text-gray-900 dark:text-gray-100">
+                {searchQuery
+                  ? `Results for "${searchQuery}"`
+                  : activeCategory !== 'All'
+                    ? `${activeCategory} Tools`
+                    : 'All Tools'}
+              </h2>
+              <span className="text-xs text-gray-400 dark:text-gray-500">
+                {filteredPosts.length} tool{filteredPosts.length !== 1 ? 's' : ''}
+              </span>
+            </div>
+
+            {filteredPosts.length === 0 ? (
+              <div className="py-16 text-center text-gray-500 dark:text-gray-400">
+                <svg
+                  className="mx-auto mb-3 h-12 w-12 text-gray-300 dark:text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <p className="text-sm">No tools match your filters.</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                {filteredPosts.map((post) => (
+                  <ToolCard key={post.slug} post={post} />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Newsletter */}
+          {siteMetadata.newsletter?.provider && (
+            <div className="flex items-center justify-center pt-4">
+              <NewsletterForm />
+            </div>
           )}
         </div>
-
-        {/* Pricing Filter */}
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="text-xs font-medium tracking-wider text-gray-400 uppercase dark:text-gray-500">
-            Pricing:
-          </span>
-          {PRICING_FILTERS.map((f) => (
-            <button
-              key={f.key}
-              onClick={() => setActivePricing(f.key)}
-              className={`rounded-full px-3 py-1 text-xs font-medium transition-all duration-200 ${
-                activePricing === f.key
-                  ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                  : 'bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
       </div>
-
-      {/* Tool Grid */}
-      <div className="mb-12">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-            {searchQuery ? `Results for "${searchQuery}"` : 'Latest Reviews'}
-          </h2>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            {filteredPosts.length} tool{filteredPosts.length !== 1 ? 's' : ''}
-            {posts.length !== filteredPosts.length ? ` of ${posts.length}` : ''}
-          </span>
-        </div>
-
-        {filteredPosts.length === 0 ? (
-          <div className="py-20 text-center text-gray-500 dark:text-gray-400">
-            <svg
-              className="mx-auto mb-4 h-16 w-16 text-gray-300 dark:text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <p className="text-lg">No tools match your filters.</p>
-            <p className="mt-2 text-sm">Try adjusting your search or filter criteria.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredPosts.map((post) => (
-              <ToolCard key={post.slug} post={post} />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Newsletter */}
-      {siteMetadata.newsletter?.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
-        </div>
-      )}
     </>
   )
 }
