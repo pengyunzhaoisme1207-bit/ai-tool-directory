@@ -1,0 +1,90 @@
+---
+title: 'Sourcegraph Cody - AI Codebase Navigator'
+date: '2026-05-11'
+tags: ['AI Coding', 'Code Search', 'Developer Tools', 'Codebase Indexing', 'Enterprise']
+draft: false
+summary: 'Sourcegraph Cody is an AI coding assistant that indexes your entire codebase and answers natural language questions with deep cross-repository context. It finds code, explains it, and generates new code with full awareness of your project''s architecture.'
+authors: ['default']
+toolUrl: 'https://sourcegraph.com/cody'
+logo: '/static/logos/cody.svg'
+pricing: 'Freemium'
+pricingModel: 'Freemium'
+targetUser: 'Software engineers, engineering teams, open-source contributors'
+category: 'Coding'
+rating: 4.5
+underlyingModel: 'Claude Opus 4.7 + GPT-5.5 + Sourcegraph Code Graph'
+mainFeatures:
+  - 'Full Codebase Indexing'
+  - 'Cross-Repository Search'
+  - 'Natural Language Q&A'
+  - 'Code Explanation'
+  - 'Chat + Autocomplete'
+  - 'IDE Integration (VS Code, JetBrains)'
+lastUpdated: '2026-05-11'
+images: ['/static/images/cody-review.jpg']
+---
+
+## Overview
+
+Sourcegraph Cody is an AI coding assistant built on top of Sourcegraph's code search infrastructure. Unlike Copilot which operates file-by-file, Cody indexes your entire codebase (or multiple repos) and answers natural language questions with deep cross-repository context. It knows where that utility function is defined, how the auth middleware flows, and which tests cover the billing logic.
+
+## Architecture & Model Specs
+
+- **Code Indexing**: Sourcegraph's code graph — full-text search, symbol indexing, and cross-repo references
+- **Model Routing**: Routes queries to Claude 3.5 Sonnet, GPT-4o, or Mixtral based on complexity
+- **Context Window**: Full codebase context via RAG (Retrieval-Augmented Generation)
+- **Supported IDEs**: VS Code, JetBrains, Neovim, and web interface
+- **Context Retrieval**: Combines lexical search, symbol lookup, and embedding-based semantic search
+
+## Key Features
+
+- **Full Codebase Context**: Cody sees your entire repo, not just the open file
+- **Natural Language Q&A**: "Where is the rate limiter defined?" — Cody finds and explains the exact code
+- **Code Explanation**: Select any block and ask "what does this do?" for a plain-English breakdown
+- **Chat + Autocomplete**: Inline chat for questions, autocomplete for code generation
+- **Cross-Repository**: Works across monorepos and multi-repo setups
+- **Open Source**: The Cody client is open source; the indexing backend is Sourcegraph's proprietary tech
+
+## API Performance
+
+- **API Access**: Sourcegraph API for code search; Cody AI via Sourcegraph Cloud
+- **Response Time**: ~1-2s for chat responses; autocomplete ~200ms
+- **Rate Limits**: Free: 50 chat messages/month; Pro: unlimited; Enterprise: self-hosted
+- **Self-Hosting**: Enterprise customers can host Sourcegraph + Cody on-premises for full data isolation
+
+## Pricing Breakdown
+
+| Plan | Price | Features |
+|------|-------|----------|
+| Free | $0 | 50 messages/month, Claude 3 Haiku, public repos |
+| Pro | $9/mo | Unlimited messages, Claude 3.5 Sonnet, private repos |
+| Enterprise | Custom | Self-hosted, SSO, audit logs, unlimited seats |
+
+## Privacy & Safety
+
+- **Code Privacy**: Free tier code from public repos only; Pro+ supports private repos
+- **Enterprise Isolation**: Self-hosted option keeps everything on your infrastructure
+- **Model Routing**: Code snippets sent to selected LLM provider (configurable)
+- **Data Retention**: Sourcegraph does not use your code for model training
+
+## The Killer Feature
+
+**Codebase-wide understanding** — Cody doesn't guess context from your open file. It actually indexes every symbol, every import graph, every test in your repository. When you ask "how does authentication work?", it traces the full request lifecycle from middleware to database. For developers joining a new codebase or maintaining a large monorepo, this is like having a senior engineer who memorized every file.
+
+## Pros & Cons
+
+**Pros:**
+- Deep codebase understanding beats file-level assistants
+- Cross-repository search for monorepos
+- Open source client with multiple model support
+- Enterprise self-hosting for complete privacy
+
+**Cons:**
+- Free tier is very limited (50 messages/month)
+- Requires Sourcegraph setup for self-hosting
+- Autocomplete not as fast as Copilot's inline suggestions
+- Less polished UX than Cursor or Copilot
+
+## Verdict
+
+Cody is the most codebase-aware AI assistant available. If you work on a large codebase or monorepo, its full-repo indexing is a genuine productivity multiplier. The free tier is restrictive, but at $9/month Pro is excellent value for the depth of understanding it provides.

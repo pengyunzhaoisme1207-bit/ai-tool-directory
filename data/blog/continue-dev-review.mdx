@@ -1,0 +1,93 @@
+---
+title: 'Continue.dev - Open-Source AI Code Assistant'
+date: '2026-05-11'
+tags: ['AI Coding', 'Open Source', 'Developer Tools', 'LLM Router', 'Privacy']
+draft: false
+summary: 'Continue.dev is an open-source VS Code and JetBrains extension that lets you connect any LLM — Claude, GPT-4, Llama, or local models — to your IDE. It''s the BYO-model coding assistant with full data privacy and complete customization control.'
+authors: ['default']
+toolUrl: 'https://continue.dev'
+logo: '/static/logos/continue.svg'
+pricing: 'Free'
+pricingModel: 'Free (Open Source)'
+targetUser: 'Privacy-conscious developers, enterprises, open-source contributors'
+category: 'Coding'
+rating: 4.4
+underlyingModel: 'Model-agnostic (Claude Opus 4.7, GPT-5.5, Llama 3, local models)'
+mainFeatures:
+  - 'Bring Your Own Model'
+  - 'Local Model Support (Ollama)'
+  - 'Open Source (Apache 2.0)'
+  - 'VS Code + JetBrains'
+  - 'Tab Autocomplete'
+  - 'Custom Prompt Templates'
+lastUpdated: '2026-05-11'
+images: ['/static/images/continue-review.jpg']
+---
+
+## Overview
+
+Continue.dev is an open-source AI coding assistant that takes a fundamentally different approach from Copilot or Cursor: instead of locking you into one model, it lets you plug in any LLM. Connect OpenAI, Anthropic, or run Llama 3 locally via Ollama. You control the model, the data flow, and the privacy settings.
+
+## Architecture & Model Specs
+
+- **Architecture**: VS Code/JetBrains extension acting as LLM router
+- **Model Support**: OpenAI (GPT-4, GPT-4o), Anthropic (Claude 3.5 Sonnet), Google (Gemini), Mistral, any OpenAI-compatible endpoint
+- **Local Models**: Full Ollama integration for local Llama 3, CodeLlama, DeepSeek-Coder
+- **Context Window**: Inherits from the connected model (e.g., 128k for Claude 3.5 Sonnet)
+- **Code Context**: File-level context with optional codebase indexing via embeddings
+
+The key architectural insight is agnosticism. Continue doesn't train a model — it's the layer between your IDE and whatever model you choose. This means when a better model comes out, you just swap the config — no new editor, no new subscription.
+
+## Key Features
+
+- **BYO Model**: Connect to any LLM via API key or local Ollama instance
+- **Tab Autocomplete**: Inline code suggestions as you type
+- **Chat Interface**: Natural language Q&A about your code
+- **Code Editing**: Highlight a block and ask Continue to refactor, explain, or translate
+- **Custom Prompts**: Define reusable prompt templates for common tasks
+- **Full Privacy**: Run entirely locally with Ollama — zero code leaves your machine
+- **Open Source**: Apache 2.0 license — inspect, modify, and self-host everything
+
+## API Performance
+
+- **API Access**: Continue IS NOT an API provider — it's a client that connects to other APIs
+- **Latency**: Depends on the connected model — ~200ms for local Llama 3 via Ollama, ~1-2s for cloud models
+- **Rate Limits**: Inherits from your chosen model provider
+- **Local Mode**: Zero network calls when running Ollama locally
+
+## Pricing Breakdown
+
+| Plan | Price | Features |
+|------|-------|----------|
+| Continue | Free | Open source extension, bring your own model |
+| Model Costs | Varies | Pay your chosen provider (OpenAI, Anthropic, or free via Ollama) |
+
+## Privacy & Safety
+
+- **Local Mode**: 100% private with Ollama — no network calls, no data sent anywhere
+- **Cloud Mode**: Code sent to your chosen provider (configurable per-provider)
+- **Open Source**: Full transparency — audit exactly what data is sent where
+- **Enterprise**: Self-hostable with custom model endpoints
+
+## The Killer Feature
+
+**Model agnosticism** — while Copilot locks you into GitHub's ecosystem and Cursor into its own editor, Continue lets you switch models with a config change. Today you use Claude 3.5 Sonnet for its reasoning, tomorrow you swap to local Llama 3 for privacy, next week you try a new fine-tuned model. You own the pipeline. In a market where every vendor wants lock-in, Continue's openness is radical and liberating.
+
+## Pros & Cons
+
+**Pros:**
+- Use any LLM — switch models at will
+- 100% private with local Ollama mode
+- Open source and fully auditable
+- Works in your existing IDE (VS Code, JetBrains)
+- No vendor lock-in
+
+**Cons:**
+- You need to manage your own API keys and model subscriptions
+- No codebase-wide indexing like Cursor or Cody
+- Setup more complex than out-of-the-box solutions
+- Autocomplete quality depends entirely on your chosen model
+
+## Verdict
+
+Continue.dev is the ideal coding assistant for developers who value control. If you want to use Claude today, GPT-4 tomorrow, and a local model when you're on a train without WiFi, Continue makes it seamless. It requires more setup than Copilot, but the freedom is worth the five minutes of config.

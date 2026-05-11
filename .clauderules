@@ -1,0 +1,56 @@
+# AI Tool Directory - 项目规则
+
+## 内容生成规范
+
+### Frontmatter 必填字段
+
+每个 AI 工具测评文章必须包含以下 Frontmatter：
+
+```yaml
+title: '工具名称 - 简短描述'
+date: 'YYYY-MM-DD'
+tags: ['标签1', '标签2', '标签3']
+draft: false
+summary: '100-150 字简短描述，用于卡片展示和 SEO'
+toolUrl: 'https://官方网址'
+logo: '/static/logos/工具名.svg'
+pricing: 'Free | Freemium | Paid | Open Source'
+pricingModel: 'Free | Freemium | Subscription | Pay-as-you-go'
+targetUser: '适用人群描述'
+category: 'LLM | Image Gen | Coding | Productivity | Video | Audio'
+rating: 1-5 的数字
+underlyingModel: '底层模型，如 GPT-4o, Claude 3.5, Llama 3'
+mainFeatures:
+  - '特性1'
+  - '特性2'
+  - '特性3'
+lastUpdated: 'YYYY-MM-DD'
+```
+
+### 文章结构（每篇评测必须包含）
+
+1. **Overview** — 工具概述
+2. **Key Features** — 核心功能列表
+3. **Pricing Breakdown** — 价格对比表
+4. **API Performance** — API 可用性、文档质量、响应时间
+5. **Privacy & Safety** — 数据处理方式、隐私政策
+6. **The Killer Feature** — 与 Top 3 竞品相比的杀手级特性
+7. **Pros & Cons** — 优缺点
+8. **Verdict** — 最终评价
+
+### 内容原则
+
+- 新增内容统一在 `data/blog/` 目录下生成 MDX 文件
+- 文件名格式：`工具名-review.mdx`（全小写，连字符分隔）
+- Logo 放入 `public/static/logos/` 目录
+- 严禁修改 Tailwind 配置文件或 React 组件的底层布局
+- 严禁修改 `themes/` 或底层框架代码
+- 构建命令：`npm run build`
+- 开发命令：`npm run dev`
+
+### SEO 要求
+
+- 每篇文章 800+ 字英文内容（AdSense 审核门槛）
+- 包含结构化数据（JSON-LD 已自动注入）
+- 所有外部链接使用 `target="_blank" rel="noopener noreferrer"`
+- 价格、功能等关键信息保持最新

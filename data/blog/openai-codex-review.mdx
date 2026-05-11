@@ -1,0 +1,101 @@
+---
+title: 'OpenAI Codex - Agentic Coding Platform'
+date: '2026-05-11'
+tags: ['AI Coding', 'OpenAI', 'Agent', 'Code Generation', 'Developer Tools']
+draft: false
+summary: 'OpenAI Codex is a cloud-based coding agent that runs tasks in parallel, reviews pull requests, and generates fully tested code. It goes beyond IDE autocomplete to become an async software engineering team member.'
+authors: ['default']
+toolUrl: 'https://openai.com/codex'
+logo: '/static/logos/openai.svg'
+pricing: 'Freemium'
+pricingModel: 'Included with ChatGPT plans — Plus $20/mo, Pro $100/mo, Pro 20x $200/mo, Business $25/user/mo'
+targetUser: 'Software engineers, development teams, solo developers'
+category: 'Coding'
+rating: 4.5
+underlyingModel: 'GPT-5.5 + GPT-5.4 + GPT-5.3-Codex'
+mainFeatures:
+  - 'Multi-Agent Parallelism'
+  - 'Automated Code Review'
+  - 'Worktree Isolation'
+  - 'GitHub Integration'
+  - 'CLI + IDE + Desktop + Web'
+  - 'Computer Use'
+lastUpdated: '2026-05-11'
+images: ['/static/images/openai-codex.jpg']
+---
+
+## Overview
+
+OpenAI Codex is an agentic coding platform that transforms how developers approach multi-step engineering tasks. Unlike GitHub Copilot which offers inline autocomplete, or Cursor which augments an editor with AI, Codex operates as an async software engineering agent — you give it a task, it works in parallel across multiple threads, and returns a pull request with fully tested code.
+
+The April 2026 super-app update turned Codex into the most capable OpenAI developer surface to date: a native macOS desktop app, in-app browser for rendered pages, Computer Use for macOS apps, persistent Memory, and multi-agent workflows running simultaneously.
+
+## Architecture & Model Specs
+
+- **Base Model**: GPT-5.5 (general), GPT-5.4 (coding), GPT-5.3-Codex (agentic coding), GPT-5.3-Codex-Spark (research preview, 1000+ tokens/sec real-time)
+- **Context Window**: Inherits from GPT-5 series (128k+)
+- **Code Context**: Full repository access via worktree isolation; no local file editing needed
+- **Response Format**: Pull requests with diffs, commit messages, and test suites
+- **Availability**: macOS desktop app, VS Code IDE extension, CLI, web, iOS
+
+## Key Features
+
+- **Multi-Agent Parallelism**: Run multiple agents across different tasks simultaneously. One agent refactors auth, another writes tests, a third reviews an incoming PR — all at once.
+- **Automated Code Review**: Codex reviews your GitHub pull requests, catching bugs and backward compatibility issues that human reviewers missed.
+- **Worktree Isolation**: Each agent works on an isolated copy of your codebase, so there are no merge conflicts or accidental overwrites.
+- **Automations**: Codex works unprompted in the background — picking up issue triage, alert monitoring, CI/CD fixes, and routine maintenance.
+- **Skills**: Go beyond code writing to directly contribute to product work — code understanding, prototyping, documentation, aligned with your team's standards.
+- **Computer Use** (macOS): The agent can interact with macOS applications directly, enabling it to run tests in a browser, use terminal tools, and more.
+
+## API Performance
+
+- **API Access**: Available via OpenAI API with token-based billing (since April 2, 2026)
+- **Response Time**: Background tasks complete in minutes to hours depending on scope; CLI tasks are faster
+- **Rate Limits**: Varies by plan — Plus gets baseline, Pro gets 5x-10x, Pro 20x gets 20x
+- **Billing**: Credits per million input tokens (cached input discounted ~10x, output tokens priced separately)
+- **Fast Mode**: Available but doubles token consumption
+
+## Pricing Breakdown
+
+| Plan | Price | Codex Usage |
+|------|-------|-------------|
+| Free | $0 | Limited (launch promo, may end) |
+| Go | $8/mo | Basic (launch promo) |
+| Plus | $20/mo | 1x baseline |
+| Pro | $100/mo | 5x (10x promo through May 31, 2026) |
+| Pro 20x | $200/mo | 20x |
+| Business | $25/user/mo | Per-seat + admin controls |
+| Enterprise | Custom | Custom usage + SSO + compliance |
+
+## Privacy & Safety
+
+- **Data Retention**: OpenAI does not use your code for model training on paid plans
+- **Enterprise Controls**: SCIM, EKM, user analytics, domain verification, role-based access
+- **Worktree Safety**: Each agent works in isolation — no risk of overwriting production code
+- **GitHub Integration**: Uses OAuth; PRs are created on your behalf with clear attribution
+
+## The Killer Feature
+
+**Async multi-agent parallelism** — while Copilot and Cursor require you to sit at your keyboard waiting for suggestions, Codex lets you fire off multiple tasks ("refactor the billing module," "write integration tests for the API," "review PR #47"), close the app, and come back to fully worked pull requests. For routine PR reviews, test generation, boilerplate, and documentation, this is a genuine time multiplier. The "fire and forget" model fundamentally changes how you allocate your development hours.
+
+## Pros & Cons
+
+**Pros:**
+- True async agent — works while you do other things
+- Multi-agent parallelism for complex projects
+- Automated PR review catches subtle bugs
+- Token-based billing is transparent and predictable
+- Included with ChatGPT plans you may already have
+
+**Cons:**
+- macOS-only native app (web/IDE version works everywhere but is less integrated)
+- No inline autocomplete — not a real-time pair programmer
+- Tasks need clear scoping; vague instructions produce vague results
+- Rate limit cliff between Plus ($20) and Pro ($200) is steep
+- Free tier access is promotional and may end without notice
+
+## Verdict
+
+OpenAI Codex is the best async coding agent for developers who want to offload entire tasks rather than get line-by-line suggestions. If your workflow involves writing code all day with your hands on the keyboard, stick with Cursor or Copilot. But if you want to delegate PR reviews, test suites, boilerplate features, and documentation to an agent that works in the background while you focus on architecture decisions, Codex is unmatched. The pricing is accessible at $20/month for individuals, and the multi-agent architecture scales well for teams.
+
+For developers who want a model-agnostic alternative that works in any IDE, [Continue.dev](/blog/continue-dev-review/) offers a different approach with full privacy via local models.
