@@ -1,0 +1,98 @@
+---
+title: 'Sentry Seer Agent - AI Debugging Agent'
+date: '2026-05-11'
+tags: ['Developer Tools', 'Debugging', 'AI Agent', 'Monitoring', 'Sentry']
+draft: false
+summary: 'Sentry Seer Agent is an AI debugging agent that uses your full production telemetry — errors, traces, logs, spans, and code context — to answer natural language questions and find root causes of production issues.'
+authors: ['default']
+toolUrl: 'https://sentry.io/product/seer/agent/'
+logo: '/static/logos/sentry.svg'
+pricing: 'Paid'
+pricingModel: '$40/active contributor/month on top of Sentry Team/Business plan'
+targetUser: 'Software engineers, DevOps teams, production support engineers'
+category: 'Developer Tools'
+rating: 4.3
+underlyingModel: 'Sentry proprietary + LLM reasoning'
+mainFeatures:
+  - 'Natural Language Debugging'
+  - 'Full Production Telemetry'
+  - 'Cross-Service Tracing'
+  - 'Automated Root Cause Analysis'
+  - 'GitHub PR Review'
+  - 'Incident Investigation'
+lastUpdated: '2026-05-11'
+images: ['/static/images/sentry-seer.jpg']
+---
+
+## Overview
+
+Sentry Seer Agent is an AI debugging agent that transforms how developers investigate production problems. Instead of manually navigating error pages, searching logs, and tracing request paths, you simply ask Seer "why is the checkout API failing?" and it reasons through your complete production telemetry — errors, spans, logs, traces, source code, and recent deploys — to surface the root cause.
+
+Launched as part of Sentry's Seer platform in early 2026, Seer Agent represents a fundamental shift in debugging tools: from "here's a dashboard, figure it out" to "here's the answer, let me show you the evidence."
+
+## Architecture & Model Specs
+
+- **Architecture**: AI agent layer on top of Sentry's existing telemetry infrastructure
+- **Data Sources**: Errors, spans, logs, traces, metrics, source maps, recent deploys, GitHub PRs
+- **Context Model**: Distributed tracing with cross-service correlation
+- **Response Format**: Natural language answers with linked evidence (errors, traces, log snippets)
+- **Integration**: Sentry dashboard sidebar, GitHub code review
+
+## Key Features
+
+- **Natural Language Debugging**: Ask any question about your application's behavior. "What's causing the 500 errors on the login page?" Seer finds the relevant error, traces it through the call stack, and identifies the root cause.
+- **Full Production Context**: Unlike general-purpose AI assistants that reason from pasted snippets, Seer has access to your complete error history, distributed traces, logs, and code context from Sentry's telemetry.
+- **Cross-Service Tracing**: Follows requests across microservice boundaries, correlating errors across your entire system architecture.
+- **Automated Root Cause Analysis**: Automatically scans incoming issues, finds root causes, and can generate PRs to fix bugs.
+- **GitHub PR Review**: Seer reviews your code changes in GitHub, catching bugs before they merge.
+- **Incident Investigation**: During active incidents, describe what you're seeing and Seer investigates — surfacing related errors, checking recent deploys, tracing blast radius.
+
+## API Performance
+
+- **API Access**: Via Sentry dashboard and GitHub integration; no standalone public API for Seer
+- **Response Time**: ~1-3s for natural language answers; autofix analysis takes longer for complex issues
+- **Rate Limits**: Limited by active contributor count ($40/seat/month)
+- **Availability**: Requires Sentry Team, Business, or Enterprise plan with Seer add-on
+
+## Pricing Breakdown
+
+| Component | Price | Details |
+|-----------|-------|---------|
+| Sentry Team | From $26/month | Base subscription required |
+| Seer Add-on | $40/active contributor/month | An active contributor = 2+ PRs in a connected repo |
+| 14-day Trial | Free | For existing Sentry customers with GitHub integration |
+
+For a team of 5 developers making 2+ PRs/month, Seer costs an additional $200/month on top of the base Sentry subscription.
+
+## Privacy & Safety
+
+- **Code Privacy**: Your code and telemetry stay within Sentry's infrastructure
+- **GitHub Integration**: Uses OAuth with configurable repository access
+- **Enterprise Isolation**: Enterprise plans include data residency and custom retention policies
+- **No Training on Your Data**: Sentry does not use customer telemetry for model training
+
+## The Killer Feature
+
+**Production-aware reasoning** — every other AI coding assistant reasons from what you paste into it. Seer already knows your application because it has indexed every error, every trace, every log, every deploy. When you ask "why is the checkout failing?", it doesn't guess from a snippet — it reasons from your actual production data. For developers who spend hours every week chasing down bugs in production, this is like having a senior engineer who memorized every incident your system has ever had.
+
+## Pros & Cons
+
+**Pros:**
+- Full production context beats any code-pasting approach
+- Natural language answers save hours of manual debugging
+- Cross-service tracing for microservice architectures
+- PR review catches bugs before they merge
+- Active contributor pricing scales with actual usage
+
+**Cons:**
+- Requires existing Sentry subscription (Team/Business plan minimum)
+- $40/active contributor can add up for larger teams
+- Best results require well-instrumented Sentry setup (tracing, logs, source maps)
+- Not useful for pre-production debugging without deployed telemetry
+- Beta features may have rough edges
+
+## Verdict
+
+Sentry Seer Agent is the most context-aware debugging tool available. If your team already uses Sentry with good instrumentation, Seer Agent transforms hours of incident investigation into minutes of natural language conversation. The $40/active contributor pricing is fair for the productivity gain, but teams without solid Sentry setup will see diminished returns.
+
+For developers who want a broader AI coding assistant for writing and refactoring code (not just debugging), tools like [Cursor](/blog/cursor-review/) or [GitHub Copilot](/blog/cursor-vs-copilot-comparison/) are better starting points. Seer Agent complements these by handling the debugging side of development.

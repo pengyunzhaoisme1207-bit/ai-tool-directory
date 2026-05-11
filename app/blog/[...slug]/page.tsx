@@ -4,15 +4,15 @@ import 'katex/dist/katex.css'
 import PageTitle from '@/components/PageTitle'
 import { components } from '@/components/MDXComponents'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { sortPosts, coreContent, allCoreContent } from 'pliny/utils/contentlayer'
-import { allBlogs, allAuthors } from 'contentlayer/generated'
-import type { Authors, Blog } from 'contentlayer/generated'
+import { sortPosts, allCoreContent, coreContent, CoreContent } from 'pliny/utils/contentlayer'
+import { allBlogs, allAuthors, allBriefs } from 'contentlayer/generated'
+import type { Authors, Blog, Brief } from 'contentlayer/generated'
 import PostSimple from '@/layouts/PostSimple'
 import PostLayout from '@/layouts/PostLayout'
 import PostBanner from '@/layouts/PostBanner'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 
 const defaultLayout = 'PostLayout'
 const layouts = {
@@ -26,6 +26,37 @@ export async function generateMetadata(props: {
 }): Promise<Metadata | undefined> {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
+
+  // Check briefs first (for /blog/brief-title paths)
+  const brief = allBriefs.find((p) => p.slug === slug)
+  if (brief) {
+    const publishedAt = new Date(brief.date).toISOString()
+    const modifiedAt = new Date(brief.lastmod || brief.date).toISOString()
+    return {
+      title: brief.title,
+      description: brief.summary,
+      openGraph: {
+        title: brief.title,
+        description: brief.summary,
+        siteName: siteMetadata.title,
+        locale: 'en_US',
+        type: 'article',
+        publishedTime: publishedAt,
+        modifiedTime: modifiedAt,
+        url: './',
+        images: [{ url: siteMetadata.socialBanner }],
+        authors: [siteMetadata.author],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: brief.title,
+        description: brief.summary,
+        images: [siteMetadata.socialBanner],
+      },
+    }
+  }
+
+  // Check reviews (tool评测)
   const post = allBlogs.find((p) => p.slug === slug)
   const authorList = post?.authors || ['default']
   const authorDetails = authorList.map((author) => {
@@ -74,13 +105,31 @@ export async function generateMetadata(props: {
 }
 
 export const generateStaticParams = async () => {
-  return allBlogs.map((p) => ({ slug: p.slug.split('/').map((name) => decodeURI(name)) }))
+  const reviewPaths = allBlogs.map((p) => ({
+    slug: p.slug.split('/').map((name) => decodeURI(name)),
+  }))
+  const briefPaths = allBriefs.map((p) => ({
+    slug: p.slug.split('/').map((name) => decodeURI(name)),
+  }))
+  return [...reviewPaths, ...briefPaths]
 }
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
-  // Filter out drafts in production
+
+  // Check if it's a brief
+  const brief = allBriefs.find((p) => p.slug === slug)
+  if (brief) {
+    if (brief.draft) return notFound()
+    return (
+      <PostSimple content={coreContent(brief) as unknown as CoreContent<Blog>}>
+        <MDXLayoutRenderer code={brief.body.code} components={components} toc={brief.toc} />
+      </PostSimple>
+    )
+  }
+
+  // Check if it's a review
   const sortedCoreContents = allCoreContent(sortPosts(allBlogs))
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
   if (postIndex === -1) {
