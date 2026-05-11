@@ -27,6 +27,7 @@ interface LayoutProps {
   authorDetails: CoreContent<Authors>[]
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
+  relatedPosts?: CoreContent<Blog>[]
   children: ReactNode
 }
 
@@ -35,6 +36,7 @@ export default function PostLayout({
   authorDetails,
   next,
   prev,
+  relatedPosts = [],
   children,
 }: LayoutProps) {
   const {
@@ -175,8 +177,8 @@ export default function PostLayout({
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
           {/* Tool InfoCard Header */}
           {isToolReview && (
-            <div className="pt-6 xl:pt-8">
-              <div className="relative overflow-hidden rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-6 md:p-8 dark:border-blue-800/50 dark:from-blue-950/50 dark:via-indigo-950/50 dark:to-purple-950/50">
+            <div className="pt-4 xl:pt-6">
+              <div className="relative overflow-hidden rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-5 md:p-7 dark:border-blue-800/50 dark:from-blue-950/50 dark:via-indigo-950/50 dark:to-purple-950/50">
                 <div className="flex flex-col gap-6 md:flex-row md:items-start">
                   {/* Logo */}
                   <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm md:h-20 md:w-20 dark:border-gray-700 dark:bg-gray-800">
@@ -455,7 +457,7 @@ export default function PostLayout({
                   />
                 </div>
               )}
-              <div className="prose dark:prose-invert max-w-none pt-8 pb-8">
+              <div className="prose dark:prose-invert max-w-none pt-4 pb-8">
                 {children}
               </div>
               {/* Bottom Ad */}
@@ -496,12 +498,126 @@ export default function PostLayout({
                     />
                   </div>
                 )}
+
+                {/* Quick Info Card */}
+                {isToolReview && (rating || pricing || targetUser || underlyingModel) && (
+                  <div className="py-4 xl:py-8">
+                    <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                      Quick Info
+                    </h2>
+                    <div className="mt-3 rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800/50">
+                      {rating && (
+                        <div className="mb-3 flex items-center justify-between">
+                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Rating</span>
+                          <div className="flex items-center gap-1">
+                            {[...Array(5)].map((_, i) => (
+                              <svg
+                                key={i}
+                                className={`h-3.5 w-3.5 ${i < Math.floor(rating) ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'}`}
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                              </svg>
+                            ))}
+                            <span className="ml-1 text-sm font-semibold text-gray-900 dark:text-gray-100">{rating}</span>
+                          </div>
+                        </div>
+                      )}
+                      {pricing && (
+                        <div className="mb-3 flex items-center justify-between">
+                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Pricing</span>
+                          <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{pricing}</span>
+                        </div>
+                      )}
+                      {targetUser && (
+                        <div className="mb-3 flex items-center justify-between">
+                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">For</span>
+                          <span className="text-sm text-gray-700 dark:text-gray-300">{targetUser}</span>
+                        </div>
+                      )}
+                      {underlyingModel && (
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Model</span>
+                          <span className="text-sm font-mono text-gray-700 dark:text-gray-300">{underlyingModel}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Table of Contents */}
+                {isToolReview && (
+                  <div className="py-4 xl:py-8">
+                    <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                      Table of Contents
+                    </h2>
+                    <nav className="mt-3 space-y-1">
+                      {[
+                        { id: 'overview', label: 'Overview' },
+                        { id: 'key-features', label: 'Key Features' },
+                        { id: 'architecture--model-specs', label: 'Architecture & Specs' },
+                        { id: 'pricing-breakdown', label: 'Pricing' },
+                        { id: 'privacy--safety', label: 'Privacy & Safety' },
+                        { id: 'the-killer-feature', label: 'Killer Feature' },
+                        { id: 'pros--cons', label: 'Pros & Cons' },
+                        { id: 'verdict', label: 'Verdict' },
+                      ].map((item) => (
+                        <a
+                          key={item.id}
+                          href={`#${item.id}`}
+                          className="block rounded-md px-2 py-1.5 text-xs text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </nav>
+                  </div>
+                )}
+
+                {/* Related Reviews */}
+                {isToolReview && relatedPosts.length > 0 && (
+                  <div className="py-4 xl:py-8">
+                    <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                      Related Reviews
+                    </h2>
+                    <div className="mt-3 space-y-3">
+                      {relatedPosts.map((rp) => (
+                        <Link
+                          key={rp.slug}
+                          href={`/blog/${rp.slug}`}
+                          className="group block rounded-lg border border-gray-100 p-3 transition-colors hover:border-blue-200 hover:bg-blue-50/50 dark:border-gray-700 dark:hover:border-blue-700 dark:hover:bg-blue-900/20"
+                        >
+                          <div className="text-sm font-medium text-gray-900 group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">
+                            {rp.title}
+                          </div>
+                          {rp.rating && (
+                            <div className="mt-1 flex items-center gap-1 text-xs text-gray-500">
+                              {[...Array(5)].map((_, i) => (
+                                <svg
+                                  key={i}
+                                  className={`h-3 w-3 ${i < Math.floor(rp.rating!) ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'}`}
+                                  fill="currentColor"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                              ))}
+                              <span>{rp.rating}</span>
+                            </div>
+                          )}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {tags && tags.length > 0 && (
                   <div className="py-4 xl:py-8">
                     <h2 className="text-xs tracking-wide text-gray-500 uppercase dark:text-gray-400">
                       Tags
                     </h2>
-                    <div className="flex flex-wrap">
+                    <div className="mt-3 flex flex-wrap gap-2">
                       {tags.map((tag) => (
                         <Tag key={tag} text={tag} />
                       ))}

@@ -84,7 +84,7 @@ export default function ListLayoutWithTags({
       <div>
         <div className="pt-6 pb-6">
           <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-            {title}
+            Latest Reviews
           </h1>
         </div>
         <div className="flex sm:space-x-24">
@@ -126,30 +126,41 @@ export default function ListLayoutWithTags({
           <div>
             <ul>
               {displayPosts.map((post) => {
-                const { path, date, title, summary, tags } = post
+                const { path, date, title, summary, tags, rating, category, readingTime } = post
                 return (
                   <li key={path} className="py-5">
                     <article className="flex flex-col space-y-2 xl:space-y-0">
-                      <dl>
-                        <dt className="sr-only">Published on</dt>
-                        <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
-                          <time dateTime={date} suppressHydrationWarning>
-                            {formatDate(date, siteMetadata.locale)}
-                          </time>
-                        </dd>
-                      </dl>
-                      <div className="space-y-3">
+                      <div className="flex items-center gap-3 text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
+                        <time dateTime={date} suppressHydrationWarning>
+                          {formatDate(date, siteMetadata.locale)}
+                        </time>
+                        {readingTime && readingTime.minutes && (
+                          <span className="flex items-center gap-1 text-xs">
+                            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            {Math.round(readingTime.minutes)} min read
+                          </span>
+                        )}
+                        {rating && (
+                          <span className="flex items-center gap-0.5 text-xs text-yellow-500">
+                            {'★'.repeat(Math.round(rating))}{'☆'.repeat(5 - Math.round(rating))}
+                            <span className="ml-1 text-gray-500 dark:text-gray-400">{rating}</span>
+                          </span>
+                        )}
+                      </div>
+                      <div className="space-y-2">
                         <div>
                           <h2 className="text-2xl leading-8 font-bold tracking-tight">
                             <Link href={`/${path}`} className="text-gray-900 dark:text-gray-100">
                               {title}
                             </Link>
                           </h2>
-                          <div className="flex flex-wrap">
+                          <div className="mt-1 flex flex-wrap gap-2">
                             {tags?.map((tag) => <Tag key={tag} text={tag} />)}
                           </div>
                         </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                        <div className="prose max-w-none text-sm leading-relaxed text-gray-500 dark:text-gray-400">
                           {summary}
                         </div>
                       </div>
