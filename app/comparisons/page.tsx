@@ -15,19 +15,19 @@ export default function ComparisonsPage() {
 
   // Filter comparison articles (slug contains "comparison" or "vs")
   const comparisons = allPosts.filter(
-    (p) =>
-      p.slug && (p.slug.includes('comparison') || p.slug.includes('vs'))
+    (p) => p.slug && (p.slug.includes('comparison') || p.slug.includes('vs'))
   )
 
   return (
     <div className="space-y-8 pt-6 pb-12">
       {/* Header */}
       <div className="space-y-2">
-        <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
+        <h1 className="text-2xl font-medium tracking-tight text-gray-900 sm:text-3xl sm:text-4xl dark:text-gray-100">
           AI Tool Comparisons
         </h1>
         <p className="max-w-2xl text-gray-600 dark:text-gray-400">
-          Head-to-head comparisons to help you choose the right tool. We test the same workflows, same tasks, side by side.
+          Head-to-head comparisons to help you choose the right tool. We test the same workflows,
+          same tasks, side by side.
         </p>
       </div>
 
@@ -63,25 +63,19 @@ function ComparisonCard({ post }) {
       {/* Tool face-off header */}
       <div className="flex items-center gap-3 border-b border-gray-100 px-5 py-4 dark:border-gray-800">
         <div className="flex-1 text-right">
-          <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-            {toolA}
-          </span>
+          <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">{toolA}</span>
         </div>
         <span className="rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-bold text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
           VS
         </span>
         <div className="flex-1 text-left">
-          <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-            {toolB}
-          </span>
+          <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">{toolB}</span>
         </div>
       </div>
 
       {/* Body */}
       <div className="flex flex-1 flex-col px-5 py-4">
-        <p className="flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-          {summary}
-        </p>
+        <p className="flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{summary}</p>
 
         {/* Footer */}
         <div className="mt-4 flex items-center justify-between text-xs text-gray-400 dark:text-gray-500">
