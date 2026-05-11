@@ -80,6 +80,24 @@ async function createTagCount(allBlogs) {
   writeFileSync('./app/tag-data.json', formatted)
 }
 
+async function createTagCountForBriefs(allBriefs) {
+  const tagCount: Record<string, number> = {}
+  allBriefs.forEach((file) => {
+    if (file.tags && (!isProduction || file.draft !== true)) {
+      file.tags.forEach((tag) => {
+        const formattedTag = slug(tag)
+        if (formattedTag in tagCount) {
+          tagCount[formattedTag] += 1
+        } else {
+          tagCount[formattedTag] = 1
+        }
+      })
+    }
+  })
+  const formatted = await prettier.format(JSON.stringify(tagCount, null, 2), { parser: 'json' })
+  writeFileSync('./app/tag-data-briefs.json', formatted)
+}
+
 function createSearchIndex(allBlogs) {
   if (
     siteMetadata?.search?.provider === 'kbar' &&
@@ -224,8 +242,11 @@ export default makeSource({
     ],
   },
   onSuccess: async (importData) => {
-    const { allBlogs } = await importData()
+    const { allBlogs, allBriefs } = await importData()
+    // Generate tag-data.json from reviews (for existing tag pages)
     createTagCount(allBlogs)
+    // Generate tag-data-briefs.json from briefs (for AI Brief sidebar)
+    createTagCountForBriefs(allBriefs)
     createSearchIndex(allBlogs)
   },
 })
