@@ -12,7 +12,7 @@ const ContentSecurityPolicy = `
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
   media-src *.s3.amazonaws.com;
-  connect-src 'self' pagead2.googlesyndication.com *.googlesyndication.com *.google-analytics.com *.doubleclick.net *.google.com;
+  connect-src 'self' pagead2.googlesyndication.com *.googlesyndication.com *.google-analytics.com *.doubleclick.net *.google.com *.adtrafficquality.google;
   font-src 'self';
   frame-src giscus.app pagead2.googlesyndication.com *.doubleclick.net *.google.com;
 `
