@@ -5,6 +5,7 @@ import 'remark-github-blockquote-alert/alert.css'
 import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider, SearchConfig } from 'pliny/search'
+import Script from 'next/script'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
@@ -67,6 +68,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${space_grotesk.variable} scroll-smooth`}
       suppressHydrationWarning
     >
+      {/* Google AdSense */}
+      <Script
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7338826858147459"
+        strategy="beforeInteractive"
+        crossOrigin="anonymous"
+      />
       <link
         rel="apple-touch-icon"
         sizes="76x76"
