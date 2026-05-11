@@ -1,0 +1,89 @@
+---
+title: 'AI Brief #4 — The Developer Platform War: Cursor, Replit, and the IDE Reckoning'
+date: '2026-05-01'
+tags: ['AI News', 'Coding', 'Developer Tools']
+draft: false
+summary: 'AI coding tools are converging on the same promise: build software faster with AI. But Cursor, Replit Agent, Continue, and v0 are taking fundamentally different approaches. The winner is not the best model — it is the best integration.'
+sources:
+  - 'https://www.cursor.com/'
+  - 'https://www.perplexity.ai/page/replit-agent-developer-tool-2026'
+  - 'https://www.continue.dev/'
+  - 'https://v0.dev/'
+  - 'https://aws.amazon.com/about-aws/whats-new/2026/05/agent-toolkit/'
+authors: ['default']
+---
+
+## Four Approaches, One Goal
+
+AI coding tools have converged on the same value proposition: help developers write, review, and deploy software faster. But the approach each takes reveals fundamentally different assumptions about what developers actually need.
+
+### Cursor: The Editor Is the Product
+
+Cursor's thesis is simple — the IDE is where AI coding happens, and a purpose-built editor beats a plugin every time.
+
+Cursor forked VS Code and rebuilt the editing experience around AI from the ground up. Features like multi-file editing, codebase-aware chat, and inline AI suggestions are not bolted on — they are core to the product architecture.
+
+The advantage: Cursor understands the entire codebase because it controls the editor. It can make cross-file changes, run terminal commands, and manage git workflows without jumping between tools.
+
+The limitation: you have to leave VS Code. For teams that have spent years customizing their VS Code setup with extensions, keybindings, and workflows, this is a significant switch cost.
+
+Pricing: $20/month for Pro, $40/month for Business. The Business tier adds admin controls, usage analytics, and SSO — features that matter for teams of 10+ developers.
+
+### Replit Agent: No Editor Needed
+
+Replit's approach is the opposite. Don't give the developer a better editor — remove the editor entirely.
+
+Replit Agent lets you describe what you want in natural language. It plans, writes code, deploys, and iterates — all without the developer touching a keyboard. The entire environment runs in the browser with zero setup.
+
+This is not autocomplete. It is not a chat sidebar. It is a system that takes a description and produces a working application, complete with deployment.
+
+The advantage: zero setup, zero configuration, instant deployment. You describe the app, Replit Agent builds it. For prototypes, MVPs, and internal tools, this is dramatically faster than any editor-based approach.
+
+The limitation: complex applications with specific architecture requirements, team code review workflows, and CI/CD integration needs are not Replit's sweet spot. It excels at greenfield projects and struggles with brownfield codebases.
+
+### Continue: Open Source, Bring Your Own Model
+
+Continue.dev takes the plugin approach but with a critical difference — it is open source and model-agnostic.
+
+Instead of locking you into a specific AI provider, Continue lets you connect any model: GPT-4, Claude, local Llama, or your own fine-tuned model. It works as a VS Code or JetBrains plugin, so there is no editor switch.
+
+The advantage: no vendor lock-in, works with your existing IDE, supports local models for teams with data sovereignty requirements.
+
+The limitation: you are responsible for the model. If you want the best results, you need to pay for API access or run your own inference. The plugin itself is free, but the model costs are separate.
+
+This is the developer-choice option — the team that wants to pick and mix models, use local models for sensitive code, and keep full control over their AI stack.
+
+### v0: UI-First Development
+
+Vercel's v0 approaches coding from the other direction — start with the UI, generate the code.
+
+v0 takes a text description or screenshot and generates React components with Tailwind CSS, deployed instantly on Vercel. It is not trying to replace the entire development workflow — it is trying to make the frontend iteration loop instant.
+
+The advantage: frontend developers get instant visual feedback. Describe a component, get working code, deploy it. The iteration loop is seconds, not hours.
+
+The limitation: v0 is frontend-only. It does not handle backend logic, database schema, API design, or deployment orchestration. It is a powerful tool for one part of the job.
+
+### The AWS Agent Toolkit: Agents Need Skills
+
+AWS entered the game from a different angle. The Agent Toolkit for AWS (launched May 1) is not a coding editor — it is a skill library for AI agents.
+
+The premise: AI coding agents fail in production because they improvise. They guess at API versions, misconfigure IAM roles, and generate CloudFormation templates that do not compile. The toolkit ships 40 pre-validated skills that agents can follow step by step.
+
+This is the infrastructure layer underneath the editor war. Whether you use Cursor, Replit, or Continue, if your agent deploys to AWS, it needs to know how to configure AWS services correctly. The Agent Toolkit provides that knowledge in a structured, deterministic format.
+
+### Who Wins?
+
+The answer depends on what you are building:
+
+- **Prototypes and MVPs**: Replit Agent. Zero setup, instant deployment, natural language to working app.
+- **Production codebases**: Cursor or Continue. Cursor for teams willing to switch editors, Continue for teams that want model choice and open source.
+- **Frontend-heavy products**: v0. The UI-first approach is unmatched for React + Tailwind workflows.
+- **AWS deployments**: The Agent Toolkit is becoming infrastructure. Regardless of which editor you use, if your agent touches AWS, it needs these skills.
+
+The market is not winner-take-all. Each tool occupies a different point in the developer workflow. The teams that win will combine them — v0 for UI, Cursor for logic, AWS Agent Toolkit for deployment, Continue for local model support on sensitive code.
+
+The question is not which tool wins. It is how many tools your team needs to integrate before the AI coding workflow feels seamless.
+
+---
+
+*Next Brief covers: Voice AI and multimodal models — OpenAI's realtime API, Anthropic's voice capabilities, and the $0.034/minute translation economy.*

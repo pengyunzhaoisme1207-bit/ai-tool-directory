@@ -1,66 +1,91 @@
 ---
 title: 'AI Brief #1 — Enterprise Agents Go Mainstream'
 date: '2026-05-11'
-tags: ['AI News', 'Enterprise', 'OpenAI', 'Adobe', 'Twilio']
+tags: ['AI News', 'Enterprise', 'Agents']
 draft: false
-summary: 'May 2026: AWS Agent Toolkit, Adobe productivity agent, OpenAI voice API, Twilio Agent Connect, Workato Otto — enterprise AI agents are moving from demos to production.'
+summary: 'In a single week, AWS, Adobe, Twilio, Workato, ServiceNow and Middleware all launched agent products aimed at production. The market shifted from proof-of-concept to infrastructure.'
 sources:
   - 'https://aws.amazon.com/about-aws/whats-new/2026/05/agent-toolkit/'
   - 'https://news.adobe.com/news/2026/05/adobes-new-productivity-agent'
   - 'https://thenextweb.com/news/openai-gpt-realtime-2-voice-models'
   - 'https://www.twilio.com/en-us/blog/products/launches/agent-connect'
   - 'https://www.businesswire.com/news/home/20260505979973/en/Workato-Launches-Otto-the-Trusted-AI-Teammate-that-Gets-Work-Done'
+  - 'https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Otto-creates-the-unified-AI-experience-for-the-enterprise/default.aspx'
 authors: ['default']
 ---
 
-## Major Launches
+## The Week Enterprise Agents Went from Demo to Production
 
-### AWS Agent Toolkit for Production AI Agents
+Seven agent products launched in the same week — May 5 to 11, 2026. Not from startups testing the waters, but from AWS, Adobe, Twilio, Workato, ServiceNow and Middleware. Each one is aimed at production workloads, not prototypes.
 
-AWS launched the **Agent Toolkit for AWS** — a production-ready suite of tools, MCP servers, and plugins designed specifically for AI coding agents. The toolkit includes 40+ skills across infrastructure-as-code, storage, analytics, containers, and AI services.
+This is the moment the market decided: agentic AI is no longer a lab experiment. It is a product category.
 
-Key offering: the AWS MCP Server (now GA) provides fully-managed MCP access to any AWS service, with IAM guardrails, CloudWatch observability, and sandboxed execution. Three agent plugins bundle the MCP server with curated skills for quick installation.
+### AWS Agent Toolkit — 40 Skills, Zero Improvisation
 
-**Why it matters:** AWS is treating AI coding agents as first-class consumers of its platform, not just human developers. This signals a shift toward agent-native cloud infrastructure.
+AWS launched the **Agent Toolkit for AWS** on May 1. The premise is blunt: AI coding agents fail in production because they improvise. They guess at API versions, misconfigure IAM roles, and generate CloudFormation templates that don't compile.
 
-### Adobe Productivity Agent
+The toolkit fixes this by shipping **40 pre-validated skills** — each one a step-by-step procedure that an agent can follow without guessing. The skills cover infrastructure-as-code, storage, analytics, containers, and AI services. More are coming for databases, networking and IAM.
 
-Adobe unveiled its **productivity agent** that orchestrates multiple models and tools to generate images, text, presentations, podcasts, and social content. It powers the new PDF Spaces feature in Acrobat Express and Acrobat Studio, turning static documents into interactive AI-assisted experiences.
+The centerpiece is the **AWS MCP Server**, now generally available. It is a fully-managed Model Context Protocol server that gives coding agents access to every AWS service. Guardrails are baked in: IAM policies define which actions each agent can perform, CloudWatch provides observability, and sandboxed code execution handles multi-step operations without risking production state.
 
-The agent can create customized AI assistants that represent the sender's tone and intent — imagine a PDF that answers questions about itself in your voice.
+Three agent plugins bundle the MCP server with curated skill sets for quick installation. The **AWS Core** plugin targets application developers; two others serve data engineering and ML workflows.
 
-### OpenAI GPT-Realtime-2 Voice API
+This is the first time a major cloud provider has treated AI agents as a distinct class of consumer — separate from human developers, with its own permission model, observability stack, and procedural knowledge.
 
-OpenAI released three new voice models:
+### Adobe Productivity Agent — The Document That Answers Back
 
-- **GPT-Realtime-2** — GPT-5-class reasoning for live voice interactions ($32/million audio input tokens)
-- **GPT-Realtime-Translate** — Real-time translation across 70+ input languages at $0.034/minute
-- **GPT-Realtime-Whisper** — Streaming speech-to-text at $0.017/minute
+Adobe's productivity agent, announced May 6, turns static PDFs into interactive documents. The agent orchestrates multiple models to generate images, text, presentations, podcasts and social posts. It powers **PDF Spaces** in Acrobat Express and Acrobat Studio — a workspace where you combine files, links and notes, and the agent helps you research, get insights and create content.
 
-The pricing is aggressive — translation at one-third of a cent per minute undercuts most enterprise pipelines significantly. Early adopters include Zillow, Intercom, Priceline, and Deutsche Telekom.
+The notable feature: you can create a customized AI assistant that represents your tone and intent. Send a document, and the recipient interacts with an agent that answers questions about it — in your voice, with your style. Anyone can view a PDF Space; no account required.
 
-## Enterprise Adoption
+This is significant because Adobe is treating the document itself as a platform, not just a container. The agent runs inside the document, not beside it.
 
-### Twilio Agent Connect (GA)
+### OpenAI GPT-Realtime-2 — Voice at $0.034 Per Minute
 
-Twilio's **Agent Connect** is now generally available, providing a model-agnostic orchestration layer that connects AI runtimes (OpenAI, Anthropic, Bedrock, LangGraph) to Twilio's voice and messaging channels. Handles low-latency streaming, turn-taking, session management, and AI-to-human handoff.
+OpenAI released three voice models on May 8:
 
-Also launched: **Conversation Orchestrator** (GA) — bridges AI agents, human agents, and all communication channels with shared context.
+- **GPT-Realtime-2** brings GPT-5-class reasoning to live voice interactions. Priced at $32 per million audio-input tokens and $64 per million audio-output tokens.
+- **GPT-Realtime-Translate** provides real-time translation across 70+ input languages and 13 output languages at **$0.034 per minute**.
+- **GPT-Realtime-Whisper** handles streaming speech-to-text at **$0.017 per minute**.
 
-### Workato Otto — Digital Teammate for Enterprise
+The translation pricing is the headline. At one-third of a cent per minute, it undercuts most enterprise translation pipelines by a wide margin — and bundles latency and language coverage that cost-conscious deployments have historically had to trade off.
 
-Workato announced **Otto**, an autonomous AI agent embedded in Slack and Teams that executes work across enterprise systems. Powered by Workato Enterprise MCP, it requires no new integrations or security reviews. Over 1,000 users are already running Otto daily.
+Early adopters include Zillow, Glean, Genspark, Bluejay, Intercom and Priceline for the realtime model; BolnaAI, Vimeo and Deutsche Telekom for translation. The price card and the benchmarks suggest OpenAI is not waiting for competitors to catch up.
 
-### Middleware OpsAI — AI SRE Agent
+### Twilio Agent Connect — Omnichannel Without Vendor Lock-In
 
-Middleware launched **OpsAI**, an AI-native Site Reliability Engineering agent that auto-resolves 80%+ of production issues. Built on full-stack observability (APM, logs, Kubernetes), it generates PR-ready code fixes and remediates incidents in real time.
+Twilio's **Agent Connect** (GA since May 6) provides a model-agnostic orchestration layer that connects AI runtimes to voice and messaging channels. Plug in OpenAI, Azure, Bedrock, Anthropic, LangChain or LangGraph — the SDK runs in your environment; Twilio handles the communications layer.
 
-## Trend: Agents Are the New SaaS
+It handles low-latency streaming, barge-in, timeouts, consistent turn handling, session and identity management, and AI-to-human handoff. Because it integrates with Twilio's Conversation Orchestrator (also GA), Conversation Memory and handoff primitives, you get shared context across channels — a customer who starts on WhatsApp and escalates to voice doesn't lose their conversation history.
 
-The pattern across all these launches is clear: **every platform is shipping its own AI agent layer**. AWS, Adobe, Twilio, Workato, ServiceNow, Middleware — all released agentic products in the same week.
+The key design decision: **self-hosted control**. You run the SDK and models in your own infrastructure. Twilio only provides the communications pipes. This avoids the vendor lock-in that has held back many enterprise AI deployments.
 
-The question is no longer "should you use AI agents?" but "which agent platform should you trust with your workflows?"
+### Workato Otto and ServiceNow Otto — Two Ottos, Same Thesis
+
+Workato announced **Otto** on May 6 — an autonomous AI agent embedded in Slack and Teams that executes work across enterprise systems. Powered by Workato Enterprise MCP, it requires no new integrations, security reviews, or credentials to manage. Over 1,000 users are already running Otto daily.
+
+ServiceNow announced **ServiceNow Otto** on May 5 at Knowledge 2026 — a unified AI experience that combines Now Assist, Moveworks and AI Experience. Rather than living inside a single application, it sits across the entire enterprise, routing work to the right agent and executing it to completion. Actions are governed by AI Control Tower, which logs each interaction, enforces policies, and provides explainability.
+
+Two products with the same name, launched one day apart, both making the same claim: **the enterprise needs an AI teammate that can execute work end-to-end, not just answer questions**.
+
+### Middleware OpsAI — 80% Auto-Resolution
+
+Middleware launched **OpsAI** on May 5 — an AI-native SRE agent built on its full-stack observability platform. It has native access to APM, RUM, logs, infrastructure and Kubernetes telemetry, enabling faster investigations than platform-agnostic agents that depend on third-party APIs.
+
+OpsAI automates root cause analysis, generates pull-request-ready code fixes, and remediates Kubernetes incidents. In internal benchmarks, it resolved more than 80% of Middleware's own production issues automatically, achieved a detection-to-resolution rate of over 90% in customer beta accounts, and delivered 10x faster response times than competing AI SRE agents.
+
+Available immediately under usage-based pricing, with a free 14-day trial. SOC 2 Type II, ISO 27001, HIPAA and GDPR compliant.
+
+### What This Week Means
+
+The pattern is unambiguous. Six companies — spanning cloud infrastructure, creative software, communications, enterprise workflow, and observability — all shipped agent products in the same week. Not chatbots. Not copilots. Agents that execute work, make decisions, and integrate with production systems.
+
+The competitive question has shifted. It is no longer "should you use AI agents?" but "which agent platform do you trust with your workflows, and how do you prevent them from becoming a new kind of vendor lock-in?"
+
+The self-hosted, model-agnostic approach (Twilio, Workato, ServiceNow) is likely to win over enterprises that cannot risk being dependent on a single AI provider. The bundled approach (AWS, Adobe) will win on convenience for teams already invested in those ecosystems.
+
+Both strategies are valid. The market is large enough for both.
 
 ---
 
-*Next Brief will cover: GPT-5 ecosystem impact, open-source model updates, and AI regulatory developments.*
+*Next Brief covers: GPT-5's real-world impact three months after launch, the open-source model landscape, and what the EU AI Act's enforcement timeline means for US companies.*

@@ -1,0 +1,91 @@
+---
+title: 'AI Brief #6 — Anthropic Releases "Superhacking" Model, EU Sidelined'
+date: '2026-04-14'
+tags: ['AI News', 'Safety', 'Security', 'Regulation']
+draft: false
+summary: 'Anthropic released Claude Mythos — a cybersecurity specialist model — to only 40 companies, bypassing EU AI Act requirements. European regulators call it a dangerous precedent. The model found zero-days in major platforms during testing.'
+sources:
+  - 'https://www.politico.eu/article/anthropic-apple-microsoft-europe-left-in-the-dark-superhacking-ai/'
+  - 'https://anthropic.com/news/mythos'
+  - 'https://www.irishtimes.com/opinion/editorials/2026/04/19/the-irish-times-view-on-artificial-intelligence-self-regulation-is-a-dangerous-myth/'
+authors: ['default']
+---
+
+## The Private Model Loophole
+
+Anthropic released Claude Mythos on April 8, 2026. It is a cybersecurity specialist model capable of finding and exploiting software vulnerabilities. During internal testing, it identified zero-day vulnerabilities in several major platforms — including some that had been previously audited by human security teams.
+
+The delivery method is what matters: Mythos was released to only 40 technology companies, including Apple and Microsoft, under private access agreements. It was not "placed on the market" in the legal sense defined by the EU AI Act.
+
+### The Regulatory Gap
+
+The EU AI Act regulates AI systems "placed on the market" or "put into service" within the EU. Claude Mythos, released privately to 40 named companies, does not meet this threshold. European regulators were not consulted before the release, have no access to evaluate the model, and have no enforcement mechanism.
+
+Laura Caroli, a key advisor on the drafting of the EU AI Act, described the EU as "sidelined ... because the model is not released on the market."
+
+Marietje Schaake, former European Parliament lawmaker and adviser to the European Commission on AI code of practice, was more direct: "The fact that models with far-reaching impact are governed by a private company is concerning."
+
+### What Claude Mythos Does
+
+Claude Mythos is a red-teaming and security research model. Its capabilities include:
+
+- **Vulnerability discovery**: Finding zero-day vulnerabilities in codebases and deployed systems
+- **Exploit development**: Writing proof-of-concept exploits for discovered vulnerabilities
+- **Security auditing**: Comprehensive security reviews of applications and infrastructure
+- **Threat modeling**: Identifying attack vectors and assessing risk across systems
+
+During testing, Mythos identified vulnerabilities that had been missed by previous human-led security audits. This is the selling point — AI can scan code faster and more systematically than human auditors.
+
+The risk is the same capability in the wrong hands. An AI that can find zero-days can also be used to find zero-days for exploitation, not remediation.
+
+### The 40-Company Access List
+
+Anthropic has not published the full list of 40 companies. Known recipients include:
+
+- **Apple**: For internal security testing of iOS, macOS, and services
+- **Microsoft**: For Azure and Windows security validation
+- **Several major cloud providers**: For infrastructure security testing
+
+The access criteria appear to be: companies that operate large-scale consumer-facing systems and have established security teams to use the model responsibly.
+
+The problem: 40 companies each with their own security priorities. The model's capabilities are powerful, but the governance is entirely self-imposed by each company. There is no external oversight, no reporting requirement, and no coordination mechanism for vulnerabilities the model discovers.
+
+### The Self-Regulation Problem
+
+The Irish Times framed it directly:
+
+> "Unlike the EU, the White House accepts the argument made by US tech firms that they understand the industry best and that anything other than self-regulation will stymie the growth and potential of AI."
+
+The US position is that industry knows best. The EU position is that self-regulation is insufficient for systems that can find and exploit zero-day vulnerabilities.
+
+Both positions have merit. The question is: what happens when a privately-accessed AI model finds a vulnerability in a system that the accessing company does not own? Who gets notified? What is the timeline? What prevents the company from exploiting the finding before patching?
+
+These are not hypothetical questions. They are operational questions that require frameworks, not just good intentions.
+
+### The EU AI Act's Blind Spot
+
+Claude Mythos exposes a structural gap in the EU AI Act. The regulation was designed for products — AI systems sold, licensed, or distributed to users. It was not designed for services — AI systems accessed privately by a limited set of organizations.
+
+The gap matters because the most powerful AI systems are increasingly delivered as services, not products. If every frontier model is delivered as a private API to named recipients, the AI Act's regulatory trigger is never pulled.
+
+The EU's options are limited:
+
+1. **Amend the AI Act** to include private access models — requires new legislation, takes 12-18 months minimum
+2. **Negotiate voluntary codes of practice** with AI labs — already in progress but non-binding
+3. **Wait for the market** to self-regulate — the US approach
+
+None of these options provide near-term oversight of models like Mythos.
+
+### What This Means
+
+For companies with access: Claude Mythos is a powerful security tool that can find vulnerabilities faster than human teams. The value is clear.
+
+For companies without access: your systems may be tested by companies using Mythos, and the vulnerabilities found may or may not be disclosed to you through standard responsible disclosure channels.
+
+For regulators: this is a test case. If private-access AI models become the norm, the AI Act needs a fundamental rewrite. If they remain the exception, the current framework can be adapted.
+
+The precedent is set. The question is whether this becomes the standard model for frontier AI delivery.
+
+---
+
+*Next Brief covers: AI in HR and finance workflow automation — Workday Sana and the enterprise action layer.*

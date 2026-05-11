@@ -96,6 +96,16 @@ module.exports = () => {
         },
       ]
     },
+    async redirects() {
+      return [
+        // Old tag pages -> home (tags feature removed)
+        {
+          source: '/tags/:tag',
+          destination: '/',
+          permanent: true,
+        },
+      ]
+    },
     webpack: (config, options) => {
       config.module.rules.push({
         test: /\.svg$/,

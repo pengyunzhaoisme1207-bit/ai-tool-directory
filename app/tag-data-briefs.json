@@ -1,0 +1,19 @@
+{
+  "ai-news": 7,
+  "safety": 1,
+  "security": 1,
+  "regulation": 2,
+  "voice": 1,
+  "multimodal": 1,
+  "pricing": 1,
+  "enterprise": 2,
+  "workflow": 1,
+  "hr": 1,
+  "finance": 1,
+  "open-source": 1,
+  "llm": 1,
+  "coding": 1,
+  "developer-tools": 1,
+  "eu": 1,
+  "agents": 1
+}

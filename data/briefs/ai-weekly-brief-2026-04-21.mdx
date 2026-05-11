@@ -1,0 +1,74 @@
+---
+title: 'AI Brief #5 — Voice AI at $0.034 Per Minute Changes the Math'
+date: '2026-04-21'
+tags: ['AI News', 'Voice', 'Multimodal', 'Pricing']
+draft: false
+summary: 'OpenAI released three voice models with pricing that undercuts enterprise translation pipelines. GPT-Realtime-Translate at $0.034/minute across 70+ languages changes what products are economically viable. Meanwhile, Anthropic and Google advanced their own multimodal capabilities.'
+sources:
+  - 'https://thenextweb.com/news/openai-gpt-realtime-2-voice-models'
+  - 'https://openai.com/blog/gpt-realtime-models'
+  - 'https://anthropic.com/news/voice-capabilities'
+  - 'https://deepmind.google/discover/blog/gemini-voice-and-vision-updates/'
+authors: ['default']
+---
+
+## The Voice Economy at Scale
+
+OpenAI released three voice models. The translation model is the one that changes the market.
+
+### GPT-Realtime-Translate: $0.034/Minute
+
+At one-third of a cent per minute, OpenAI's realtime translation service is priced below what most enterprises pay for their translation infrastructure. The service covers 70+ input languages and 13 output languages with real-time latency.
+
+The math matters:
+
+- **Enterprise call centers**: A 10-minute call costs $0.34 in translation. For a call center handling 10,000 multilingual calls per day, that is $3,400/day. Traditional translation services (human or API-based) cost 10-50x more.
+- **Customer support chatbots**: Combined with voice models, this enables fully automated multilingual support at a cost structure that makes it viable for SMBs, not just enterprises.
+- **Content localization**: Podcast translation, video dubbing, and live event translation become economically viable at this price point for the first time.
+
+Early adopters include BolnaAI, Vimeo, and Deutsche Telekom. Deutsche Telekom's adoption is the signal — a major European telco does not integrate a translation API unless the quality and reliability meet production standards.
+
+### GPT-Realtime-2: GPT-5 Reasoning in Live Voice
+
+The base model brings GPT-5-class reasoning to live voice interactions. Priced at $32 per million audio-input tokens and $64 per million audio-output tokens.
+
+The capability matters as much as the price. Previous voice models could handle basic Q&A but struggled with complex reasoning — multi-step problems, code debugging conversations, or nuanced technical support. GPT-Realtime-2 handles these because it inherits GPT-5's reasoning capabilities.
+
+Early adopters include Zillow, Glean, Genspark, Bluejay, Intercom, and Priceline. Zillow's use case — real estate agent voice AI — requires understanding property details, pricing logic, and neighborhood context. These are not simple Q&A tasks.
+
+### GPT-Realtime-Whisper: $0.017/Minute Transcription
+
+Streaming speech-to-text at one-sixth of a cent per minute. This is infrastructure pricing — cheap enough to transcribe everything, not just what you can afford.
+
+For context: the previous generation of real-time transcription APIs cost 3-10x more. At $0.017/minute, a one-hour meeting costs about $1 to transcribe in real time. This enables always-on transcription for call centers, meetings, and voice interfaces that previously had to budget per-minute.
+
+### Anthropic's Voice Capabilities
+
+Anthropic has taken a different approach. Rather than releasing standalone voice models, it has integrated voice capabilities into Claude's existing interface. The focus is on quality and safety rather than price.
+
+Claude's voice mode emphasizes:
+- Longer context retention in voice conversations
+- Better handling of technical and analytical tasks via voice
+- Stronger safety guardrails for voice interactions
+
+The pricing is bundled with Claude's existing API — no separate voice model charge. This makes it simpler for existing Claude users but less competitive on pure price compared to OpenAI's a-la-carte model.
+
+### Google Gemini Voice and Vision
+
+Google updated Gemini's voice and vision capabilities with improved real-time processing. The Gemini voice model integrates with Google's existing translation infrastructure, giving it an advantage in language coverage and quality for less common languages.
+
+Google's approach is ecosystem-first — voice and vision are features of the Gemini model family, not standalone products. This means you get voice capabilities when you use Gemini, but you cannot buy them separately at OpenAI's aggressive price points.
+
+### The Market Impact
+
+OpenAI's pricing creates a new floor. At $0.034/minute for translation and $0.017/minute for transcription, the economics of voice-first products change:
+
+1. **Voice-first customer support** becomes viable at any scale. A startup can offer 24/7 multilingual voice support for less than $1,000/month.
+2. **Real-time meeting transcription and translation** is now cheap enough to be a default feature, not a premium add-on.
+3. **Voice interfaces for non-English speakers** lose their primary barrier — cost. The remaining barrier is quality and latency, which the benchmarks suggest OpenAI has addressed.
+
+The competitors must respond. Google has the translation quality advantage but not the price advantage. Anthropic has the safety and reasoning advantage but not the standalone pricing. The gap will close, but for now, OpenAI controls the price floor.
+
+---
+
+*Next Brief covers: AI in workflow automation — Workday Sana, Salesforce AI, and the enterprise action layer.*

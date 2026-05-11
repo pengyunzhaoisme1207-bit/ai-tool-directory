@@ -10,6 +10,7 @@ import type { Authors, Blog, Brief } from 'contentlayer/generated'
 import PostSimple from '@/layouts/PostSimple'
 import PostLayout from '@/layouts/PostLayout'
 import PostBanner from '@/layouts/PostBanner'
+import BriefDetailLayout from '@/layouts/BriefDetailLayout'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound, redirect } from 'next/navigation'
@@ -122,10 +123,20 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
   const brief = allBriefs.find((p) => p.slug === slug)
   if (brief) {
     if (brief.draft) return notFound()
+    const briefDate = brief.date
+      ? new Date(brief.date).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+      : undefined
     return (
-      <PostSimple content={coreContent(brief) as unknown as CoreContent<Blog>}>
+      <BriefDetailLayout
+        content={coreContent(brief) as unknown as CoreContent<Blog>}
+        date={briefDate}
+      >
         <MDXLayoutRenderer code={brief.body.code} components={components} toc={brief.toc} />
-      </PostSimple>
+      </BriefDetailLayout>
     )
   }
 

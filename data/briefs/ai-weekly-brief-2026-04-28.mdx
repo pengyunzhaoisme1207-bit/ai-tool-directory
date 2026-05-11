@@ -1,0 +1,75 @@
+---
+title: 'AI Brief #2 — Open-Source Models Beat GPT-5.4 on SWE-Bench'
+date: '2026-04-28'
+tags: ['AI News', 'Open Source', 'LLM']
+draft: false
+summary: 'Zhipu AI released GLM-5.1 under MIT license, topping SWE-Bench Pro ahead of GPT-5.4 and Claude Opus 4.6. Google, Meta, Alibaba and Mistral all shipped open-weight models in April. The gap between open and closed models has effectively closed.'
+sources:
+  - 'https://medium.com/@sanjeevpatel3007/april-2026-ai-models-every-major-release-reviewed-6ea03d7bc0b7'
+  - 'https://lushbinary.com/blog/best-open-source-llms-april-2026-comparison-guide/'
+  - 'https://www.buildfastwithai.com/blogs/latest-ai-models-april-2026'
+  - 'https://ai.meta.com/blog/llama-4/'
+  - 'https://cloud.google.com/blog/products/ai-machine-learning/gemma-4/'
+authors: ['default']
+---
+
+## Open-Source Models Close the Gap
+
+Six major labs shipped open-weight models in April 2026. Not incremental updates — substantive releases that match or exceed proprietary alternatives on practical benchmarks.
+
+The headline: Zhipu AI released **GLM-5.1** under the MIT license on April 7, and claimed it beat both Claude Opus 4.6 and GPT-5.4 on SWE-Bench Pro — the expert-level real-world software engineering benchmark. If verified, this is the first time an open-source model has led a coding benchmark at this level.
+
+Alongside GLM-5.1, Google released **Gemma 4**, Meta shipped **Llama 4**, Alibaba updated to **Qwen 3.6**, Mistral released **Small 4**, and DeepSeek quietly pushed **V4**. The April open-source landscape is fundamentally different from even three months ago.
+
+### GLM-5.1: MIT License, SWE-Bench Leader
+
+Zhipu AI chose the MIT license — the most permissive open-source license available. No attribution requirements beyond copyright notice. No field-of-use restrictions. No commercial-use limitations.
+
+This is significant because most "open" AI models carry restrictions. Llama uses a custom license with a 700M user threshold. Qwen has its own license. Gemma is open but with usage restrictions. GLM-5.1 is the first frontier-class model under a license that is OSI-approved and universally accepted by corporate legal departments.
+
+The SWE-Bench Pro claim needs verification. The benchmark measures real-world GitHub issue resolution — not synthetic coding puzzles. It uses actual issues from popular repositories, requiring the model to understand codebase context, make targeted changes, and pass existing test suites. GLM-5.1 reportedly scores higher than both Claude Opus 4.6 and GPT-5.4 on this metric.
+
+Key specs:
+- Context window: 128K tokens
+- License: MIT (fully permissive)
+- SWE-Bench Pro: reportedly leads GPT-5.4 and Claude Opus 4.6
+- Available: April 7, 2026
+
+### Gemma 4: Smaller, Faster, Competitive
+
+Google's Gemma 4 outperforms Llama 4 Maverick on math and coding benchmarks despite being a fraction of the parameter count. The efficiency gains come from architecture improvements — better attention mechanisms and training data quality rather than raw scale.
+
+Gemma 4 is available in multiple sizes, with the smallest variant runnable on a single consumer GPU with 8GB VRAM. This makes it viable for local deployment, edge use cases, and teams that cannot justify cloud inference costs.
+
+Google's licensing remains more restrictive than MIT but less restrictive than Llama's. Gemma allows commercial use with attribution and requires modifications to be noted.
+
+### Llama 4: The Baseline Moves Up
+
+Meta's Llama 4 continues the trajectory. The full model family includes:
+- **Llama 4 Scout**: lightweight, optimized for latency
+- **Llama 4 Maverick**: balanced performance across benchmarks
+- **Llama 4**: full model, highest capability
+
+The 700M user threshold in the Llama license remains a point of contention. It means that any company with more than 700M monthly active users needs explicit permission from Meta to use Llama. This effectively excludes Google, Apple, and Amazon from using it without a deal.
+
+### Qwen 3.6: Alibaba's Coding Focus
+
+Alibaba's Qwen 3.6 iteration continues to improve on coding and multilingual benchmarks. Qwen has historically performed well on Chinese-language tasks and mathematics, and the 3.6 release narrows the gap with Western models on general reasoning.
+
+The licensing is custom but permits commercial use. Qwen models are available through Alibaba Cloud and Hugging Face.
+
+### Mistral Small 4: European Contender
+
+Mistral's Small 4 continues the company's strategy of efficient, smaller models that punch above their weight class. Mistral has positioned itself as the European answer to American and Chinese dominance in foundation models, and Small 4 delivers competitive performance at a fraction of the parameter count of larger models.
+
+### What This Means
+
+The open-source vs. closed-source distinction is becoming less about capability and more about license, ecosystem, and deployment model. In April 2026, you can run a model locally on a consumer GPU that performs within single-digit percentage points of the best proprietary models on coding, math, and reasoning benchmarks.
+
+For teams building AI products, the question is no longer "can open models do what we need?" It's "what do we gain from paying for API access when open models cover 90% of the workload at near-equivalent quality?"
+
+The answer for many use cases is: very little. The remaining 10% — edge cases, specific domain expertise, guaranteed uptime SLAs — is what keeps API providers in business. But the margin is shrinking fast.
+
+---
+
+*Next Brief covers: EU AI Act rollback, Germany's industrial exemption, and what it means for US companies building for European markets.*

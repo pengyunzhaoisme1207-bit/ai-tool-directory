@@ -1,0 +1,94 @@
+---
+title: 'AI Brief #7 — AI Agents Take Over HR and Finance Workflows'
+date: '2026-04-25'
+tags: ['AI News', 'Enterprise', 'Workflow', 'HR', 'Finance']
+draft: false
+summary: 'Workday Sana launched as an AI operating system for enterprise workflows — agents that own HR and finance processes end-to-end. SAP, Oracle, and Salesforce all announced competing agent platforms. The enterprise AI market shifted from chatbots to execution.'
+sources:
+  - 'https://sanalabs.com/agents-blog/ai-workflow-automation-agents-workday-sana-2026'
+  - 'https://www.workday.com/en-us/newsroom/2026/sana-launch.html'
+  - 'https://news.sap.com/2026/04/joule-agent-enterprise-workflows/'
+  - 'https://www.salesforce.com/news/ai-agents-2026/'
+authors: ['default']
+---
+
+## From System of Record to System of Action
+
+Workday's launch positioning of Sana frames the shift directly: the goal is "shifting value from better AI and ERP UX to real workflow automation: agents that own high-volume, policy-driven workflows end-to-end so you can redeploy teams to higher-value work."
+
+The key phrase: "agents that own workflows end-to-end." Not agents that suggest actions. Agents that execute them.
+
+### Workday Sana: The AI Operating System for Work
+
+Sana is not a chatbot embedded in Workday. It is a control plane that orchestrates AI agents across Workday-native systems, third-party integrations, and custom-built tools.
+
+What Sana agents can execute:
+
+- **Employee onboarding**: Create accounts, assign equipment, schedule training, complete compliance requirements — across Workday, IT systems, and facilities
+- **HR case resolution**: Resolve policy questions, process leave requests, handle benefits changes without human HR involvement
+- **Finance reconciliation**: Match invoices to purchase orders, flag discrepancies, process payments within policy limits
+- **Compliance workflows**: Run periodic audits, generate reports, flag anomalies
+
+The architecture is a control plane (Sana) that manages multiple agents (Workday-native, third-party, custom) under unified governance. Policies define what each agent can do, what requires human approval, and what is prohibited.
+
+Sana's advantage: Workday already holds the data — employee records, financial data, organizational structure. The agents have native access to this data, not through APIs but through direct system integration. This eliminates the data retrieval step that slows external AI tools.
+
+### SAP Joule Agents
+
+SAP's Joule agent platform competes on similar ground. Joule agents operate across SAP's ERP, supply chain, and procurement systems.
+
+Key capabilities:
+- **Procurement automation**: Agents that process purchase requisitions, match to contracts, and handle exceptions
+- **Supply chain monitoring**: Agents that track inventory levels, predict shortages, and trigger replenishment
+- **Financial close**: Agents that reconcile accounts, generate journal entries, and flag anomalies during month-end close
+
+SAP's advantage: the installed base. Companies running SAP for core ERP already have their most critical business processes in SAP. Joule agents can act on these processes natively.
+
+### Salesforce AI Agents
+
+Salesforce's agent platform focuses on customer-facing workflows:
+
+- **Sales agent**: Qualifies leads, updates CRM records, schedules follow-ups, generates proposals
+- **Service agent**: Handles customer inquiries, processes returns, escalates complex cases
+- **Marketing agent**: Builds campaign segments, personalizes content, measures engagement
+
+Salesforce's advantage: the customer relationship layer. Salesforce owns the customer data, and its agents can act on customer interactions across sales, service, and marketing — the revenue-generating workflows.
+
+### Oracle's Approach
+
+Oracle's AI agents target the back-office — the same space as Workday and SAP but with a stronger focus on database-driven operations. Oracle's agents can query and act on Oracle Database directly, giving them access to transactional data that other agents need to reach through APIs.
+
+### The Governance Layer
+
+All four platforms emphasize governance — and for good reason. When AI agents execute payroll, process payments, and onboard employees, the cost of a mistake is measured in dollars, not just time.
+
+The governance frameworks share common elements:
+
+1. **Policy-based access control**: Each agent has defined permissions based on role, data sensitivity, and transaction value
+2. **Human-in-the-loop thresholds**: Transactions above certain dollar values or sensitivity levels require human approval
+3. **Audit trails**: Every agent action is logged with rationale, data used, and outcome
+4. **Escalation paths**: Agents that cannot resolve a case escalate to human operators with full context
+
+The AI Control Tower concept (pioneered by ServiceNow and adopted by all four platforms) provides a single dashboard where administrators can see what agents are doing, set policies, and review audit logs.
+
+### The Market Numbers
+
+Workday reports that over 1,000 customers are running Sana agents daily. SAP reports Joule agent usage across 5,000+ companies. Salesforce claims 10 billion AI agent interactions per week.
+
+These are not pilot programs. They are production deployments at enterprise scale.
+
+### What This Means
+
+The enterprise AI market has moved past the chatbot phase. Agents are no longer answering questions — they are executing transactions. This changes the risk profile, the governance requirements, and the vendor lock-in dynamics.
+
+For enterprises evaluating these platforms, the decision is not about AI capability. It is about:
+
+1. **Data proximity**: Which platform already holds your critical data? Sana has HR/finance data. Joule has ERP data. Salesforce has customer data.
+2. **Governance maturity**: Which platform's control mechanisms match your risk tolerance?
+3. **Integration cost**: How much engineering is needed to connect the agent platform to your existing systems?
+
+The vendor with the best AI model does not win. The vendor with the best data access wins.
+
+---
+
+*Back to Brief #1: The enterprise agent infrastructure build-out continues with new platform launches.*
