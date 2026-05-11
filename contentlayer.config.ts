@@ -193,6 +193,10 @@ export const Brief = defineDocumentType(() => ({
   },
   computedFields: {
     ...computedFields,
+    path: {
+      type: 'string',
+      resolve: (doc) => `blog/${doc._raw.flattenedPath}`,
+    },
     structuredData: {
       type: 'json',
       resolve: (doc) => ({
@@ -203,7 +207,7 @@ export const Brief = defineDocumentType(() => ({
         dateModified: doc.lastmod || doc.date,
         description: doc.summary,
         image: siteMetadata.socialBanner,
-        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+        url: `${siteMetadata.siteUrl}/blog/${doc._raw.flattenedPath}`,
       }),
     },
   },
