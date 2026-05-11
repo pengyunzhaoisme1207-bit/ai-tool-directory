@@ -141,6 +141,10 @@ export const Blog = defineDocumentType(() => ({
   },
   computedFields: {
     ...computedFields,
+    path: {
+      type: 'string',
+      resolve: (doc) => doc._raw.flattenedPath.replace(/^reviews\//, 'blog/'),
+    },
     structuredData: {
       type: 'json',
       resolve: (doc) => ({
@@ -193,6 +197,10 @@ export const Brief = defineDocumentType(() => ({
   },
   computedFields: {
     ...computedFields,
+    slug: {
+      type: 'string',
+      resolve: (doc) => doc._raw.flattenedPath,
+    },
     path: {
       type: 'string',
       resolve: (doc) => `blog/${doc._raw.flattenedPath}`,
