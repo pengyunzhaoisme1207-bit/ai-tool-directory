@@ -70,12 +70,8 @@ const CONTENT_TYPES = [
 ]
 
 function getContentType(post: CoreContent<Review | Guide | Comparison>): string {
-  if ((post as any).toolUrl) {
-    // Has tool-specific fields → Review or Comparison
-    const filePath = (post as any).filePath || ''
-    if (filePath.includes('comparisons/')) return 'comparison'
-    return 'review'
-  }
+  const filePath = (post as any).filePath || ''
+  if (filePath.includes('comparisons/')) return 'comparison'
   return 'guide'
 }
 
@@ -87,19 +83,7 @@ export default function ListLayoutWithTags({
 }: ListLayoutProps) {
   const pathname = usePathname()
   const [activeType, setActiveType] = useState('all')
-  const [activeCategory, setActiveCategory] = useState('all')
 
-  // Extract categories from posts
-  const categories = useMemo(() => {
-    const catSet = new Set<string>()
-    posts.forEach((post) => {
-      const cat = (post as any).category
-      if (cat) catSet.add(cat)
-    })
-    return Array.from(catSet).sort()
-  }, [posts])
-
-  // Count posts per type
   const typeCounts = useMemo(() => {
     const counts: Record<string, number> = { all: posts.length, guide: 0, comparison: 0 }
     posts.forEach((post) => {
@@ -109,37 +93,13 @@ export default function ListLayoutWithTags({
     return counts
   }, [posts])
 
-  // Count posts per category
-  const categoryCounts = useMemo(() => {
-    const counts: Record<string, number> = {}
-    posts.forEach((post) => {
-      const cat = (post as any).category
-      if (cat) {
-        counts[cat] = (counts[cat] || 0) + 1
-      }
-    })
-    return counts
-  }, [posts])
-
-  // Filter posts
   const filteredPosts = useMemo(() => {
-    return posts.filter((post) => {
-      if (activeType !== 'all') {
-        const type = getContentType(post)
-        if (type !== activeType) return false
-      }
-      if (activeCategory !== 'all') {
-        const cat = (post as any).category
-        if (cat !== activeCategory) return false
-      }
-      return true
-    })
-  }, [posts, activeType, activeCategory])
+    if (activeType === 'all') return posts
+    return posts.filter((post) => getContentType(post) === activeType)
+  }, [posts, activeType])
 
   const displayPosts =
-    initialDisplayPosts.length > 0 && !activeType && !activeCategory
-      ? initialDisplayPosts
-      : filteredPosts
+    initialDisplayPosts.length > 0 && activeType === 'all' ? initialDisplayPosts : filteredPosts
 
   return (
     <>
@@ -152,68 +112,22 @@ export default function ListLayoutWithTags({
         <div className="flex sm:space-x-24">
           <div className="hidden h-full max-h-screen max-w-[280px] min-w-[280px] flex-wrap overflow-auto rounded-sm bg-gray-50 pt-5 shadow-md sm:flex dark:bg-gray-900/70 dark:shadow-gray-800/40">
             <div className="px-6 py-4">
-              {/* Content Type Filter */}
-              <div className="mb-6">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
-                  Content Type
-                </h3>
-                <ul className="space-y-1">
-                  {CONTENT_TYPES.map((type) => (
-                    <li key={type.key}>
-                      <button
-                        onClick={() => {
-                          setActiveType(type.key)
-                          setActiveCategory('all')
-                        }}
-                        className={`w-full text-left px-3 py-2 text-sm font-medium rounded transition-colors ${
-                          activeType === type.key
-                            ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-bold'
-                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                        }`}
-                      >
-                        {type.label} ({typeCounts[type.key]})
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Category Filter */}
-              {categories.length > 0 && (
-                <div>
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
-                    Category
-                  </h3>
-                  <ul className="space-y-1">
-                    <li>
-                      <button
-                        onClick={() => setActiveCategory('all')}
-                        className={`w-full text-left px-3 py-2 text-sm font-medium rounded transition-colors ${
-                          activeCategory === 'all'
-                            ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-bold'
-                            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                        }`}
-                      >
-                        All Categories ({posts.length})
-                      </button>
-                    </li>
-                    {categories.map((cat) => (
-                      <li key={cat}>
-                        <button
-                          onClick={() => setActiveCategory(cat)}
-                          className={`w-full text-left px-3 py-2 text-sm font-medium rounded transition-colors ${
-                            activeCategory === cat
-                              ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-bold'
-                              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                          }`}
-                        >
-                          {cat} ({categoryCounts[cat] || 0})
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <ul className="space-y-1">
+                {CONTENT_TYPES.map((type) => (
+                  <li key={type.key}>
+                    <button
+                      onClick={() => setActiveType(type.key)}
+                      className={`w-full text-left px-3 py-2 text-sm font-medium rounded transition-colors ${
+                        activeType === type.key
+                          ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-bold'
+                          : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                      }`}
+                    >
+                      {type.label} ({typeCounts[type.key]})
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
           <div>
