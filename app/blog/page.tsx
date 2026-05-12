@@ -1,16 +1,15 @@
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
-import { allReviews, allGuides, allComparisons } from 'contentlayer/generated'
+import { allGuides, allComparisons } from 'contentlayer/generated'
 import { genPageMetadata } from 'app/seo'
 import ListLayoutWithTags from '@/layouts/ListLayoutWithTags'
 
 export const metadata = genPageMetadata({
   title: 'Blog',
-  description: 'AI tool reviews, how-to guides, comparisons and tutorials.',
+  description: 'AI tool usage guides and product comparisons.',
 })
 
 export default function BlogPage() {
   const allContent = [
-    ...allCoreContent(sortPosts(allReviews)),
     ...allCoreContent(sortPosts(allGuides)),
     ...allCoreContent(sortPosts(allComparisons)),
   ]

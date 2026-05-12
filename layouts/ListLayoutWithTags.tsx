@@ -65,7 +65,6 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 
 const CONTENT_TYPES = [
   { key: 'all', label: 'All Posts' },
-  { key: 'review', label: 'Reviews' },
   { key: 'guide', label: 'Guides' },
   { key: 'comparison', label: 'Comparisons' },
 ]
@@ -102,7 +101,7 @@ export default function ListLayoutWithTags({
 
   // Count posts per type
   const typeCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: posts.length, review: 0, guide: 0, comparison: 0 }
+    const counts: Record<string, number> = { all: posts.length, guide: 0, comparison: 0 }
     posts.forEach((post) => {
       const type = getContentType(post)
       counts[type]++
