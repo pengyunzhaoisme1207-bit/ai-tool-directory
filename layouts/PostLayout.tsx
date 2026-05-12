@@ -447,10 +447,11 @@ export default function PostLayout({
             <div
               className={`${isToolReview ? '' : 'xl:col-span-3 xl:row-span-2 xl:pb-0'}`}
             >
-              {/* In-Content Ad */}
+              {/* In-Content Ad — after tool info card, before MDX body */}
               {isToolReview && (
                 <div className="my-6">
                   <AdUnit
+                    slotName="middle"
                     adSlot="1234567890"
                     adFormat="rectangle"
                     className="min-h-[250px]"
@@ -460,10 +461,11 @@ export default function PostLayout({
               <div className="prose dark:prose-invert max-w-none pt-4 pb-8">
                 {children}
               </div>
-              {/* Bottom Ad */}
+              {/* Bottom Ad — after MDX body, before discuss/edit links */}
               {isToolReview && (
                 <div className="mb-6">
                   <AdUnit
+                    slotName="bottom"
                     adSlot="2345678901"
                     adFormat="rectangle"
                     className="min-h-[250px]"
@@ -488,10 +490,11 @@ export default function PostLayout({
             </div>
             <footer>
               <div className="divide-gray-200 text-sm leading-5 font-medium xl:divide-y dark:divide-gray-700">
-                {/* Sidebar Ad */}
+                {/* Sidebar Ad — sticky sidebar, desktop only */}
                 {isToolReview && (
                   <div className="mb-4">
                     <AdUnit
+                      slotName="sidebar"
                       adSlot="3456789012"
                       adFormat="rectangle"
                       className="min-h-[250px]"

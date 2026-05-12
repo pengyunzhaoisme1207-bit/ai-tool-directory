@@ -489,6 +489,139 @@ export default function Home({ posts }) {
           )}
         </div>
       </div>
+
+      {/* SEO Footer — Below the fold: deep explanatory text + FAQ section */}
+      <div className="mt-16 border-t border-gray-200 pt-12 pb-16 dark:border-gray-800">
+        <div className="mx-auto max-w-3xl space-y-10">
+          {/* What is this site */}
+          <section>
+            <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
+              How to Choose the Right AI Tool
+            </h2>
+            <div className="prose prose-gray dark:prose-invert max-w-none">
+              <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">
+                With thousands of AI tools launching every month, finding the right one for your
+                workflow is overwhelming. This directory curates and tests the most important AI
+                tools across coding, image generation, writing, search, video, and productivity
+                categories — so you don't have to. Each tool is evaluated on its core capabilities,
+                pricing, target audience, and real-world performance.
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-gray-600 dark:text-gray-400">
+                Whether you're a developer looking for the best AI coding assistant, a marketer
+                searching for content generation tools, or a creator exploring AI-powered video and
+                design, our reviews provide side-by-side comparisons, honest ratings, and detailed
+                pricing breakdowns to help you make an informed decision.
+              </p>
+            </div>
+          </section>
+
+          {/* Our methodology */}
+          <section>
+            <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
+              Our Review Methodology
+            </h2>
+            <p className="text-base leading-relaxed text-gray-600 dark:text-gray-400">
+              Every tool in this directory is tested hands-on. We evaluate each product across five
+              dimensions:{' '}
+              <strong className="text-gray-800 dark:text-gray-200">core AI capabilities</strong>{' '}
+              (how well does it perform its primary task),{' '}
+              <strong className="text-gray-800 dark:text-gray-200">ease of use</strong> (can a
+              non-technical person get value),{' '}
+              <strong className="text-gray-800 dark:text-gray-200">pricing fairness</strong> (does
+              the cost match the value delivered),{' '}
+              <strong className="text-gray-800 dark:text-gray-200">privacy and data safety</strong>{' '}
+              (how is your data handled), and{' '}
+              <strong className="text-gray-800 dark:text-gray-200">ecosystem integration</strong>{' '}
+              (does it work with your existing tools). Ratings are on a 1–5 scale based on these
+              criteria.
+            </p>
+          </section>
+
+          {/* FAQ Section */}
+          <section>
+            <h2 className="mb-6 text-xl font-semibold text-gray-900 dark:text-gray-100">
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-5">
+              {[
+                {
+                  q: 'What is the best free AI tool for coding?',
+                  a: 'It depends on your needs. For general coding assistance, Cursor and Continue.dev both offer free tiers that integrate with your existing editor. Cursor is a standalone IDE built on VS Code with AI-native features, while Continue.dev is a VS Code / JetBrains extension. Check our coding category above for detailed comparisons.',
+                },
+                {
+                  q: 'Are these AI tools safe for enterprise use?',
+                  a: 'Each tool review includes a "Privacy & Safety" section where we examine data handling, model training policies, and enterprise readiness. We recommend checking the privacy policy of each tool before using it with sensitive data.',
+                },
+                {
+                  q: 'How often are these reviews updated?',
+                  a: 'We update tool reviews whenever there are major feature changes, pricing updates, or new competing tools launch. Each review shows its "last updated" date so you know how current the information is.',
+                },
+                {
+                  q: 'How do you rate AI tools?',
+                  a: 'We rate each tool on a 1–5 scale across five dimensions: core capabilities, ease of use, pricing fairness, privacy and data safety, and ecosystem integration. The overall rating is a weighted average reflecting real-world usage value, not just feature checklists.',
+                },
+              ].map((faq) => (
+                <details
+                  key={faq.q}
+                  className="group rounded-lg border border-gray-200 px-5 py-4 transition-colors hover:border-gray-300 dark:border-gray-700 dark:hover:border-gray-600"
+                >
+                  <summary className="cursor-pointer list-none text-sm font-medium text-gray-900 dark:text-gray-100">
+                    {faq.q}
+                  </summary>
+                  <p className="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                    {faq.a}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+
+      {/* FAQPage JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              {
+                '@type': 'Question',
+                name: 'What is the best free AI tool for coding?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'It depends on your needs. For general coding assistance, Cursor and Continue.dev both offer free tiers that integrate with your existing editor. Cursor is a standalone IDE built on VS Code with AI-native features, while Continue.dev is a VS Code / JetBrains extension. Check our coding category for detailed comparisons.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'Are these AI tools safe for enterprise use?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Each tool review includes a "Privacy & Safety" section where we examine data handling, model training policies, and enterprise readiness. We recommend checking the privacy policy of each tool before using it with sensitive data.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'How often are these reviews updated?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'We update tool reviews whenever there are major feature changes, pricing updates, or new competing tools launch. Each review shows its "last updated" date so you know how current the information is.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'How do you rate AI tools?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'We rate each tool on a 1–5 scale across five dimensions: core capabilities, ease of use, pricing fairness, privacy and data safety, and ecosystem integration. The overall rating is a weighted average reflecting real-world usage value, not just feature checklists.',
+                },
+              },
+            ],
+          }),
+        }}
+      />
     </>
   )
 }

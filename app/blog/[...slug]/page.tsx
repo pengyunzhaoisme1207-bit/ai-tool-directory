@@ -173,12 +173,22 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
 
   const Layout = layouts[post.layout || defaultLayout]
 
+  // Generate FAQPage JSON-LD for comparison articles
+  const isComparison = post.slug?.includes('vs') || post.slug?.includes('comparison')
+  const faqPageJsonLd = isComparison ? generateComparisonFAQ(post) : null
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqPageJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd) }}
+        />
+      )}
       <Layout
         content={mainContent}
         authorDetails={authorDetails}
@@ -190,4 +200,52 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
       </Layout>
     </>
   )
+}
+
+/**
+ * Generate FAQPage JSON-LD for comparison articles.
+ * Extracts structured Q&A from the comparison content to enable Google FAQ rich snippets.
+ */
+function generateComparisonFAQ(post: Blog) {
+  const title = post.title || ''
+  const summary = post.summary || ''
+  const toolA = title.match(/^(.+?)\s+vs\s+/i)?.[1]?.trim() || 'Tool A'
+  const toolB = title.match(/\s+vs\s+(.+?)(?:\s*[:;]|$)/i)?.[1]?.trim() || 'Tool B'
+  const url = `${siteMetadata.siteUrl}/blog/${post.slug}`
+
+  // Build dynamic FAQ from comparison metadata
+  const faqItems = [
+    {
+      question: `Which is better: ${toolA} or ${toolB}?`,
+      answer: summary,
+    },
+    {
+      question: `What are the main differences between ${toolA} and ${toolB}?`,
+      answer: `${toolA} and ${toolB} are both tools in the ${post.category || 'AI'} category. ${toolA} is priced as ${post.pricing || 'N/A'} while ${toolB} offers different pricing options. The key differences lie in their features, target users, and underlying models. See our full comparison for detailed analysis across multiple dimensions.`,
+    },
+    {
+      question: `Should I choose ${toolA} over ${toolB}?`,
+      answer: `It depends on your needs. ${post.targetUser ? `This comparison is aimed at ${post.targetUser}.` : 'Consider your specific requirements, budget, and existing workflow.'} Our comparison tests both tools across multiple dimensions to help you make an informed decision.`,
+    },
+  ]
+
+  if (post.rating) {
+    faqItems.push({
+      question: `How do you rate ${toolA} compared to ${toolB}?`,
+      answer: `We rated this comparison across multiple dimensions and gave an overall rating of ${post.rating}/5. Our evaluation covers core capabilities, ease of use, pricing fairness, and ecosystem integration.`,
+    })
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
 }
