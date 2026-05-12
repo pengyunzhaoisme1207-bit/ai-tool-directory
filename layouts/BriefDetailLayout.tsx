@@ -1,14 +1,22 @@
 import { ReactNode } from 'react'
 import { formatDate } from 'pliny/utils/formatDate'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog, Brief } from 'contentlayer/generated'
+import type { CoreContent } from 'pliny/utils/contentlayer'
+import type { Brief } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
 import SectionContainer from '@/components/SectionContainer'
 import siteMetadata from '@/data/siteMetadata'
 
+interface BriefContent {
+  path: string
+  slug: string
+  title: string
+  tags?: string[]
+  sources?: string[]
+}
+
 interface LayoutProps {
-  content: CoreContent<Blog> & { sources?: string[] }
+  content: BriefContent
   children: ReactNode
   date?: string
 }

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Blog, Authors } from 'contentlayer/generated'
+import type { Review, Guide, Comparison, Authors } from 'contentlayer/generated'
 import Comments from '@/components/Comments'
 import Link from '@/components/Link'
 import PageTitle from '@/components/PageTitle'
@@ -23,11 +23,11 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
 }
 
 interface LayoutProps {
-  content: CoreContent<Blog>
+  content: CoreContent<Review | Guide | Comparison>
   authorDetails: CoreContent<Authors>[]
   next?: { path: string; title: string }
   prev?: { path: string; title: string }
-  relatedPosts?: CoreContent<Blog>[]
+  relatedPosts?: CoreContent<Review | Guide | Comparison>[]
   children: ReactNode
 }
 
@@ -46,18 +46,18 @@ export default function PostLayout({
     date,
     title,
     tags,
-    toolUrl,
-    logo,
-    pricing,
-    pricingModel,
-    targetUser,
-    rating,
     summary,
-    underlyingModel,
-    mainFeatures,
     lastUpdated,
-    category,
   } = content
+  const category = (content as CoreContent<Review | Comparison>).category
+  const toolUrl = (content as CoreContent<Review | Comparison>).toolUrl
+  const logo = (content as CoreContent<Review | Comparison>).logo
+  const pricing = (content as CoreContent<Review | Comparison>).pricing
+  const pricingModel = (content as CoreContent<Review | Comparison>).pricingModel
+  const targetUser = (content as CoreContent<Review | Comparison>).targetUser
+  const rating = (content as CoreContent<Review | Comparison>).rating
+  const underlyingModel = (content as CoreContent<Review | Comparison>).underlyingModel
+  const mainFeatures = (content as CoreContent<Review | Comparison>).mainFeatures
   const basePath = path.split('/')[0]
   const isToolReview = !!toolUrl
 
@@ -594,19 +594,19 @@ export default function PostLayout({
                           <div className="text-sm font-medium text-gray-900 group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">
                             {rp.title}
                           </div>
-                          {rp.rating && (
+                          {(rp as CoreContent<Review | Comparison>).rating && (
                             <div className="mt-1 flex items-center gap-1 text-xs text-gray-500">
                               {[...Array(5)].map((_, i) => (
                                 <svg
                                   key={i}
-                                  className={`h-3 w-3 ${i < Math.floor(rp.rating!) ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'}`}
+                                  className={`h-3 w-3 ${i < Math.floor((rp as CoreContent<Review | Comparison>).rating!) ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'}`}
                                   fill="currentColor"
                                   viewBox="0 0 20 20"
                                 >
                                   <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                 </svg>
                               ))}
-                              <span>{rp.rating}</span>
+                              <span>{(rp as CoreContent<Review | Comparison>).rating}</span>
                             </div>
                           )}
                         </Link>

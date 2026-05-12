@@ -111,8 +111,8 @@ function createSearchIndex(allBlogs) {
   }
 }
 
-export const Blog = defineDocumentType(() => ({
-  name: 'Blog',
+export const Review = defineDocumentType(() => ({
+  name: 'Review',
   filePathPattern: 'reviews/**/*.mdx',
   contentType: 'mdx',
   fields: {
@@ -143,7 +143,7 @@ export const Blog = defineDocumentType(() => ({
     ...computedFields,
     path: {
       type: 'string',
-      resolve: (doc) => doc._raw.flattenedPath.replace(/^reviews\//, 'blog/'),
+      resolve: (doc) => `blog/${doc._raw.flattenedPath.replace(/^reviews\//, '')}`,
     },
     structuredData: {
       type: 'json',
@@ -155,7 +155,95 @@ export const Blog = defineDocumentType(() => ({
         dateModified: doc.lastmod || doc.date,
         description: doc.summary,
         image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
-        url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+        url: `${siteMetadata.siteUrl}/blog/${doc._raw.flattenedPath.replace(/^reviews\//, '')}`,
+      }),
+    },
+  },
+}))
+
+export const Guide = defineDocumentType(() => ({
+  name: 'Guide',
+  filePathPattern: 'guides/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    tags: { type: 'list', of: { type: 'string' }, default: [] },
+    lastmod: { type: 'date' },
+    draft: { type: 'boolean' },
+    summary: { type: 'string' },
+    images: { type: 'json' },
+    authors: { type: 'list', of: { type: 'string' } },
+    layout: { type: 'string' },
+    lastUpdated: { type: 'date' },
+  },
+  computedFields: {
+    ...computedFields,
+    path: {
+      type: 'string',
+      resolve: (doc) => `blog/${doc._raw.flattenedPath.replace(/^guides\//, '')}`,
+    },
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: doc.title,
+        datePublished: doc.date,
+        dateModified: doc.lastmod || doc.date,
+        description: doc.summary,
+        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
+        url: `${siteMetadata.siteUrl}/blog/${doc._raw.flattenedPath.replace(/^guides\//, '')}`,
+      }),
+    },
+  },
+}))
+
+export const Comparison = defineDocumentType(() => ({
+  name: 'Comparison',
+  filePathPattern: 'comparisons/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    tags: { type: 'list', of: { type: 'string' }, default: [] },
+    lastmod: { type: 'date' },
+    draft: { type: 'boolean' },
+    summary: { type: 'string' },
+    images: { type: 'json' },
+    authors: { type: 'list', of: { type: 'string' } },
+    layout: { type: 'string' },
+    bibliography: { type: 'string' },
+    canonicalUrl: { type: 'string' },
+    // AI Tool specific fields
+    toolUrl: { type: 'string' },
+    logo: { type: 'string' },
+    pricing: { type: 'string' },
+    pricingModel: { type: 'string' },
+    targetUser: { type: 'string' },
+    category: { type: 'string' },
+    rating: { type: 'number' },
+    underlyingModel: { type: 'string' },
+    mainFeatures: { type: 'list', of: { type: 'string' }, default: [] },
+    lastUpdated: { type: 'date' },
+  },
+  computedFields: {
+    ...computedFields,
+    path: {
+      type: 'string',
+      resolve: (doc) => `blog/${doc._raw.flattenedPath.replace(/^comparisons\//, '')}`,
+    },
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: doc.title,
+        datePublished: doc.date,
+        dateModified: doc.lastmod || doc.date,
+        description: doc.summary,
+        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
+        url: `${siteMetadata.siteUrl}/blog/${doc._raw.flattenedPath.replace(/^comparisons\//, '')}`,
       }),
     },
   },
@@ -223,7 +311,7 @@ export const Brief = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Brief],
+  documentTypes: [Review, Guide, Comparison, Authors, Brief],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
@@ -254,11 +342,11 @@ export default makeSource({
     ],
   },
   onSuccess: async (importData) => {
-    const { allBlogs, allBriefs } = await importData()
-    // Generate tag-data.json from reviews (for existing tag pages)
-    createTagCount(allBlogs)
+    const { allReviews, allGuides, allComparisons, allBriefs } = await importData()
+    // Generate tag-data.json from all content types (unified blog view)
+    createTagCount([...allReviews, ...allGuides, ...allComparisons])
     // Generate tag-data-briefs.json from briefs (for AI Brief sidebar)
     createTagCountForBriefs(allBriefs)
-    createSearchIndex(allBlogs)
+    createSearchIndex([...allReviews, ...allGuides, ...allComparisons])
   },
 })

@@ -1,11 +1,11 @@
 import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer'
-import { allBlogs } from 'contentlayer/generated'
+import { allReviews } from 'contentlayer/generated'
 import Main from './Main'
 import siteMetadata from '@/data/siteMetadata'
 
 export default async function Page() {
-  const sortedPosts = sortPosts(allBlogs)
-  const posts = allCoreContent(sortedPosts)
+  const sortedPosts = sortPosts(allReviews)
+  const posts = allCoreContent(sortedPosts).filter((p) => p.toolUrl)
 
   const jsonLd = {
     '@context': 'https://schema.org',

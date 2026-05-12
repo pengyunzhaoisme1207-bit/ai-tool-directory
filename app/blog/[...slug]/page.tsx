@@ -5,8 +5,14 @@ import PageTitle from '@/components/PageTitle'
 import { components } from '@/components/MDXComponents'
 import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { sortPosts, allCoreContent, coreContent, CoreContent } from 'pliny/utils/contentlayer'
-import { allBlogs, allAuthors, allBriefs } from 'contentlayer/generated'
-import type { Authors, Blog, Brief } from 'contentlayer/generated'
+import {
+  allReviews,
+  allAuthors,
+  allBriefs,
+  allGuides,
+  allComparisons,
+} from 'contentlayer/generated'
+import type { Authors, Review, Brief, Guide, Comparison } from 'contentlayer/generated'
 import PostSimple from '@/layouts/PostSimple'
 import PostLayout from '@/layouts/PostLayout'
 import PostBanner from '@/layouts/PostBanner'
@@ -14,6 +20,8 @@ import BriefDetailLayout from '@/layouts/BriefDetailLayout'
 import { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 import { notFound, redirect } from 'next/navigation'
+
+type BlogPost = Review | Guide | Comparison
 
 const defaultLayout = 'PostLayout'
 const layouts = {
@@ -28,7 +36,7 @@ export async function generateMetadata(props: {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
 
-  // Check briefs first (for /blog/brief-title paths)
+  // Check briefs first
   const brief = allBriefs.find((p) => p.slug === slug)
   if (brief) {
     const publishedAt = new Date(brief.date).toISOString()
@@ -57,29 +65,23 @@ export async function generateMetadata(props: {
     }
   }
 
-  // Check reviews (tool评测)
-  const post = allBlogs.find((p) => p.slug === slug)
-  const authorList = post?.authors || ['default']
-  const authorDetails = authorList.map((author) => {
-    const authorResults = allAuthors.find((p) => p.slug === author)
-    return coreContent(authorResults as Authors)
-  })
-  if (!post) {
-    return
-  }
+  // Check reviews
+  const review = allReviews.find((p) => p.slug === slug)
+  // Check guides
+  const guide = allGuides.find((p) => p.slug === slug)
+  // Check comparisons
+  const comparison = allComparisons.find((p) => p.slug === slug)
+
+  const post = review || guide || comparison
+  if (!post) return
 
   const publishedAt = new Date(post.date).toISOString()
   const modifiedAt = new Date(post.lastmod || post.date).toISOString()
-  const authors = authorDetails.map((author) => author.name)
-  let imageList = [siteMetadata.socialBanner]
-  if (post.images) {
-    imageList = typeof post.images === 'string' ? [post.images] : post.images
-  }
-  const ogImages = imageList.map((img) => {
-    return {
-      url: img && img.includes('http') ? img : siteMetadata.siteUrl + img,
-    }
-  })
+  const imageList = (post as BlogPost).images
+    ? typeof (post as BlogPost).images === 'string'
+      ? [(post as BlogPost).images]
+      : (post as BlogPost).images
+    : [siteMetadata.socialBanner]
 
   return {
     title: post.title,
@@ -93,8 +95,10 @@ export async function generateMetadata(props: {
       publishedTime: publishedAt,
       modifiedTime: modifiedAt,
       url: './',
-      images: ogImages,
-      authors: authors.length > 0 ? authors : [siteMetadata.author],
+      images: imageList.map((img: string) => ({
+        url: img && img.includes('http') ? img : siteMetadata.siteUrl + img,
+      })),
+      authors: [siteMetadata.author],
     },
     twitter: {
       card: 'summary_large_image',
@@ -106,13 +110,19 @@ export async function generateMetadata(props: {
 }
 
 export const generateStaticParams = async () => {
-  const reviewPaths = allBlogs.map((p) => ({
+  const reviewPaths = allReviews.map((p) => ({
+    slug: p.slug.split('/').map((name) => decodeURI(name)),
+  }))
+  const guidePaths = allGuides.map((p) => ({
+    slug: p.slug.split('/').map((name) => decodeURI(name)),
+  }))
+  const comparisonPaths = allComparisons.map((p) => ({
     slug: p.slug.split('/').map((name) => decodeURI(name)),
   }))
   const briefPaths = allBriefs.map((p) => ({
     slug: p.slug.split('/').map((name) => decodeURI(name)),
   }))
-  return [...reviewPaths, ...briefPaths]
+  return [...reviewPaths, ...guidePaths, ...comparisonPaths, ...briefPaths]
 }
 
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
@@ -132,7 +142,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
       : undefined
     return (
       <BriefDetailLayout
-        content={coreContent(brief) as unknown as CoreContent<Blog>}
+        content={coreContent(brief) as unknown as CoreContent<Review>}
         date={briefDate}
       >
         <MDXLayoutRenderer code={brief.body.code} components={components} toc={brief.toc} />
@@ -140,8 +150,98 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
     )
   }
 
+  // Check if it's a guide
+  const guide = allGuides.find((p) => p.slug === slug)
+  if (guide) {
+    if (guide.draft) return notFound()
+    const sortedGuides = allCoreContent(sortPosts(allGuides))
+    const guideIndex = sortedGuides.findIndex((p) => p.slug === slug)
+    const prev = sortedGuides[guideIndex + 1]
+    const next = sortedGuides[guideIndex - 1]
+
+    return (
+      <PostSimple
+        content={coreContent(guide) as unknown as CoreContent<Review>}
+        next={next}
+        prev={prev}
+      >
+        <MDXLayoutRenderer code={guide.body.code} components={components} toc={guide.toc} />
+      </PostSimple>
+    )
+  }
+
+  // Check if it's a comparison
+  const comparison = allComparisons.find((p) => p.slug === slug)
+  if (comparison) {
+    if (comparison.draft) return notFound()
+    const allContent = [
+      ...allCoreContent(sortPosts(allReviews)),
+      ...allCoreContent(sortPosts(allComparisons)),
+    ]
+    const sortedContent = allContent.sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+    const postIndex = sortedContent.findIndex((p) => p.slug === slug)
+    const prev = sortedContent[postIndex + 1]
+    const next = sortedContent[postIndex - 1]
+
+    const authorList = comparison.authors || ['default']
+    const authorDetails = authorList.map((author) => {
+      const authorResults = allAuthors.find((p) => p.slug === author)
+      return coreContent(authorResults as Authors)
+    })
+    const mainContent = coreContent(comparison)
+
+    // Related posts by category
+    const relatedPosts = comparison.category
+      ? sortedContent
+          .filter((p) => p.category === comparison.category && p.slug !== slug && !!p.toolUrl)
+          .slice(0, 3)
+      : []
+
+    const jsonLd = (comparison as Comparison).structuredData || {}
+    jsonLd['author'] = authorDetails.map((author) => ({
+      '@type': 'Person',
+      name: author.name,
+    }))
+
+    const Layout = layouts[(comparison as Comparison).layout || defaultLayout]
+
+    const isComparisonSlug =
+      comparison.slug?.includes('vs') || comparison.slug?.includes('comparison')
+    const faqPageJsonLd = isComparisonSlug ? generateComparisonFAQ(comparison) : null
+
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {faqPageJsonLd && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPageJsonLd) }}
+          />
+        )}
+        <Layout
+          content={mainContent as unknown as CoreContent<Review>}
+          authorDetails={authorDetails}
+          next={next}
+          prev={prev}
+          relatedPosts={relatedPosts}
+        >
+          <MDXLayoutRenderer
+            code={comparison.body.code}
+            components={components}
+            toc={comparison.toc}
+          />
+        </Layout>
+      </>
+    )
+  }
+
   // Check if it's a review
-  const sortedCoreContents = allCoreContent(sortPosts(allBlogs))
+  const sortedCoreContents = allCoreContent(sortPosts(allReviews))
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === slug)
   if (postIndex === -1) {
     return notFound()
@@ -149,7 +249,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
 
   const prev = sortedCoreContents[postIndex + 1]
   const next = sortedCoreContents[postIndex - 1]
-  const post = allBlogs.find((p) => p.slug === slug) as Blog
+  const post = allReviews.find((p) => p.slug === slug) as Review
   const authorList = post?.authors || ['default']
   const authorDetails = authorList.map((author) => {
     const authorResults = allAuthors.find((p) => p.slug === author)
@@ -206,7 +306,7 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
  * Generate FAQPage JSON-LD for comparison articles.
  * Extracts structured Q&A from the comparison content to enable Google FAQ rich snippets.
  */
-function generateComparisonFAQ(post: Blog) {
+function generateComparisonFAQ(post: Review | Comparison) {
   const title = post.title || ''
   const summary = post.summary || ''
   const toolA = title.match(/^(.+?)\s+vs\s+/i)?.[1]?.trim() || 'Tool A'

@@ -4,7 +4,7 @@ import { slug } from 'github-slugger'
 import { escape } from 'pliny/utils/htmlEscaper.js'
 import siteMetadata from '../data/siteMetadata.js'
 import tagData from '../app/tag-data.json' with { type: 'json' }
-import { allBlogs } from '../.contentlayer/generated/index.mjs'
+import { allReviews, allGuides, allComparisons } from '../.contentlayer/generated/index.mjs'
 import { sortPosts } from 'pliny/utils/contentlayer.js'
 
 const outputFolder = process.env.EXPORT ? 'out' : 'public'
@@ -39,15 +39,27 @@ const generateRss = (config, posts, page = 'feed.xml') => `
 
 async function generateRSS(config, allBlogs, page = 'feed.xml') {
   const publishPosts = allBlogs.filter((post) => post.draft !== true)
-  // RSS for blog post
-  if (publishPosts.length > 0) {
-    const rss = generateRss(config, sortPosts(publishPosts))
+  // RSS for blog (merge reviews + guides + comparisons)
+  const merged = [
+    ...publishPosts,
+    ...allGuides.filter((post) => post.draft !== true),
+    ...allComparisons.filter((post) => post.draft !== true),
+  ].sort((a, b) => new Date(b.date) - new Date(a.date))
+
+  if (merged.length > 0) {
+    const rss = generateRss(config, merged)
     writeFileSync(`./${outputFolder}/${page}`, rss)
   }
 
   if (publishPosts.length > 0) {
     for (const tag of Object.keys(tagData)) {
-      const filteredPosts = allBlogs.filter((post) => post.tags.map((t) => slug(t)).includes(tag))
+      const allContent = [
+        ...publishPosts,
+        ...allGuides.filter((p) => p.draft !== true),
+        ...allComparisons.filter((p) => p.draft !== true),
+      ]
+      const filteredPosts = allContent.filter((post) => post.tags?.map((t) => slug(t)).includes(tag))
+      if (filteredPosts.length === 0) continue
       const rss = generateRss(config, filteredPosts, `tags/${tag}/${page}`)
       const rssPath = path.join(outputFolder, 'tags', tag)
       mkdirSync(rssPath, { recursive: true })
@@ -57,7 +69,7 @@ async function generateRSS(config, allBlogs, page = 'feed.xml') {
 }
 
 const rss = () => {
-  generateRSS(siteMetadata, allBlogs)
+  generateRSS(siteMetadata, allReviews)
   console.log('RSS feed generated...')
 }
 export default rss

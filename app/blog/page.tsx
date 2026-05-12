@@ -1,28 +1,21 @@
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
-import { allBriefs } from 'contentlayer/generated'
+import { allReviews, allGuides, allComparisons } from 'contentlayer/generated'
 import { genPageMetadata } from 'app/seo'
-import BriefListLayout from '@/layouts/BriefListLayout'
+import ListLayoutWithTags from '@/layouts/ListLayoutWithTags'
 
-const POSTS_PER_PAGE = 10
+export const metadata = genPageMetadata({
+  title: 'Blog',
+  description: 'AI tool reviews, how-to guides, comparisons and tutorials.',
+})
 
-export const metadata = genPageMetadata({ title: 'AI Brief' })
+export default function BlogPage() {
+  const allContent = [
+    ...allCoreContent(sortPosts(allReviews)),
+    ...allCoreContent(sortPosts(allGuides)),
+    ...allCoreContent(sortPosts(allComparisons)),
+  ]
 
-export default async function BlogPage(props: { searchParams: Promise<{ page: string }> }) {
-  const briefs = allCoreContent(sortPosts(allBriefs))
-  const pageNumber = 1
-  const totalPages = Math.ceil(briefs.length / POSTS_PER_PAGE)
-  const initialDisplayBriefs = briefs.slice(0, POSTS_PER_PAGE * pageNumber)
-  const pagination = {
-    currentPage: pageNumber,
-    totalPages: totalPages,
-  }
+  const sorted = allContent.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-  return (
-    <BriefListLayout
-      briefs={briefs}
-      initialDisplayBriefs={initialDisplayBriefs}
-      pagination={pagination}
-      title="All Briefs"
-    />
-  )
+  return <ListLayoutWithTags posts={sorted} title="Blog" />
 }
