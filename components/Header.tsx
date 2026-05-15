@@ -5,6 +5,7 @@ import Link from './Link'
 import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import SearchButton from './SearchButton'
+import ClientOnly from './ClientOnly'
 
 const Header = () => {
   let headerClass = 'flex items-center w-full bg-white dark:bg-gray-950 justify-between py-10'
@@ -43,8 +44,10 @@ const Header = () => {
             ))}
         </div>
         <SearchButton />
-        <ThemeSwitch />
-        <MobileNav />
+        <ClientOnly>
+          <ThemeSwitch />
+          <MobileNav />
+        </ClientOnly>
       </div>
     </header>
   )

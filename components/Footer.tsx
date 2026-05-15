@@ -34,12 +34,9 @@ export default function Footer() {
           <Link href="/about" className="hover:text-primary-500 dark:hover:text-primary-400">
             About
           </Link>
-          <a
-            href="mailto:contact@next-happy.com"
-            className="hover:text-primary-500 dark:hover:text-primary-400"
-          >
+          <Link href="/contact" className="hover:text-primary-500 dark:hover:text-primary-400">
             Contact
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

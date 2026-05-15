@@ -440,6 +440,61 @@ export default function Home({ posts }) {
             </div>
           </div>
 
+          {/* Decision paths */}
+          {activeCategory === 'All' && !searchQuery && activePricing === 'all' && (
+            <section className="mb-8 rounded-xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/60">
+              <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <h2 className="text-base font-bold text-gray-900 dark:text-gray-100">
+                    Start with a Use Case
+                  </h2>
+                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                    Pick the workflow you are trying to improve, then compare tools by cost,
+                    privacy, model quality, and how much setup they require.
+                  </p>
+                </div>
+                <Link
+                  href="/blog/how-to-choose-ai-coding-tool"
+                  className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+                >
+                  Read the selection guide
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+                {[
+                  {
+                    title: 'Build and ship code',
+                    body: 'Compare agentic coding tools, IDE assistants, code search, and production debugging workflows.',
+                    href: '/blog/claude-code-vs-cursor-comparison',
+                  },
+                  {
+                    title: 'Research faster',
+                    body: 'Evaluate AI search engines by source quality, freshness, citation clarity, and deep research ability.',
+                    href: '/blog/perplexity-vs-chatgpt-comparison',
+                  },
+                  {
+                    title: 'Create media assets',
+                    body: 'Choose image, audio, video, and presentation tools based on output quality and commercial usability.',
+                    href: '/blog/how-to-use-ai-image-generators',
+                  },
+                ].map((item) => (
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    className="rounded-lg border border-gray-200 bg-white p-4 transition-colors hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-950 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+                  >
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                      {item.body}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
           {/* Tool Grid */}
           <div className="mb-8">
             <div className="mb-4 flex items-center justify-between">
@@ -512,6 +567,17 @@ export default function Home({ posts }) {
                 design, our reviews provide side-by-side comparisons, honest ratings, and detailed
                 pricing breakdowns to help you make an informed decision.
               </p>
+              <p className="mt-3 text-base leading-relaxed text-gray-600 dark:text-gray-400">
+                If you are new to the category, start with our{' '}
+                <Link href="/blog" className="font-medium text-blue-600 dark:text-blue-400">
+                  AI tool guides and comparisons
+                </Link>
+                . If you represent a product, use the{' '}
+                <Link href="/contact" className="font-medium text-blue-600 dark:text-blue-400">
+                  contact page
+                </Link>{' '}
+                to submit corrections or review requests.
+              </p>
             </div>
           </section>
 
@@ -533,7 +599,11 @@ export default function Home({ posts }) {
               (how is your data handled), and{' '}
               <strong className="text-gray-800 dark:text-gray-200">ecosystem integration</strong>{' '}
               (does it work with your existing tools). Ratings are on a 1–5 scale based on these
-              criteria.
+              criteria. You can read more about the editorial process on our{' '}
+              <Link href="/about" className="font-medium text-blue-600 dark:text-blue-400">
+                About page
+              </Link>
+              .
             </p>
           </section>
 
