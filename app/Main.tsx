@@ -243,6 +243,37 @@ export default function Home({ posts }) {
         </div>
       </div>
 
+      <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-950">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div className="max-w-2xl">
+            <h2 className="text-base font-bold text-gray-900 dark:text-gray-100">
+              Editorially reviewed, not auto-generated
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-400">
+              We publish hands-on AI tool reviews, comparison articles, and weekly briefs. Each page
+              is written for people deciding what to use in real workflows, with pricing, target
+              user fit, privacy notes, and update dates kept visible.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {[
+              { href: '/about', label: 'About' },
+              { href: '/projects', label: 'Review Process' },
+              { href: '/privacy', label: 'Privacy' },
+              { href: '/contact', label: 'Contact' },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-lg border border-gray-200 px-3 py-2 text-center text-sm font-medium text-gray-700 transition-colors hover:border-blue-300 hover:text-blue-700 dark:border-gray-700 dark:text-gray-300 dark:hover:border-blue-700 dark:hover:text-blue-400"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Two-column layout: sidebar + content */}
       <div className="flex gap-8">
         {/* Sidebar — Category Navigation */}

@@ -31,7 +31,7 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
     <div className="space-y-2 pt-6 pb-8 md:space-y-5">
       <nav className="flex justify-between font-serif">
         {!prevPage && (
-          <button className="cursor-auto disabled:opacity-50 text-[#6b6a64]" disabled={!prevPage}>
+          <button className="cursor-auto text-[#6b6a64] disabled:opacity-50" disabled={!prevPage}>
             Previous
           </button>
         )}
@@ -48,12 +48,16 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
           {currentPage} of {totalPages}
         </span>
         {!nextPage && (
-          <button className="cursor-auto disabled:opacity-50 text-[#6b6a64]" disabled={!nextPage}>
+          <button className="cursor-auto text-[#6b6a64] disabled:opacity-50" disabled={!nextPage}>
             Next
           </button>
         )}
         {nextPage && (
-          <Link href={`/${basePath}/page/${currentPage + 1}`} rel="next" className="text-[#1B365D] hover:underline">
+          <Link
+            href={`/${basePath}/page/${currentPage + 1}`}
+            rel="next"
+            className="text-[#1B365D] hover:underline"
+          >
             Next
           </Link>
         )}
@@ -79,17 +83,28 @@ export default function BriefListLayout({
     <>
       <div className="font-serif">
         {/* Header — editorial, serif */}
-        <div className="pt-6 pb-8 border-b-[1.5px] border-[#e8e6dc]">
+        <div className="border-b-[1.5px] border-[#e8e6dc] pt-6 pb-8">
           <div className="flex items-center gap-3">
-            <svg className="h-7 w-7 text-[#1B365D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            <svg
+              className="h-7 w-7 text-[#1B365D]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
+              />
             </svg>
-            <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-[#1B365D]">
+            <h1 className="text-2xl font-medium tracking-tight text-[#1B365D] sm:text-3xl">
               AI Brief
             </h1>
           </div>
           <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-[#504e49]">
-            AI industry news and updates, curated by our team. Published irregularly as significant developments occur.
+            AI industry news and updates, curated by our team. Published irregularly as significant
+            developments occur.
           </p>
         </div>
 
@@ -97,7 +112,7 @@ export default function BriefListLayout({
           {/* Sidebar — Brief index */}
           <div className="hidden h-full max-h-screen max-w-[300px] min-w-[300px] flex-wrap overflow-auto pt-5 sm:flex">
             <div className="px-4 py-4">
-              <h3 className="text-xs font-medium tracking-widest text-[#6b6a64] uppercase mb-4">
+              <h3 className="mb-4 text-xs font-medium tracking-widest text-[#6b6a64] uppercase">
                 All Briefs ({briefs.length})
               </h3>
               <ul className="space-y-0">
@@ -111,14 +126,14 @@ export default function BriefListLayout({
                         href={`/${path}`}
                         className={`block text-sm leading-snug ${
                           isActive
-                            ? 'text-[#1B365D] font-medium'
+                            ? 'font-medium text-[#1B365D]'
                             : 'text-[#504e49] hover:text-[#1B365D]'
                         }`}
                       >
-                        <div className={isActive ? 'text-[#1B365D] font-medium' : 'text-[#504e49]'}>
+                        <div className={isActive ? 'font-medium text-[#1B365D]' : 'text-[#504e49]'}>
                           {briefTitle}
                         </div>
-                        <div className="text-xs text-[#8a8983] mt-0.5">
+                        <div className="mt-0.5 text-xs text-[#8a8983]">
                           {formatDate(date, siteMetadata.locale)}
                         </div>
                       </Link>
@@ -133,9 +148,7 @@ export default function BriefListLayout({
           <div className="min-w-0 flex-1">
             {displayBriefs.length === 0 ? (
               <div className="py-16 text-center">
-                <p className="text-lg font-medium text-[#504e49]">
-                  No briefs published yet.
-                </p>
+                <p className="text-lg font-medium text-[#504e49]">No briefs published yet.</p>
                 <p className="mt-1 text-sm text-[#6b6a64]">
                   Check back soon for the latest AI industry updates.
                 </p>

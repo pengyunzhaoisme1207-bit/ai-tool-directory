@@ -19,10 +19,9 @@ export default function Footer() {
           <div>{` • `}</div>
           <Link href="/">{siteMetadata.title}</Link>
         </div>
-        <div className="mb-8 text-sm text-gray-500 dark:text-gray-400">
-          <Link href="https://github.com/timlrx/tailwind-nextjs-starter-blog">
-            Tailwind Nextjs Theme
-          </Link>
+        <div className="mb-8 text-center text-sm text-gray-500 dark:text-gray-400">
+          Independent editorial reviews, comparison guides, and weekly AI tool briefs for real-world
+          workflows.
         </div>
         <div className="mb-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-500 dark:text-gray-400">
           <Link href="/privacy" className="hover:text-primary-500 dark:hover:text-primary-400">
@@ -37,6 +36,12 @@ export default function Footer() {
           <Link href="/contact" className="hover:text-primary-500 dark:hover:text-primary-400">
             Contact
           </Link>
+          <a
+            href={`mailto:${siteMetadata.email}`}
+            className="hover:text-primary-500 dark:hover:text-primary-400"
+          >
+            {siteMetadata.email}
+          </a>
         </div>
       </div>
     </footer>

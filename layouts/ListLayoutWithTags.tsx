@@ -117,10 +117,10 @@ export default function ListLayoutWithTags({
                   <li key={type.key}>
                     <button
                       onClick={() => setActiveType(type.key)}
-                      className={`w-full text-left px-3 py-2 text-sm font-medium rounded transition-colors ${
+                      className={`w-full rounded px-3 py-2 text-left text-sm font-medium transition-colors ${
                         activeType === type.key
                           ? 'bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 font-bold'
-                          : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                          : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
                       }`}
                     >
                       {type.label} ({typeCounts[type.key]})
@@ -146,11 +146,11 @@ export default function ListLayoutWithTags({
                         <time dateTime={date} suppressHydrationWarning>
                           {formatDate(date, siteMetadata.locale)}
                         </time>
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                        <span className="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
                           {typeLabel}
                         </span>
                         {category && (
-                          <span className="text-xs text-primary-500 dark:text-primary-400">
+                          <span className="text-primary-500 dark:text-primary-400 text-xs">
                             {category}
                           </span>
                         )}
@@ -174,7 +174,8 @@ export default function ListLayoutWithTags({
                         )}
                         {rating && (
                           <span className="flex items-center gap-0.5 text-xs text-yellow-500">
-                            {'★'.repeat(Math.round(rating))}{'☆'.repeat(5 - Math.round(rating))}
+                            {'★'.repeat(Math.round(rating))}
+                            {'☆'.repeat(5 - Math.round(rating))}
                             <span className="ml-1 text-gray-500 dark:text-gray-400">{rating}</span>
                           </span>
                         )}
@@ -187,7 +188,9 @@ export default function ListLayoutWithTags({
                             </Link>
                           </h2>
                           <div className="mt-1 flex flex-wrap gap-2">
-                            {tags?.map((tag) => <Tag key={tag} text={tag} />)}
+                            {tags?.map((tag) => (
+                              <Tag key={tag} text={tag} />
+                            ))}
                           </div>
                         </div>
                         <div className="prose max-w-none text-sm leading-relaxed text-gray-500 dark:text-gray-400">

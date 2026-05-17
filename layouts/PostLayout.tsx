@@ -39,16 +39,7 @@ export default function PostLayout({
   relatedPosts = [],
   children,
 }: LayoutProps) {
-  const {
-    filePath,
-    path,
-    slug,
-    date,
-    title,
-    tags,
-    summary,
-    lastUpdated,
-  } = content
+  const { filePath, path, slug, date, title, tags, summary, lastUpdated } = content
   const category = (content as CoreContent<Review | Comparison>).category
   const toolUrl = (content as CoreContent<Review | Comparison>).toolUrl
   const logo = (content as CoreContent<Review | Comparison>).logo
@@ -337,7 +328,7 @@ export default function PostLayout({
                 {/* Tech Specs Inline - under the main info */}
                 {(underlyingModel || (mainFeatures && mainFeatures.length > 0)) && (
                   <div className="mt-6 rounded-xl border border-blue-200/50 bg-white/60 p-4 dark:border-blue-700/50 dark:bg-gray-900/40">
-                    <h3 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                    <h3 className="mb-3 text-xs font-semibold tracking-wider text-gray-500 uppercase dark:text-gray-400">
                       Tech Specs
                     </h3>
                     <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
@@ -356,9 +347,7 @@ export default function PostLayout({
                           <span className="font-medium text-gray-700 dark:text-gray-300">
                             Pricing:
                           </span>
-                          <span className="text-gray-600 dark:text-gray-400">
-                            {pricingModel}
-                          </span>
+                          <span className="text-gray-600 dark:text-gray-400">{pricingModel}</span>
                         </div>
                       )}
                       {mainFeatures && mainFeatures.length > 0 && (
@@ -394,10 +383,7 @@ export default function PostLayout({
                     <dt className="sr-only">Published on</dt>
                     <dd className="text-base leading-6 font-medium text-gray-500 dark:text-gray-400">
                       <time dateTime={date}>
-                        {new Date(date).toLocaleDateString(
-                          siteMetadata.locale,
-                          postDateTemplate
-                        )}
+                        {new Date(date).toLocaleDateString(siteMetadata.locale, postDateTemplate)}
                       </time>
                     </dd>
                   </div>
@@ -419,10 +405,7 @@ export default function PostLayout({
                 <dd>
                   <ul className="flex flex-wrap justify-center gap-4 sm:space-x-12 xl:block xl:space-y-8 xl:space-x-0">
                     {authorDetails.map((author) => (
-                      <li
-                        className="flex items-center space-x-2"
-                        key={author.name}
-                      >
+                      <li className="flex items-center space-x-2" key={author.name}>
                         {author.avatar && (
                           <Image
                             src={author.avatar}
@@ -434,9 +417,7 @@ export default function PostLayout({
                         )}
                         <dl className="text-sm leading-5 font-medium whitespace-nowrap">
                           <dt className="sr-only">Name</dt>
-                          <dd className="text-gray-900 dark:text-gray-100">
-                            {author.name}
-                          </dd>
+                          <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
                         </dl>
                       </li>
                     ))}
@@ -444,9 +425,7 @@ export default function PostLayout({
                 </dd>
               </dl>
             )}
-            <div
-              className={`${isToolReview ? '' : 'xl:col-span-3 xl:row-span-2 xl:pb-0'}`}
-            >
+            <div className={`${isToolReview ? '' : 'xl:col-span-3 xl:row-span-2 xl:pb-0'}`}>
               {/* In-Content Ad — after tool info card, before MDX body */}
               {isToolReview && (
                 <div className="my-6">
@@ -458,9 +437,7 @@ export default function PostLayout({
                   />
                 </div>
               )}
-              <div className="prose dark:prose-invert max-w-none pt-4 pb-8">
-                {children}
-              </div>
+              <div className="prose dark:prose-invert max-w-none pt-4 pb-8">{children}</div>
               {/* Bottom Ad — after MDX body, before discuss/edit links */}
               {isToolReview && (
                 <div className="mb-6">
@@ -511,7 +488,9 @@ export default function PostLayout({
                     <div className="mt-3 rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800/50">
                       {rating && (
                         <div className="mb-3 flex items-center justify-between">
-                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Rating</span>
+                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                            Rating
+                          </span>
                           <div className="flex items-center gap-1">
                             {[...Array(5)].map((_, i) => (
                               <svg
@@ -523,26 +502,40 @@ export default function PostLayout({
                                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                               </svg>
                             ))}
-                            <span className="ml-1 text-sm font-semibold text-gray-900 dark:text-gray-100">{rating}</span>
+                            <span className="ml-1 text-sm font-semibold text-gray-900 dark:text-gray-100">
+                              {rating}
+                            </span>
                           </div>
                         </div>
                       )}
                       {pricing && (
                         <div className="mb-3 flex items-center justify-between">
-                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Pricing</span>
-                          <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{pricing}</span>
+                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                            Pricing
+                          </span>
+                          <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                            {pricing}
+                          </span>
                         </div>
                       )}
                       {targetUser && (
                         <div className="mb-3 flex items-center justify-between">
-                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">For</span>
-                          <span className="text-sm text-gray-700 dark:text-gray-300">{targetUser}</span>
+                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                            For
+                          </span>
+                          <span className="text-sm text-gray-700 dark:text-gray-300">
+                            {targetUser}
+                          </span>
                         </div>
                       )}
                       {underlyingModel && (
                         <div className="flex items-center justify-between">
-                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Model</span>
-                          <span className="text-sm font-mono text-gray-700 dark:text-gray-300">{underlyingModel}</span>
+                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                            Model
+                          </span>
+                          <span className="font-mono text-sm text-gray-700 dark:text-gray-300">
+                            {underlyingModel}
+                          </span>
                         </div>
                       )}
                     </div>

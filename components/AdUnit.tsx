@@ -6,10 +6,12 @@ interface AdUnitProps {
   /** Semantic slot name: 'top', 'middle', 'result', 'bottom', 'sidebar' */
   slotName?: string
   /** Legacy ad slot ID (numeric string, for AdSense data-ad-slot) */
-  adSlot: string
+  adSlot?: string
   adFormat?: 'auto' | 'display' | 'rectangle'
   className?: string
 }
+
+const PLACEHOLDER_SLOTS = new Set(['1234567890', '2345678901', '3456789012'])
 
 /**
  * Google AdSense ad unit component.
@@ -23,15 +25,22 @@ export default function AdUnit({
   className = '',
 }: AdUnitProps) {
   const ref = useRef<HTMLModElement>(null)
+  const isRenderable = Boolean(adSlot && !PLACEHOLDER_SLOTS.has(adSlot))
 
   useEffect(() => {
+    if (!isRenderable) return
+
     try {
       // @ts-expect-error adsbygoogle is a global variable injected by the AdSense script
       ;(window.adsbygoogle = window.adsbygoogle || []).push({})
     } catch (e) {
       // AdSense may not be loaded or ad blockers may be active
     }
-  }, [])
+  }, [isRenderable])
+
+  if (!isRenderable) {
+    return null
+  }
 
   const slotClass = slotName ? `ad-slot-${slotName}` : ''
 
