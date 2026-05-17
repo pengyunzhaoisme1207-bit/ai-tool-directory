@@ -11,6 +11,12 @@ import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import AdUnit from '@/components/AdUnit'
 
+const AD_SLOTS = {
+  middle: process.env.NEXT_PUBLIC_ADSENSE_SLOT_MIDDLE,
+  bottom: process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM,
+  sidebar: process.env.NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR,
+}
+
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(`${siteMetadata.siteUrl}/${path}`)}`
@@ -431,7 +437,7 @@ export default function PostLayout({
                 <div className="my-6">
                   <AdUnit
                     slotName="middle"
-                    adSlot="1234567890"
+                    adSlot={AD_SLOTS.middle}
                     adFormat="rectangle"
                     className="min-h-[250px]"
                   />
@@ -443,7 +449,7 @@ export default function PostLayout({
                 <div className="mb-6">
                   <AdUnit
                     slotName="bottom"
-                    adSlot="2345678901"
+                    adSlot={AD_SLOTS.bottom}
                     adFormat="rectangle"
                     className="min-h-[250px]"
                   />
@@ -472,7 +478,7 @@ export default function PostLayout({
                   <div className="mb-4">
                     <AdUnit
                       slotName="sidebar"
-                      adSlot="3456789012"
+                      adSlot={AD_SLOTS.sidebar}
                       adFormat="rectangle"
                       className="min-h-[250px]"
                     />
