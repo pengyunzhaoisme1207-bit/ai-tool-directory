@@ -180,9 +180,11 @@ export default function PostLayout({
                   {/* Logo */}
                   <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm md:h-20 md:w-20 dark:border-gray-700 dark:bg-gray-800">
                     {logo ? (
-                      <img
+                      <Image
                         src={logo}
                         alt={title}
+                        width={48}
+                        height={48}
                         className="h-10 w-10 object-contain md:h-12 md:w-12"
                       />
                     ) : (

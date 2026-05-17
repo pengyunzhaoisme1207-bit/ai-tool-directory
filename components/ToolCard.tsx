@@ -1,5 +1,6 @@
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
+import Image from '@/components/Image'
 
 export default function ToolCard({ post }) {
   const {
@@ -36,7 +37,13 @@ export default function ToolCard({ post }) {
           <div className="flex items-center gap-3">
             <div className="relative flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-xl border border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 dark:border-gray-600 dark:from-gray-800 dark:to-gray-700">
               {logo ? (
-                <img src={logo} alt={title} className="h-8 w-8 object-contain" />
+                <Image
+                  src={logo}
+                  alt={title}
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 object-contain"
+                />
               ) : (
                 <svg
                   className="h-6 w-6 text-gray-400"

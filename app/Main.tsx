@@ -5,6 +5,7 @@ import ToolCard from '@/components/ToolCard'
 import siteMetadata from '@/data/siteMetadata'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
 import Link from '@/components/Link'
+import Image from '@/components/Image'
 
 const CATEGORIES = [
   { key: 'All', label: 'All', icon: 'grid' },
@@ -375,7 +376,13 @@ export default function Home({ posts }) {
                   >
                     <div className="flex items-center gap-2.5">
                       {post.logo && (
-                        <img src={post.logo} alt="" className="h-8 w-8 rounded-lg object-contain" />
+                        <Image
+                          src={post.logo}
+                          alt=""
+                          width={32}
+                          height={32}
+                          className="h-8 w-8 rounded-lg object-contain"
+                        />
                       )}
                       <div className="min-w-0 flex-1">
                         <div className="truncate text-xs font-semibold text-gray-900 dark:text-gray-100">
