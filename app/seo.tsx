@@ -1,12 +1,12 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import siteMetadata from '@/data/siteMetadata'
 
-interface PageSEOProps {
+interface PageSEOProps extends Partial<
+  Omit<Metadata, 'title' | 'description' | 'openGraph' | 'twitter'>
+> {
   title: string
   description?: string
   image?: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
 }
 
 export function genPageMetadata({ title, description, image, ...rest }: PageSEOProps): Metadata {

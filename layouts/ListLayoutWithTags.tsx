@@ -70,7 +70,7 @@ const CONTENT_TYPES = [
 ]
 
 function getContentType(post: CoreContent<Review | Guide | Comparison>): string {
-  const filePath = (post as any).filePath || ''
+  const filePath = 'filePath' in post && typeof post.filePath === 'string' ? post.filePath : ''
   if (filePath.includes('comparisons/')) return 'comparison'
   return 'guide'
 }
@@ -134,8 +134,12 @@ export default function ListLayoutWithTags({
             <ul>
               {displayPosts.map((post) => {
                 const { path, date, title, summary, tags, readingTime } = post
-                const rating = (post as any).rating
-                const category = (post as any).category
+                const rating =
+                  'rating' in post && typeof post.rating === 'number' ? post.rating : undefined
+                const category =
+                  'category' in post && typeof post.category === 'string'
+                    ? post.category
+                    : undefined
                 const type = getContentType(post)
                 const typeLabel =
                   type === 'guide' ? 'Guide' : type === 'comparison' ? 'Comparison' : 'Review'
