@@ -83,6 +83,24 @@ Phind is a search engine purpose-built for developers. Instead of returning a li
 - Smaller model than GPT-4 or Claude for complex reasoning
 - Community awareness is still low
 
+## Best Use Cases
+
+Phind is most useful when the query includes technical language that a general search engine treats poorly: stack traces, package errors, API migration questions, framework configuration problems, and "why does this code fail" debugging sessions. It is designed for the moment when you do not want ten SEO articles; you want a sourced answer that points to docs, issues, or examples.
+
+It also fits exploratory engineering research. Before adopting a library, a developer can ask about common failure modes, version compatibility, or differences between two APIs. The answer is not a substitute for reading the official documentation, but it helps narrow what to inspect first.
+
+## How to Verify Answers
+
+The citation layer is Phind's main advantage, but users should still click through. For bug fixes, check whether the cited answer matches your framework version, runtime, and dependency stack. A solution from an older GitHub issue may be correct for one release and wrong for another.
+
+When Phind provides code, treat it as a starting point. Run tests, inspect edge cases, and confirm that the snippet does not introduce security or performance problems. The tool is good at compressing research time, not at replacing engineering judgment.
+
+## Phind vs General AI Assistants
+
+Compared with ChatGPT or Claude, Phind is narrower but faster for source-grounded developer search. It is less useful for broad product strategy, long-form writing, or multi-file code generation, but it can be more efficient for "find the answer in public technical sources" tasks.
+
+Compared with Google, Phind removes a lot of link scanning and summarizes the likely fix. Google still wins when you need the widest possible index, very recent niche pages, or non-technical results. A practical workflow is to start with Phind for technical diagnosis, then use official docs and tests to verify.
+
 ## Verdict
 
 Phind is the search engine your Stack Overflow tab should have become. For developers tired of sifting through SEO-optimized blog posts to find a working solution, Phind delivers direct, sourced answers with actual code. It's free, it's fast, and it's built for the job.

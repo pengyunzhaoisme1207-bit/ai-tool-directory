@@ -480,15 +480,17 @@ export default function Home({ posts }) {
 
           {/* Decision paths */}
           {activeCategory === 'All' && !searchQuery && activePricing === 'all' && (
-            <section className="mb-8 rounded-xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/60">
-              <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+            <section className="mb-8 space-y-5 rounded-xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/60">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <h2 className="text-base font-bold text-gray-900 dark:text-gray-100">
                     Start with a Use Case
                   </h2>
-                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                  <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
                     Pick the workflow you are trying to improve, then compare tools by cost,
-                    privacy, model quality, and how much setup they require.
+                    privacy, model quality, and how much setup they require. We do not treat every
+                    popular launch as a recommendation; a tool only stays in the directory when it
+                    solves a clear job for a real user group.
                   </p>
                 </div>
                 <Link
@@ -528,6 +530,34 @@ export default function Home({ posts }) {
                       {item.body}
                     </p>
                   </Link>
+                ))}
+              </div>
+              <div className="grid gap-3 border-t border-gray-200 pt-5 md:grid-cols-3 dark:border-gray-800">
+                {[
+                  {
+                    title: 'For individual users',
+                    body: 'We look for useful free tiers, fast onboarding, clear export options, and whether the tool replaces an existing workflow instead of adding another login.',
+                  },
+                  {
+                    title: 'For teams',
+                    body: 'We check collaboration controls, permission models, workspace billing, data retention signals, and whether the product can be introduced without heavy training.',
+                  },
+                  {
+                    title: 'For businesses',
+                    body: 'We prioritize reliability, privacy documentation, commercial rights, auditability, integrations, and whether pricing scales predictably as usage grows.',
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950"
+                  >
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                      {item.body}
+                    </p>
+                  </div>
                 ))}
               </div>
             </section>
@@ -643,6 +673,34 @@ export default function Home({ posts }) {
               </Link>
               .
             </p>
+          </section>
+
+          <section>
+            <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-gray-100">
+              What Makes a Tool Worth Listing
+            </h2>
+            <div className="space-y-4 text-base leading-relaxed text-gray-600 dark:text-gray-400">
+              <p>
+                A product is not added simply because it is new or popular. We look for a concrete
+                use case, enough product maturity for a user to evaluate it today, public pricing or
+                a clear sales path, and evidence that the tool can produce repeatable results. This
+                is why the directory mixes well-known platforms with narrower products that solve a
+                specific workflow better than a general chatbot.
+              </p>
+              <p>
+                Reviews are also written with trade-offs in mind. A high score does not mean a tool
+                is the right choice for everyone. For example, a professional video platform may be
+                excellent for an agency but too expensive for a solo creator; a writing assistant
+                may be valuable for brand governance but unnecessary for a student. The goal of each
+                page is to help readers rule tools in or out quickly.
+              </p>
+              <p>
+                We keep legal, privacy, and commercial-use details visible because these are the
+                areas where AI tools create the most real-world risk. When a tool has unclear data
+                handling, weak free-tier value, limited export options, or licensing uncertainty,
+                that affects the verdict even if the generated output looks impressive.
+              </p>
+            </div>
           </section>
 
           {/* FAQ Section */}

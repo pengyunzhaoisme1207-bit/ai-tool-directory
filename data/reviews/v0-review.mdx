@@ -84,6 +84,24 @@ Vercel v0 is an AI-powered UI generation tool that transforms natural language p
 - Not a replacement for a skilled frontend engineer
 - Free tier credits run out quickly
 
+## Best Use Cases
+
+v0 is strongest for common application interfaces: dashboards, settings pages, forms, pricing tables, onboarding flows, admin panels, empty states, and data cards. These surfaces often take hours to assemble by hand even when the design pattern is familiar. v0 gets a developer to a solid first implementation quickly, then the team can refine behavior, state management, and product-specific details.
+
+It is also useful during product discovery. A founder or product manager can describe a screen, generate a working preview, and use it to discuss layout and hierarchy before design resources are assigned. Because the output is code, the prototype can become a starting point instead of a disposable image mockup.
+
+## Where Manual Engineering Still Matters
+
+Generated UI needs review before production. Developers should check accessibility labels, loading and error states, keyboard behavior, responsiveness, data boundaries, and whether the component matches the existing design system. v0 can produce good visual structure, but it cannot know every product rule, analytics event, permission state, or backend contract.
+
+Complex applications also need architecture beyond a component. v0 can help create the screen, but the team still needs to wire data fetching, validation, security, tests, routing, and performance constraints. The tool saves front-end assembly time; it does not remove the need for front-end ownership.
+
+## Prompting Tips
+
+The best prompts describe the user, the data shown, the primary action, the empty state, and the visual density. "Create a compact billing settings page for a SaaS admin with plan status, payment method, invoice table, and cancellation state" will produce better output than "make a settings page."
+
+Ask for revisions in small steps. First get the structure right, then ask for mobile improvements, better empty states, stronger accessibility, or a quieter enterprise style. This keeps the generated component maintainable and avoids a visually busy result.
+
 ## Verdict
 
 Vercel v0 is the fastest path from "I need a form" to "here's the React component." It won't replace your frontend team, but it will save them hours of boilerplate work. The shadcn/ui integration makes the output immediately maintainable.

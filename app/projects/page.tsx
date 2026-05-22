@@ -152,6 +152,56 @@ export default function Projects() {
             workflow.
           </p>
 
+          <h2>What We Test Before Publishing</h2>
+          <p>
+            A review is not published from a product homepage alone. Before a tool receives a full
+            page, we check the onboarding path, the free or trial experience when available, the
+            core output quality for at least one realistic task, pricing clarity, export options,
+            privacy signals, and whether a user can reasonably understand the product without a
+            sales call. If a product cannot be evaluated from public information, we mark that
+            limitation in the review instead of filling the page with marketing claims.
+          </p>
+
+          <div className="not-prose my-8 grid gap-4 md:grid-cols-2">
+            {[
+              {
+                title: 'Workflow fit',
+                desc: 'Who should use this tool, what task it improves, and what existing workflow it replaces or supports.',
+              },
+              {
+                title: 'Usability evidence',
+                desc: 'How quickly a new user can reach a useful result, where setup becomes confusing, and which features require paid access.',
+              },
+              {
+                title: 'Commercial readiness',
+                desc: 'Whether pricing, licensing, export rights, collaboration, and admin controls are clear enough for business use.',
+              },
+              {
+                title: 'Risk and limits',
+                desc: 'Privacy concerns, reliability gaps, model limits, vague claims, or legal uncertainty that should affect the buying decision.',
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-lg border border-gray-200 p-5 dark:border-gray-700"
+              >
+                <h3 className="mt-0 text-lg font-semibold">{item.title}</h3>
+                <p className="mb-0 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <h2>Why Some Popular Tools Score Lower</h2>
+          <p>
+            Popularity is not the same as fit. Some tools generate impressive demos but have weak
+            export controls, unclear rights, high per-seat pricing, or poor predictability on
+            repeated tasks. Others are excellent for specialists but frustrating for casual users.
+            Our ratings intentionally separate raw capability from practical value so readers can
+            choose based on their own constraints.
+          </p>
+
           <h2>Transparency</h2>
           <p>
             We purchase our own licenses for the tools we review whenever possible. When a tool
