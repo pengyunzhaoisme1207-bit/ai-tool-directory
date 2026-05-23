@@ -15,6 +15,17 @@ export default function Projects() {
       </div>
       <div className="container py-12">
         <div className="prose prose-gray dark:prose-invert mx-auto max-w-none">
+          <div className="not-prose mb-8 rounded-xl border border-blue-200 bg-blue-50 p-5 dark:border-blue-900 dark:bg-blue-950/30">
+            <h2 className="mt-0 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              Editorial Notes
+            </h2>
+            <p className="mb-0 text-sm leading-6 text-gray-700 dark:text-gray-300">
+              Our reviews are written to help readers choose between tools, not to maximize page
+              count. When a product changes pricing, model access, licensing, or a major workflow,
+              we update the relevant page and keep a visible trail of how we evaluate it.
+            </p>
+          </div>
+
           <h2>What We Review</h2>
           <p>We cover AI tools across six major categories:</p>
 

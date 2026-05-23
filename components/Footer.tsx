@@ -24,6 +24,18 @@ export default function Footer() {
           workflows.
         </div>
         <div className="mb-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-gray-500 dark:text-gray-400">
+          <Link
+            href="/editorial-policy"
+            className="hover:text-primary-500 dark:hover:text-primary-400"
+          >
+            Editorial Policy
+          </Link>
+          <Link href="/submit" className="hover:text-primary-500 dark:hover:text-primary-400">
+            Submit a Tool
+          </Link>
+          <Link href="/categories" className="hover:text-primary-500 dark:hover:text-primary-400">
+            Categories
+          </Link>
           <Link href="/privacy" className="hover:text-primary-500 dark:hover:text-primary-400">
             Privacy Policy
           </Link>

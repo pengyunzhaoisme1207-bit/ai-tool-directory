@@ -296,40 +296,74 @@ export default function PostLayout({
                     )}
 
                     {/* CTA Button */}
-                    <a
-                      href={toolUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
-                    >
-                      <svg
-                        className="h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                      <a
+                        href={toolUrl}
+                        target="_blank"
+                        rel="nofollow noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        />
-                      </svg>
-                      Visit Official Website
-                      <svg
-                        className="h-4 w-4 opacity-70"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                        <svg
+                          className="h-5 w-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                          />
+                        </svg>
+                        Visit Official Website
+                        <svg
+                          className="h-4 w-4 opacity-70"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          />
+                        </svg>
+                      </a>
+                      <Link
+                        href="/submit"
+                        className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        />
-                      </svg>
-                    </a>
+                        Report pricing or feature changes
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 grid gap-3 border-t border-blue-200/60 pt-5 text-sm md:grid-cols-3 dark:border-blue-800/60">
+                  <div className="rounded-xl bg-white/70 p-3 dark:bg-gray-900/50">
+                    <div className="font-semibold text-gray-900 dark:text-gray-100">
+                      Editorial review
+                    </div>
+                    <p className="mt-1 leading-6 text-gray-600 dark:text-gray-400">
+                      Rated by our editorial criteria, not by paid placement.
+                    </p>
+                  </div>
+                  <div className="rounded-xl bg-white/70 p-3 dark:bg-gray-900/50">
+                    <div className="font-semibold text-gray-900 dark:text-gray-100">
+                      Update checks
+                    </div>
+                    <p className="mt-1 leading-6 text-gray-600 dark:text-gray-400">
+                      Pricing, model access, and rights can change; verify final terms with the
+                      provider.
+                    </p>
+                  </div>
+                  <div className="rounded-xl bg-white/70 p-3 dark:bg-gray-900/50">
+                    <div className="font-semibold text-gray-900 dark:text-gray-100">Disclosure</div>
+                    <p className="mt-1 leading-6 text-gray-600 dark:text-gray-400">
+                      Outbound links may be affiliate links and do not affect the review verdict.
+                    </p>
                   </div>
                 </div>
 
