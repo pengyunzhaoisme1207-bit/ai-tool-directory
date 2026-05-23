@@ -7,6 +7,29 @@ import NewsletterForm from 'pliny/ui/NewsletterForm'
 import Link from '@/components/Link'
 import Image from '@/components/Image'
 
+type DirectoryPost = {
+  slug: string
+  path?: string
+  title: string
+  summary?: string
+  date?: string
+  tags?: string[]
+  logo?: string
+  pricing?: string
+  targetUser?: string
+  rating?: number
+  category?: string
+  mainFeatures?: string[]
+  lastUpdated?: string
+}
+
+type HomeProps = {
+  posts: DirectoryPost[]
+  guides?: DirectoryPost[]
+  briefs?: DirectoryPost[]
+  comparisons?: DirectoryPost[]
+}
+
 const CATEGORIES = [
   { key: 'All', label: 'All', icon: 'grid' },
   { key: 'LLM', label: 'LLM', icon: 'chat' },
@@ -152,7 +175,13 @@ const PRICING_FILTERS = [
   { key: 'Paid', label: 'Paid' },
 ]
 
-export default function Home({ posts }) {
+const sortByUpdated = (a: DirectoryPost, b: DirectoryPost) => {
+  const aTime = new Date(a.lastUpdated || a.date || 0).getTime()
+  const bTime = new Date(b.lastUpdated || b.date || 0).getTime()
+  return bTime - aTime
+}
+
+export default function Home({ posts, guides = [], briefs = [], comparisons = [] }: HomeProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
   const [activePricing, setActivePricing] = useState('all')
@@ -187,6 +216,35 @@ export default function Home({ posts }) {
     [posts]
   )
 
+  const featuredTools = useMemo(() => {
+    const sorted = [...posts].sort(sortByUpdated)
+    return sorted.slice(0, 6)
+  }, [posts])
+
+  const latestGuides = useMemo(() => [...guides].sort(sortByUpdated).slice(0, 2), [guides])
+  const latestBriefs = useMemo(() => [...briefs].sort(sortByUpdated).slice(0, 2), [briefs])
+  const latestComparisons = useMemo(
+    () => [...comparisons].sort(sortByUpdated).slice(0, 3),
+    [comparisons]
+  )
+
+  const editorialUpdates = useMemo(
+    () =>
+      [...guides, ...briefs, ...comparisons]
+        .sort(sortByUpdated)
+        .slice(0, 4)
+        .map((item) => {
+          const href = item.path ? `/${item.path}` : '#'
+          const kind = briefs.some((post) => post.slug === item.slug)
+            ? 'Brief'
+            : comparisons.some((post) => post.slug === item.slug)
+              ? 'Comparison'
+              : 'Guide'
+          return { ...item, href, kind }
+        }),
+    [briefs, comparisons, guides]
+  )
+
   // Filtered posts
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
@@ -211,38 +269,322 @@ export default function Home({ posts }) {
 
   return (
     <>
-      {/* Hero Section */}
-      <div className="relative mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 px-6 py-10 md:py-14 dark:from-blue-800 dark:via-blue-900 dark:to-indigo-950">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
-        <div className="relative mx-auto max-w-3xl text-center">
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white/80 backdrop-blur-sm">
-            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M11.3 1.046A1.5 1.5 0 0113 2v5h4a1.5 1.5 0 01.707 2.821l-9 5.25a1.5 1.5 0 01-2.407-1.643L7.44 8H3a1.5 1.5 0 01-1.33-2.198l9.5-5.25z" />
-            </svg>
-            Curated AI Tools Directory
+      <section className="mb-6 border-b border-gray-200 pb-6 dark:border-gray-800">
+        <div className="grid gap-6 lg:grid-cols-[1.4fr_0.9fr] lg:items-start">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-semibold tracking-wide text-gray-700 uppercase dark:border-gray-800 dark:bg-gray-950 dark:text-gray-300">
+              Curated AI Tools Directory
+            </div>
+            <div className="max-w-3xl">
+              <h1 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl dark:text-gray-50">
+                Search, compare, and track the AI tools people actually use.
+              </h1>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-gray-600 dark:text-gray-400">
+                {siteMetadata.description}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2 text-xs text-gray-500 dark:text-gray-400">
+              <span className="rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
+                {totalTools} reviewed tools
+              </span>
+              <span className="rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
+                {categoryCount} active categories
+              </span>
+              <span className="rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
+                {guides.length + briefs.length + comparisons.length} editorial updates
+              </span>
+              <span className="rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
+                {freeCount + freemiumCount} free or freemium tools
+              </span>
+            </div>
           </div>
-          <h1 className="mb-3 text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-            Find the Right AI Tool
-          </h1>
-          <p className="mx-auto max-w-2xl text-base leading-relaxed text-blue-100 md:text-lg">
-            {siteMetadata.description}
-          </p>
-          {/* Stats inline */}
-          <div className="mt-5 flex items-center justify-center gap-6 text-sm text-blue-200">
-            <span>
-              <strong className="text-white">{totalTools}</strong> Tools
-            </span>
-            <span className="text-blue-300">·</span>
-            <span>
-              <strong className="text-white">{categoryCount}</strong> Categories
-            </span>
-            <span className="text-blue-300">·</span>
-            <span>
-              <strong className="text-white">{freeCount + freemiumCount}</strong> Free
-            </span>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+            <Link
+              href="/submit"
+              className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
+            >
+              <div className="text-xs font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
+                Submit or correct a tool
+              </div>
+              <div className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                Send a new listing, pricing update, or editorial fix.
+              </div>
+              <div className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                Keep the directory current when a product changes, launches a new plan, or needs a
+                better category fit.
+              </div>
+            </Link>
+            <Link
+              href="/categories"
+              className="rounded-2xl border border-gray-200 bg-gray-50 p-4 transition hover:-translate-y-0.5 hover:border-gray-300 hover:bg-white dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700"
+            >
+              <div className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Browse categories
+              </div>
+              <div className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                Move by workflow, not by hype.
+              </div>
+              <div className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                Use category pages to compare coding, search, writing, design, image, and agent
+                tools in one place.
+              </div>
+            </Link>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="mb-8 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+          <div className="mb-4 flex items-center justify-between gap-3">
+            <div>
+              <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Search the directory
+              </h2>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                Filter tools by category, price, and keyword.
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+            >
+              Editorial archive
+            </Link>
+          </div>
+          <div className="relative">
+            <svg
+              className="absolute top-1/2 left-3.5 h-4.5 w-4.5 -translate-y-1/2 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search tools by name, tag, or keyword..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3 pr-4 pl-10 text-sm text-gray-900 shadow-sm transition focus:border-blue-400 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-blue-600 dark:focus:ring-blue-900/30"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => {
+                  setSearchQuery('')
+                  setActiveCategory('All')
+                  setActivePricing('all')
+                }}
+                className="absolute top-1/2 right-2.5 -translate-y-1/2 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+              >
+                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            )}
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {PRICING_FILTERS.map((f) => (
+              <button
+                key={f.key}
+                onClick={() => setActivePricing(f.key)}
+                className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                  activePricing === f.key
+                    ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+          <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+            Fresh editorial updates
+          </h2>
+          <div className="mt-4 space-y-3">
+            {editorialUpdates.map((item) => (
+              <Link
+                key={item.slug}
+                href={item.href}
+                className="block rounded-xl border border-gray-200 px-4 py-3 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-semibold tracking-wide text-gray-500 uppercase dark:bg-gray-800 dark:text-gray-400">
+                    {item.kind}
+                  </span>
+                  <span className="text-xs text-gray-400 dark:text-gray-500">
+                    {item.date
+                      ? new Date(item.date).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                        })
+                      : ''}
+                  </span>
+                </div>
+                <div className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                  {item.title}
+                </div>
+                <div className="mt-1 line-clamp-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                  {item.summary}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mb-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+          <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+            Featured tools
+          </h2>
+          <div className="mt-4 space-y-3">
+            {featuredTools.slice(0, 3).map((post) => (
+              <Link
+                key={post.slug}
+                href={`/${post.path}`}
+                className="flex items-start gap-3 rounded-xl border border-gray-100 p-3 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+              >
+                {post.logo && (
+                  <Image
+                    src={post.logo}
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="mt-0.5 h-7 w-7 rounded-lg object-contain"
+                  />
+                )}
+                <div className="min-w-0">
+                  <div className="truncate text-sm font-medium text-gray-900 dark:text-gray-100">
+                    {post.title}
+                  </div>
+                  <div className="mt-1 line-clamp-2 text-xs leading-5 text-gray-600 dark:text-gray-400">
+                    {post.summary}
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+          <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+            Latest guide
+          </h2>
+          <div className="mt-4 space-y-3">
+            {latestGuides.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/${post.path}`}
+                className="block rounded-xl border border-gray-100 p-3 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+              >
+                <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  {post.title}
+                </div>
+                <div className="mt-2 line-clamp-3 text-xs leading-5 text-gray-600 dark:text-gray-400">
+                  {post.summary}
+                </div>
+              </Link>
+            ))}
+            <Link
+              href="/blog"
+              className="block rounded-xl border border-dashed border-gray-200 px-3 py-2 text-center text-sm font-medium text-gray-600 hover:border-blue-300 hover:text-blue-700 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-400"
+            >
+              View all guides
+            </Link>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+          <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+            Latest brief
+          </h2>
+          <div className="mt-4 space-y-3">
+            {latestBriefs.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/${post.path}`}
+                className="block rounded-xl border border-gray-100 p-3 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+              >
+                <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  {post.title}
+                </div>
+                <div className="mt-2 line-clamp-3 text-xs leading-5 text-gray-600 dark:text-gray-400">
+                  {post.summary}
+                </div>
+              </Link>
+            ))}
+            <Link
+              href="/blog"
+              className="block rounded-xl border border-dashed border-gray-200 px-3 py-2 text-center text-sm font-medium text-gray-600 hover:border-blue-300 hover:text-blue-700 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-400"
+            >
+              View all briefs
+            </Link>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+          <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+            Popular comparisons
+          </h2>
+          <div className="mt-4 space-y-3">
+            {latestComparisons.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/${post.path}`}
+                className="block rounded-xl border border-gray-100 p-3 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+              >
+                <div className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                  {post.title}
+                </div>
+                <div className="mt-2 line-clamp-3 text-xs leading-5 text-gray-600 dark:text-gray-400">
+                  {post.summary}
+                </div>
+              </Link>
+            ))}
+            <Link
+              href="/blog"
+              className="block rounded-xl border border-dashed border-gray-200 px-3 py-2 text-center text-sm font-medium text-gray-600 hover:border-blue-300 hover:text-blue-700 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-400"
+            >
+              View all comparisons
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/60">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">
+              Browse by workflow, then drill into the tools.
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-400">
+              Directory sites like this work best when the user can move from category to shortlist
+              to decision without friction. That is why the homepage now balances tool cards,
+              editorial updates, comparisons, and submission routes in one view.
+            </p>
+          </div>
+          <Link
+            href="/submit"
+            className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+          >
+            Submit a tool update
+          </Link>
+        </div>
+      </section>
 
       <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-950">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
@@ -392,7 +734,7 @@ export default function Home({ posts }) {
                           {[...Array(5)].map((_, i) => (
                             <svg
                               key={i}
-                              className={`h-3 w-3 ${i < Math.floor(post.rating) ? 'text-yellow-400' : 'text-gray-200 dark:text-gray-700'}`}
+                              className={`h-3 w-3 ${i < Math.floor(post.rating ?? 0) ? 'text-yellow-400' : 'text-gray-200 dark:text-gray-700'}`}
                               fill="currentColor"
                               viewBox="0 0 20 20"
                             >
@@ -408,75 +750,6 @@ export default function Home({ posts }) {
               </div>
             </div>
           )}
-
-          {/* Search & Pricing */}
-          <div className="mb-6 space-y-3">
-            <div className="relative">
-              <svg
-                className="absolute top-1/2 left-3.5 h-4.5 w-4.5 -translate-y-1/2 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-              <input
-                type="text"
-                placeholder="Search tools by name, tag, or keyword..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-lg border border-gray-200 bg-white py-2.5 pr-4 pl-10 text-sm text-gray-900 shadow-sm transition-shadow focus:border-blue-400 focus:shadow-md focus:ring-2 focus:ring-blue-100 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-blue-600 dark:focus:ring-blue-900/30"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => {
-                    setSearchQuery('')
-                    setActiveCategory('All')
-                    setActivePricing('all')
-                  }}
-                  className="absolute top-1/2 right-2.5 -translate-y-1/2 rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-800 dark:hover:text-gray-300"
-                >
-                  <svg
-                    className="h-3.5 w-3.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              )}
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-medium tracking-wider text-gray-400 uppercase dark:text-gray-500">
-                Pricing:
-              </span>
-              {PRICING_FILTERS.map((f) => (
-                <button
-                  key={f.key}
-                  onClick={() => setActivePricing(f.key)}
-                  className={`rounded-full px-2.5 py-1 text-xs font-medium transition-colors ${
-                    activePricing === f.key
-                      ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
-                      : 'bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
-                  }`}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
-          </div>
 
           {/* Decision paths */}
           {activeCategory === 'All' && !searchQuery && activePricing === 'all' && (
