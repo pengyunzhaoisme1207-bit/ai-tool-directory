@@ -1,5 +1,5 @@
 {
-  "ai-news": 8,
+  "ai-news": 9,
   "safety": 1,
   "security": 1,
   "regulation": 2,
@@ -17,6 +17,9 @@
   "eu": 1,
   "agents": 1,
   "ai-coding": 1,
-  "enterprise-ai": 1,
-  "agentic-ai": 1
+  "enterprise-ai": 2,
+  "agentic-ai": 1,
+  "google-io": 1,
+  "ai-agents": 1,
+  "ai-infrastructure": 1
 }

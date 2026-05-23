@@ -1,0 +1,87 @@
+---
+title: 'AI Brief #9 — Google I/O 2026, enterprise Claude adoption, and production AI routing'
+date: '2026-05-23'
+tags: ['AI News', 'Google I/O', 'Enterprise AI', 'AI Agents', 'AI Infrastructure']
+draft: false
+summary: 'Google I/O pushed Gemini deeper into Search, Android and developer tools; Anthropic expanded Claude into large enterprise workforces; Vercel data shows agentic workloads now dominate production AI traffic.'
+sources:
+  - 'https://blog.google/innovation-and-ai/technology/ai/google-io-2026-all-our-announcements/'
+  - 'https://blog.google/innovation-and-ai/technology/developers-tools/google-io-2026-developer-highlights/'
+  - 'https://blog.google/products-and-platforms/products/search/search-io-2026/?pubDate=20260520'
+  - 'https://www.anthropic.com/news/pwc-expanded-partnership?target=_blank'
+  - 'https://www.anthropic.com/news'
+  - 'https://vercel.com/blog'
+authors: ['default']
+---
+
+## The Week AI Moved from Chat to Operating Layer
+
+The most important AI story this week was not a single model release. It was the way AI moved deeper into products that people already use: Search, Android, developer environments, consulting workflows, and production infrastructure.
+
+Google used I/O 2026 to push Gemini into agentic Search, Android intelligence, Antigravity, AI Studio, Firebase and the Gemini API. Anthropic announced more enterprise distribution for Claude through PwC and its broader May newsroom cycle. Vercel published production traffic patterns from AI Gateway showing that agent workloads now represent a large share of real application usage.
+
+For AI tool buyers, the message is clear: the market is shifting from "which chatbot is smartest?" to "which system can safely take action inside my workflow?"
+
+## Google I/O 2026: Gemini Becomes an Action Layer
+
+Google's I/O announcements centered on Gemini 3.5, Gemini Omni, agentic Search, Android intelligence and developer tools. The developer update is especially important because it shows how Google wants developers to build with agents, not just call a text model.
+
+The headline for builders is Gemini 3.5 Flash. Google describes it as a frontier model optimized for action and speed, and says it is available through Antigravity, the Gemini API, Google AI Studio and Android Studio. Google also introduced Managed Agents in the Gemini API, letting developers create agents that reason, use tools and execute code in isolated Linux environments through a single API path.
+
+That matters because agent products need persistence, state, tools and execution environments. A raw LLM API can answer questions, but a managed agent environment can run steps, keep files, resume sessions and execute work. This is the infrastructure layer that makes the difference between a demo and a product.
+
+## Search Is Becoming Agentic
+
+Google's Search update is another signal that search is no longer just a page of links. Google says AI Mode has passed one billion monthly users, and it is adding more agent-like capabilities to Search: deeper reasoning, task completion and a more intelligent search box.
+
+For tool discovery sites like AI Tool Directory, this changes the competitive environment. Users will increasingly expect direct answers, summaries and recommendations. A directory page that only lists tools is weak. A useful directory must explain trade-offs, pricing, privacy, use cases and how to choose between alternatives.
+
+That is why we are investing more in category pages, review methodology, correction paths and comparison content. Search engines and AI assistants are both rewarding pages that help users make decisions, not pages that merely repeat product descriptions.
+
+## Anthropic: Claude Moves Further into Enterprise Work
+
+Anthropic's May updates show Claude becoming embedded in professional services and enterprise operations. The expanded PwC partnership includes Claude Code and Cowork, a joint Center of Excellence, and a program to train and certify 30,000 PwC professionals on Claude.
+
+The scale matters. When a large consulting firm rolls out Claude across technology, deals and enterprise transformation work, it becomes a signal for buyers: AI adoption is moving from individual productivity into repeatable firm-level workflows.
+
+Anthropic's newsroom also shows a broader May push: Claude for Small Business, enterprise alliances, the Stainless acquisition, KPMG integration, and Project Glasswing updates. The pattern is not simply "Claude as a chatbot." It is Claude as a platform for coding, business process redesign, implementation services and enterprise workforce adoption.
+
+## Vercel AI Gateway: Production Traffic Is Multi-Model
+
+Vercel's AI Gateway production index is useful because it is based on real application traffic rather than synthetic benchmarks. Vercel reports that AI Gateway serves tens of trillions of tokens across hundreds of models, used by more than 200,000 teams.
+
+The most important takeaway is that production teams are not loyal to one model lab. Vercel's blog says Anthropic leads in spend, Google leads in volume, OpenAI spend share is growing after recent model updates, OSS models are gaining traction, and high-volume workloads route across 30 or more models on average.
+
+This matches what developers are experiencing: one model may be best for code review, another for low-cost summarization, another for fast classification, and another for long-context reasoning. AI infrastructure is becoming a routing problem.
+
+## What This Means for Tool Buyers
+
+### 1. Prefer tools that explain model routing
+
+If a product uses multiple models, buyers should ask how routing works. Is it automatic? Can the user select a model? Does the tool show cost, quality or latency trade-offs? A multi-model product can be powerful, but it can also hide unpredictable costs.
+
+### 2. Evaluate action safety, not just answer quality
+
+Agents that can execute code, operate browsers or change business systems need permission boundaries. Look for audit logs, sandboxing, approval steps, role-based access and rollback paths.
+
+### 3. Treat AI Search as a new discovery layer
+
+AI Mode and agentic search experiences will change how people find software. Product pages and review pages need to answer concrete questions quickly: who is this for, what does it cost, what are the risks, and what should I compare?
+
+### 4. Enterprise adoption will pressure small-team tools
+
+As PwC, KPMG and other large firms adopt AI platforms, small teams will see more pressure to standardize their own AI stack. The best small-team setup is still simple: one strong general assistant, one workflow-specific tool where needed, and clear rules for private data.
+
+## Tools to Revisit This Week
+
+- [ChatGPT review](/blog/chatgpt-review/) for a general-purpose assistant baseline.
+- [Claude Code review](/blog/claude-code-review/) for coding and agentic development workflows.
+- [Perplexity review](/blog/perplexity-review/) for AI search and source-backed answers.
+- [Vercel v0 review](/blog/v0-review/) for UI generation and developer workflow acceleration.
+- [How to evaluate AI tool pricing](/blog/how-to-evaluate-ai-tool-pricing/) before adding another subscription.
+
+## Editorial Takeaway
+
+The AI market is maturing around three layers: models, agents and workflow distribution. Models still matter, but the winning products are increasingly the ones that package models into safe, repeatable work.
+
+That is the standard we will use more aggressively in future reviews. A tool has to do more than produce impressive output. It has to fit a workflow, explain its pricing, handle data responsibly and help users make better decisions.
