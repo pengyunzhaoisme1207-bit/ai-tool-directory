@@ -117,6 +117,18 @@ export default function PrivacyPolicy() {
         </a>
         .
       </p>
+      <p>
+        You can also learn how Google uses information from sites and apps that use Google services
+        at{' '}
+        <a
+          href="https://policies.google.com/technologies/partner-sites"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Google&apos;s partner sites policy page
+        </a>
+        .
+      </p>
 
       <h2>8. Data Retention</h2>
       <p>

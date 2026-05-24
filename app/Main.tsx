@@ -3,7 +3,6 @@
 import { useState, useMemo } from 'react'
 import ToolCard from '@/components/ToolCard'
 import siteMetadata from '@/data/siteMetadata'
-import NewsletterForm from 'pliny/ui/NewsletterForm'
 import Link from '@/components/Link'
 import Image from '@/components/Image'
 
@@ -685,6 +684,36 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
             ))}
           </div>
         </div>
+        <div className="mt-5 grid gap-3 border-t border-gray-200 pt-5 md:grid-cols-3 dark:border-gray-800">
+          {[
+            {
+              title: 'Independent review policy',
+              body: 'Ratings and rankings are based on workflow fit, usability, pricing, risk, and update history rather than paid placement.',
+              href: '/editorial-policy',
+            },
+            {
+              title: 'Privacy and advertising disclosure',
+              body: 'The privacy policy explains cookies, analytics, Google AdSense, third-party links, and user choices in one public page.',
+              href: '/privacy',
+            },
+            {
+              title: 'Corrections are welcome',
+              body: 'Every product page has a path for pricing, feature, licensing, and privacy corrections through the contact channel.',
+              href: '/contact',
+            },
+          ].map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              className="rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900/70 dark:hover:border-blue-800 dark:hover:bg-blue-950/30"
+            >
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{item.body}</p>
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* Directory layout: categories + content + decision sidebar */}
@@ -949,12 +978,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
             )}
           </div>
 
-          {/* Newsletter */}
-          {siteMetadata.newsletter?.provider && (
-            <div className="flex items-center justify-center pt-4">
-              <NewsletterForm />
-            </div>
-          )}
+          <div className="pt-4" />
         </div>
 
         <aside className="hidden min-w-0 xl:block">

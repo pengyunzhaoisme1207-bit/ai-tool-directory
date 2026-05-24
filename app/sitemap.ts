@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { allReviews, allGuides, allComparisons } from 'contentlayer/generated'
+import { allReviews, allGuides, allComparisons, allBriefs } from 'contentlayer/generated'
 import siteMetadata from '@/data/siteMetadata'
 
 export const dynamic = 'force-static'
@@ -28,6 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: post.lastmod || post.date,
     }))
 
+  const briefRoutes = allBriefs
+    .filter((post) => !post.draft)
+    .map((post) => ({
+      url: `${siteUrl}/${post.path}`,
+      lastModified: post.lastmod || post.date,
+    }))
+
   const routes = [
     '',
     'blog',
@@ -45,5 +52,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date().toISOString().split('T')[0],
   }))
 
-  return [...routes, ...reviewRoutes, ...guideRoutes, ...comparisonRoutes]
+  return [...routes, ...reviewRoutes, ...guideRoutes, ...comparisonRoutes, ...briefRoutes]
 }

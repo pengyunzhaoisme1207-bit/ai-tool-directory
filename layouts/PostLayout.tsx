@@ -300,7 +300,7 @@ export default function PostLayout({
                       <a
                         href={toolUrl}
                         target="_blank"
-                        rel="nofollow noopener noreferrer"
+                        rel="nofollow sponsored noopener noreferrer"
                         className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-lg"
                       >
                         <svg
