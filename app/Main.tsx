@@ -269,14 +269,14 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
 
   return (
     <>
-      <section className="mb-6 border-b border-gray-200 pb-6 dark:border-gray-800">
-        <div className="grid gap-6 lg:grid-cols-[1.4fr_0.9fr] lg:items-start">
+      <section className="mb-6 rounded-2xl border border-gray-200 bg-[linear-gradient(135deg,#f8fafc_0%,#ffffff_45%,#eff6ff_100%)] p-5 shadow-sm dark:border-gray-800 dark:bg-[linear-gradient(135deg,#020617_0%,#111827_50%,#0f172a_100%)]">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(320px,0.75fr)] lg:items-start">
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-semibold tracking-wide text-gray-700 uppercase dark:border-gray-800 dark:bg-gray-950 dark:text-gray-300">
               Curated AI Tools Directory
             </div>
             <div className="max-w-3xl">
-              <h1 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl dark:text-gray-50">
+              <h1 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl xl:text-5xl dark:text-gray-50">
                 Search, compare, and track the AI tools people actually use.
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-gray-600 dark:text-gray-400">
@@ -302,7 +302,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
             <Link
               href="/submit"
-              className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
+              className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
             >
               <div className="text-xs font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
                 Submit or correct a tool
@@ -317,7 +317,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
             </Link>
             <Link
               href="/categories"
-              className="rounded-2xl border border-gray-200 bg-gray-50 p-4 transition hover:-translate-y-0.5 hover:border-gray-300 hover:bg-white dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700"
+              className="rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:-translate-y-0.5 hover:border-gray-300 hover:bg-white dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700"
             >
               <div className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
                 Browse categories
@@ -334,8 +334,8 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
         </div>
       </section>
 
-      <section className="mb-8 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+      <section className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)]">
+        <div className="rounded-xl border border-sky-200/70 bg-gradient-to-br from-white via-sky-50/70 to-amber-50/70 p-5 shadow-sm dark:border-sky-900/40 dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
           <div className="mb-4 flex items-center justify-between gap-3">
             <div>
               <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
@@ -408,9 +408,65 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
               </button>
             ))}
           </div>
+          <div className="mt-5">
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <h3 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                  Popular this week
+                </h3>
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                  Fast entry points for the most useful tools.
+                </p>
+              </div>
+              <Link
+                href="/blog"
+                className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+              >
+                All reviews
+              </Link>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-3">
+              {featuredTools.slice(0, 3).map((post, index) => (
+                <Link
+                  key={post.slug}
+                  href={`/${post.path}`}
+                  className={`group rounded-xl border p-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
+                    index === 0
+                      ? 'border-sky-200 bg-sky-50/80 dark:border-sky-900/50 dark:bg-sky-950/40'
+                      : index === 1
+                        ? 'border-amber-200 bg-amber-50/80 dark:border-amber-900/50 dark:bg-amber-950/40'
+                        : 'border-rose-200 bg-rose-50/80 dark:border-rose-900/50 dark:bg-rose-950/40'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    {post.logo ? (
+                      <Image
+                        src={post.logo}
+                        alt=""
+                        width={28}
+                        height={28}
+                        className="h-7 w-7 rounded-lg object-contain"
+                      />
+                    ) : (
+                      <div className="h-7 w-7 rounded-lg bg-white/80 ring-1 ring-black/5 ring-inset dark:bg-white/10" />
+                    )}
+                    <div className="min-w-0">
+                      <div className="truncate text-sm font-semibold text-gray-900 group-hover:text-blue-700 dark:text-gray-100 dark:group-hover:text-blue-300">
+                        {post.title}
+                      </div>
+                      <div className="mt-0.5 text-xs text-gray-500 dark:text-gray-400">
+                        {post.category}
+                        {post.rating ? ` · ${post.rating}/5` : ''}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+        <div className="rounded-xl border border-gray-200 bg-gradient-to-br from-white via-slate-50 to-indigo-50 p-5 shadow-sm dark:border-gray-800 dark:from-gray-950 dark:via-gray-950 dark:to-slate-900">
           <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
             Fresh editorial updates
           </h2>
@@ -419,10 +475,24 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
               <Link
                 key={item.slug}
                 href={item.href}
-                className="block rounded-xl border border-gray-200 px-4 py-3 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+                className={`block rounded-xl border px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-sm ${
+                  item.kind === 'Guide'
+                    ? 'border-sky-200 bg-white/90 hover:border-sky-300 dark:border-sky-900/40 dark:bg-slate-950/80 dark:hover:border-sky-700'
+                    : item.kind === 'Brief'
+                      ? 'border-amber-200 bg-white/90 hover:border-amber-300 dark:border-amber-900/40 dark:bg-slate-950/80 dark:hover:border-amber-700'
+                      : 'border-emerald-200 bg-white/90 hover:border-emerald-300 dark:border-emerald-900/40 dark:bg-slate-950/80 dark:hover:border-emerald-700'
+                }`}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-semibold tracking-wide text-gray-500 uppercase dark:bg-gray-800 dark:text-gray-400">
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-[11px] font-semibold tracking-wide uppercase ${
+                      item.kind === 'Guide'
+                        ? 'bg-sky-100 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300'
+                        : item.kind === 'Brief'
+                          ? 'bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300'
+                          : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300'
+                    }`}
+                  >
                     {item.kind}
                   </span>
                   <span className="text-xs text-gray-400 dark:text-gray-500">
@@ -447,7 +517,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
       </section>
 
       <section className="mb-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+        <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-950">
           <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
             Featured tools
           </h2>
@@ -480,7 +550,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
           </div>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+        <div className="rounded-xl border border-amber-200 bg-gradient-to-br from-white to-amber-50/70 p-5 shadow-sm dark:border-amber-900/40 dark:from-slate-950 dark:to-amber-950/20">
           <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
             Latest guide
           </h2>
@@ -508,7 +578,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
           </div>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+        <div className="rounded-xl border border-sky-200 bg-gradient-to-br from-white to-sky-50/70 p-5 shadow-sm dark:border-sky-900/40 dark:from-slate-950 dark:to-sky-950/20">
           <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
             Latest brief
           </h2>
@@ -536,7 +606,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
           </div>
         </div>
 
-        <div className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+        <div className="rounded-xl border border-rose-200 bg-gradient-to-br from-white to-rose-50/70 p-5 shadow-sm dark:border-rose-900/40 dark:from-slate-950 dark:to-rose-950/20">
           <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
             Popular comparisons
           </h2>
@@ -617,60 +687,62 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
         </div>
       </section>
 
-      {/* Two-column layout: sidebar + content */}
-      <div className="flex gap-8">
+      {/* Directory layout: categories + content + decision sidebar */}
+      <div className="grid gap-5 xl:grid-cols-[220px_minmax(0,1fr)_300px]">
         {/* Sidebar — Category Navigation */}
-        <aside className="hidden w-48 shrink-0 lg:block">
+        <aside className="hidden lg:block">
           <div className="sticky top-24">
-            <h2 className="mb-3 text-sm font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-              Categories
-            </h2>
-            <nav className="space-y-0.5">
-              {visibleCategories.map((cat) => {
-                const count = cat.key === 'All' ? totalTools : categoryCounts[cat.key] || 0
-                const isActive = activeCategory === cat.key
-                return (
-                  <button
-                    key={cat.key}
-                    onClick={() => {
-                      setActiveCategory(cat.key)
-                      setActivePricing('all')
-                      setSearchQuery('')
-                    }}
-                    className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm transition-colors duration-150 ${
-                      isActive
-                        ? 'bg-blue-50 font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
-                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200'
-                    }`}
-                  >
-                    <span
-                      className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md ${
+            <div className="rounded-xl border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+              <h2 className="mb-3 px-2 text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Categories
+              </h2>
+              <nav className="space-y-0.5">
+                {visibleCategories.map((cat) => {
+                  const count = cat.key === 'All' ? totalTools : categoryCounts[cat.key] || 0
+                  const isActive = activeCategory === cat.key
+                  return (
+                    <button
+                      key={cat.key}
+                      onClick={() => {
+                        setActiveCategory(cat.key)
+                        setActivePricing('all')
+                        setSearchQuery('')
+                      }}
+                      className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors duration-150 ${
                         isActive
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
+                          ? 'bg-blue-50 font-semibold text-blue-700 dark:bg-blue-900/30 dark:text-blue-400'
+                          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-200'
                       }`}
                     >
-                      {CATEGORY_ICONS[cat.icon]}
-                    </span>
-                    <span className="flex-1 truncate">{cat.label}</span>
-                    <span
-                      className={`text-xs tabular-nums ${
-                        isActive
-                          ? 'text-blue-500 dark:text-blue-400'
-                          : 'text-gray-400 dark:text-gray-500'
-                      }`}
-                    >
-                      {count}
-                    </span>
-                  </button>
-                )
-              })}
-            </nav>
+                      <span
+                        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md ${
+                          isActive
+                            ? 'bg-blue-600 text-white'
+                            : 'bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
+                        }`}
+                      >
+                        {CATEGORY_ICONS[cat.icon]}
+                      </span>
+                      <span className="flex-1 truncate">{cat.label}</span>
+                      <span
+                        className={`text-xs tabular-nums ${
+                          isActive
+                            ? 'text-blue-500 dark:text-blue-400'
+                            : 'text-gray-400 dark:text-gray-500'
+                        }`}
+                      >
+                        {count}
+                      </span>
+                    </button>
+                  )
+                })}
+              </nav>
+            </div>
           </div>
         </aside>
 
         {/* Main content area */}
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0">
           {/* Mobile category scroll */}
           <div className="mb-4 flex gap-2 overflow-x-auto pb-2 lg:hidden">
             {visibleCategories.map((cat) => {
@@ -869,7 +941,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
                 <p className="text-sm">No tools match your filters.</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 2xl:grid-cols-3">
                 {filteredPosts.map((post) => (
                   <ToolCard key={post.slug} post={post} />
                 ))}
@@ -884,6 +956,87 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
             </div>
           )}
         </div>
+
+        <aside className="hidden min-w-0 xl:block">
+          <div className="sticky top-24 space-y-4">
+            <section className="rounded-xl border border-sky-200 bg-gradient-to-br from-white to-sky-50/70 p-4 shadow-sm dark:border-sky-900/40 dark:from-slate-950 dark:to-sky-950/20">
+              <h2 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Editor's Shortlist
+              </h2>
+              <div className="mt-3 space-y-2.5">
+                {topPicks.map((post, index) => (
+                  <Link
+                    key={post.slug}
+                    href={`/${post.path}`}
+                    className="flex items-start gap-3 rounded-lg border border-gray-100 p-2.5 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+                  >
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-gray-900 text-xs font-bold text-white dark:bg-gray-100 dark:text-gray-900">
+                      {index + 1}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100">
+                        {post.title}
+                      </div>
+                      <div className="mt-1 flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                        <span>{post.category}</span>
+                        {post.rating && <span>{post.rating}/5</span>}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+            <section className="rounded-xl border border-amber-200 bg-gradient-to-br from-white to-amber-50/70 p-4 shadow-sm dark:border-amber-900/40 dark:from-slate-950 dark:to-amber-950/20">
+              <h2 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Quick Filters
+              </h2>
+              <div className="mt-3 grid grid-cols-2 gap-2">
+                {PRICING_FILTERS.filter((filter) => filter.key !== 'all').map((filter) => (
+                  <button
+                    key={filter.key}
+                    onClick={() => setActivePricing(filter.key)}
+                    className={`rounded-lg border px-3 py-2 text-left text-xs font-semibold transition ${
+                      activePricing === filter.key
+                        ? 'border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-700 dark:bg-blue-950/40 dark:text-blue-300'
+                        : 'border-gray-200 bg-gray-50 text-gray-600 hover:border-gray-300 hover:bg-white dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:border-gray-700'
+                    }`}
+                  >
+                    {filter.label}
+                  </button>
+                ))}
+                <button
+                  onClick={() => {
+                    setActiveCategory('All')
+                    setActivePricing('all')
+                    setSearchQuery('')
+                  }}
+                  className="rounded-lg border border-dashed border-gray-300 px-3 py-2 text-left text-xs font-semibold text-gray-600 transition hover:border-blue-300 hover:text-blue-700 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-400"
+                >
+                  Reset all
+                </button>
+              </div>
+            </section>
+
+            <section className="rounded-xl border border-emerald-200 bg-gradient-to-br from-white to-emerald-50/70 p-4 dark:border-emerald-900/40 dark:from-slate-950 dark:to-emerald-950/20">
+              <h2 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Latest Reading
+              </h2>
+              <div className="mt-3 space-y-3">
+                {editorialUpdates.slice(0, 3).map((item) => (
+                  <Link key={item.slug} href={item.href} className="group block">
+                    <div className="text-xs font-semibold text-blue-600 dark:text-blue-400">
+                      {item.kind}
+                    </div>
+                    <div className="mt-1 line-clamp-2 text-sm font-medium text-gray-900 group-hover:text-blue-700 dark:text-gray-100 dark:group-hover:text-blue-400">
+                      {item.title}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          </div>
+        </aside>
       </div>
 
       {/* SEO Footer — Below the fold: deep explanatory text + FAQ section */}

@@ -29,13 +29,13 @@ export default function ToolCard({ post }) {
     'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400'
 
   return (
-    <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-900 dark:hover:border-blue-600">
+    <div className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl dark:border-gray-700 dark:bg-gray-900 dark:hover:border-blue-600">
       {/* Card body */}
-      <div className="flex-1 p-6">
+      <div className="flex-1 p-5">
         {/* Header: Logo + Title + Pricing badge */}
         <div className="mb-4 flex items-start justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-xl border border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 dark:border-gray-600 dark:from-gray-800 dark:to-gray-700">
+            <div className="relative flex h-11 w-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 dark:border-gray-600 dark:from-gray-800 dark:to-gray-700">
               {logo ? (
                 <Image
                   src={logo}
@@ -61,7 +61,7 @@ export default function ToolCard({ post }) {
               )}
             </div>
             <div>
-              <h3 className="line-clamp-1 text-lg font-bold text-gray-900 transition-colors group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">
+              <h3 className="line-clamp-1 text-base font-bold text-gray-900 transition-colors group-hover:text-blue-600 dark:text-gray-100 dark:group-hover:text-blue-400">
                 {title}
               </h3>
               {rating && (
@@ -91,7 +91,7 @@ export default function ToolCard({ post }) {
         </div>
 
         {/* Description */}
-        <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+        <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
           {summary}
         </p>
 
@@ -110,7 +110,7 @@ export default function ToolCard({ post }) {
         )}
 
         {/* Category + Target User */}
-        <div className="mb-3 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+        <div className="mb-2.5 flex items-center justify-between gap-2 text-xs text-gray-500 dark:text-gray-400">
           {category && (
             <span className="rounded-full bg-gray-100 px-2 py-0.5 font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">
               {category}
@@ -130,10 +130,10 @@ export default function ToolCard({ post }) {
       </div>
 
       {/* Footer: CTA Button */}
-      <div className="px-6 pt-0 pb-6">
+      <div className="px-5 pt-0 pb-5">
         <Link
           href={`/blog/${slug}`}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-blue-700 hover:shadow-md"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-blue-700 hover:shadow-md"
         >
           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
