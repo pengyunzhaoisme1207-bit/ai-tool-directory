@@ -7,16 +7,28 @@ interface PageSEOProps extends Partial<
   title: string
   description?: string
   image?: string
+  path?: string
 }
 
-export function genPageMetadata({ title, description, image, ...rest }: PageSEOProps): Metadata {
+export function genPageMetadata({
+  title,
+  description,
+  image,
+  path = './',
+  ...rest
+}: PageSEOProps): Metadata {
+  const pageDescription = description || siteMetadata.description
+
   return {
     title,
-    description: description || siteMetadata.description,
+    description: pageDescription,
+    alternates: {
+      canonical: path,
+    },
     openGraph: {
       title: `${title} | ${siteMetadata.title}`,
-      description: description || siteMetadata.description,
-      url: './',
+      description: pageDescription,
+      url: path,
       siteName: siteMetadata.title,
       images: image ? [image] : [siteMetadata.socialBanner],
       locale: 'en_US',
@@ -25,6 +37,7 @@ export function genPageMetadata({ title, description, image, ...rest }: PageSEOP
     twitter: {
       title: `${title} | ${siteMetadata.title}`,
       card: 'summary_large_image',
+      description: pageDescription,
       images: image ? [image] : [siteMetadata.socialBanner],
     },
     ...rest,

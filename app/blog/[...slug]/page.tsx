@@ -44,6 +44,9 @@ export async function generateMetadata(props: {
     return {
       title: brief.title,
       description: brief.summary,
+      alternates: {
+        canonical: `${siteMetadata.siteUrl}/${brief.path}`,
+      },
       openGraph: {
         title: brief.title,
         description: brief.summary,
@@ -52,7 +55,7 @@ export async function generateMetadata(props: {
         type: 'article',
         publishedTime: publishedAt,
         modifiedTime: modifiedAt,
-        url: './',
+        url: `${siteMetadata.siteUrl}/${brief.path}`,
         images: [{ url: siteMetadata.socialBanner }],
         authors: [siteMetadata.author],
       },
@@ -86,6 +89,9 @@ export async function generateMetadata(props: {
   return {
     title: post.title,
     description: post.summary,
+    alternates: {
+      canonical: `${siteMetadata.siteUrl}/${post.path}`,
+    },
     openGraph: {
       title: post.title,
       description: post.summary,
@@ -94,7 +100,7 @@ export async function generateMetadata(props: {
       type: 'article',
       publishedTime: publishedAt,
       modifiedTime: modifiedAt,
-      url: './',
+      url: `${siteMetadata.siteUrl}/${post.path}`,
       images: imageList.map((img: string) => ({
         url: img && img.includes('http') ? img : siteMetadata.siteUrl + img,
       })),

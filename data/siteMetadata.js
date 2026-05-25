@@ -3,7 +3,8 @@ const siteMetadata = {
   title: 'AI Tool Directory',
   author: 'AI Tool Directory',
   headerTitle: 'AI Tool Directory',
-  description: 'Curated AI tools with in-depth reviews. Find the right AI for your needs — from writing and coding to design and productivity.',
+  description:
+    'Independent AI tool reviews, comparisons, and weekly briefs for choosing software across coding, writing, search, design, video, and team workflows.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.next-happy.com',
@@ -37,7 +38,7 @@ const siteMetadata = {
       // Remember to add 'us.umami.is' in `next.config.js` as a permitted domain for the CSP
     },
     // plausibleAnalytics: {
-    //   plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
+    //   plausibleDataDomain: '', // e.g. www.next-happy.com
     // If you are hosting your own Plausible.
     //   src: '', // e.g. https://plausible.my-domain.com/js/script.js
     // },

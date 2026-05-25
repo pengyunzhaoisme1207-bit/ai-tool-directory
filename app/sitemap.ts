@@ -40,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'blog',
     'brief',
     'categories',
+    'comparisons',
     'projects',
     'editorial-policy',
     'submit',

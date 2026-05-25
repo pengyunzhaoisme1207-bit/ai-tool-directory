@@ -2,6 +2,13 @@ import { sortPosts, allCoreContent } from 'pliny/utils/contentlayer'
 import { allReviews, allGuides, allBriefs, allComparisons } from 'contentlayer/generated'
 import Main from './Main'
 import siteMetadata from '@/data/siteMetadata'
+import { genPageMetadata } from './seo'
+
+export const metadata = genPageMetadata({
+  title: 'Best AI Tools Directory 2026',
+  description:
+    'Compare independent AI tool reviews, pricing notes, workflow guides, and weekly briefs for coding, writing, search, design, video, and team productivity.',
+})
 
 export default async function Page() {
   const sortedPosts = sortPosts(allReviews)
