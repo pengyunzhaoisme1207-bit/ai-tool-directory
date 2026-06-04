@@ -1,13 +1,13 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
-  title: 'AI Tool Directory',
+  title: 'Next Happy AI Tools',
   author: 'AI Tool Directory',
-  headerTitle: 'AI Tool Directory',
+  headerTitle: 'Next Happy AI Tools',
   description:
     'Independent AI tool reviews, comparisons, and weekly briefs for choosing software across coding, writing, search, design, video, and team workflows.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://www.next-happy.com',
+  siteUrl: 'https://next-happy.com',
   siteRepo: 'https://github.com/pengyunzhaoisme1207-bit/ai-tool-directory',
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.png`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,

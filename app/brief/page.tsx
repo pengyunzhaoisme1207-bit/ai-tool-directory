@@ -5,7 +5,11 @@ import BriefListLayout from '@/layouts/BriefListLayout'
 
 const POSTS_PER_PAGE = 10
 
-export const metadata = genPageMetadata({ title: 'AI Brief' })
+export const metadata = genPageMetadata({
+  title: 'AI Brief - Weekly AI Tool and Product Updates',
+  description:
+    'Read weekly AI product briefs covering tool launches, model updates, pricing changes, enterprise adoption, privacy signals, and workflow implications.',
+})
 
 export default async function BriefPage() {
   const briefs = allCoreContent(sortPosts(allBriefs))

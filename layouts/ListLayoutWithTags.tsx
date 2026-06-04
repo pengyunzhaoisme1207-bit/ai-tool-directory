@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import { usePathname } from 'next/navigation'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
-import type { Review, Guide, Comparison } from 'contentlayer/generated'
+import type { Review, Guide, Comparison, Brief } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -14,9 +14,9 @@ interface PaginationProps {
   currentPage: number
 }
 interface ListLayoutProps {
-  posts: CoreContent<Review | Guide | Comparison>[]
+  posts: CoreContent<Review | Guide | Comparison | Brief>[]
   title: string
-  initialDisplayPosts?: CoreContent<Review | Guide | Comparison>[]
+  initialDisplayPosts?: CoreContent<Review | Guide | Comparison | Brief>[]
   pagination?: PaginationProps
 }
 
@@ -65,13 +65,17 @@ function Pagination({ totalPages, currentPage }: PaginationProps) {
 
 const CONTENT_TYPES = [
   { key: 'all', label: 'All Posts' },
+  { key: 'review', label: 'Reviews' },
   { key: 'guide', label: 'Guides' },
   { key: 'comparison', label: 'Comparisons' },
+  { key: 'brief', label: 'Briefs' },
 ]
 
-function getContentType(post: CoreContent<Review | Guide | Comparison>): string {
+function getContentType(post: CoreContent<Review | Guide | Comparison | Brief>): string {
   const filePath = 'filePath' in post && typeof post.filePath === 'string' ? post.filePath : ''
+  if (filePath.includes('reviews/')) return 'review'
   if (filePath.includes('comparisons/')) return 'comparison'
+  if (filePath.includes('briefs/')) return 'brief'
   return 'guide'
 }
 
@@ -85,7 +89,13 @@ export default function ListLayoutWithTags({
   const [activeType, setActiveType] = useState('all')
 
   const typeCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: posts.length, guide: 0, comparison: 0 }
+    const counts: Record<string, number> = {
+      all: posts.length,
+      review: 0,
+      guide: 0,
+      comparison: 0,
+      brief: 0,
+    }
     posts.forEach((post) => {
       const type = getContentType(post)
       counts[type]++
@@ -105,12 +115,16 @@ export default function ListLayoutWithTags({
     <>
       <div>
         <div className="pt-6 pb-6">
-          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
+          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-5xl md:leading-13 dark:text-gray-100">
             {title}
           </h1>
+          <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-400">
+            Browse the full editorial archive: hands-on reviews, buyer guides, product comparisons,
+            and decision notes written for real AI workflows rather than launch hype.
+          </p>
         </div>
         <div className="flex sm:space-x-24">
-          <div className="hidden h-full max-h-screen max-w-[280px] min-w-[280px] flex-wrap overflow-auto rounded-sm bg-gray-50 pt-5 shadow-md sm:flex dark:bg-gray-900/70 dark:shadow-gray-800/40">
+          <div className="hidden h-full max-h-screen max-w-[280px] min-w-[280px] flex-wrap overflow-auto rounded-lg border border-gray-200 bg-gray-50 pt-5 shadow-sm sm:flex dark:border-gray-800 dark:bg-gray-900/70">
             <div className="px-6 py-4">
               <ul className="space-y-1">
                 {CONTENT_TYPES.map((type) => (
@@ -142,7 +156,13 @@ export default function ListLayoutWithTags({
                     : undefined
                 const type = getContentType(post)
                 const typeLabel =
-                  type === 'guide' ? 'Guide' : type === 'comparison' ? 'Comparison' : 'Review'
+                  type === 'guide'
+                    ? 'Guide'
+                    : type === 'comparison'
+                      ? 'Comparison'
+                      : type === 'brief'
+                        ? 'Brief'
+                        : 'Review'
                 return (
                   <li key={path} className="py-5">
                     <article className="flex flex-col space-y-2 xl:space-y-0">

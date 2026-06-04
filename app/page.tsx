@@ -5,9 +5,9 @@ import siteMetadata from '@/data/siteMetadata'
 import { genPageMetadata } from './seo'
 
 export const metadata = genPageMetadata({
-  title: 'Best AI Tools Directory 2026',
+  title: 'Best AI Tools Directory 2026 - Reviews, Comparisons, Guides',
   description:
-    'Compare independent AI tool reviews, pricing notes, workflow guides, and weekly briefs for coding, writing, search, design, video, and team productivity.',
+    'Browse independent AI tool reviews, pricing notes, workflow guides, and comparison pages for coding, writing, search, design, video, and team productivity.',
 })
 
 export default async function Page() {

@@ -61,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7338826858147459"
           crossOrigin="anonymous"
         />
+        <meta name="google-adsense-account" content="ca-pub-7338826858147459" />
         <link
           rel="apple-touch-icon"
           sizes="76x76"

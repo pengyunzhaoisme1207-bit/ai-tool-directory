@@ -1,0 +1,279 @@
+---
+title: 'AI Coding Agent Evaluation Playbook: How to Test Tools Before You Trust Them'
+date: '2026-06-04'
+tags: ['AI Coding', 'Coding Agents', 'Developer Tools', 'Evaluation', 'Software Teams']
+draft: false
+summary: 'A hands-on evaluation playbook for testing AI coding agents on real repositories, including tasks, scoring criteria, safety checks, and rollout recommendations.'
+authors: ['default']
+lastUpdated: '2026-06-04'
+images: ['/static/images/twitter-card.png']
+---
+
+## Why Coding Agents Need a Different Evaluation
+
+AI coding agents are not simple autocomplete tools. A modern coding agent may read your repository, edit multiple files, run commands, create branches, write tests, open pull requests, and explain architecture. That makes them powerful, but it also makes evaluation harder.
+
+You cannot judge a coding agent from a demo prompt. You need to test it on your own repository, with your conventions, your tests, your dependency graph, and your review standards.
+
+This playbook gives developers, founders, engineering managers, and technical teams a practical way to evaluate coding agents before relying on them for production work.
+
+Use it when comparing tools such as [Claude Code](/blog/claude-code-review/), [Cursor](/blog/cursor-review/), [OpenAI Codex](/blog/openai-codex-review/), [Continue.dev](/blog/continue-dev-review/), [Cody](/blog/cody-review/), or [Replit Agent](/blog/replit-agent-review/).
+
+## The Five Things to Test
+
+A good coding agent should perform well across five areas:
+
+1. Repository understanding
+2. Change planning
+3. Code quality
+4. Test and error handling
+5. Developer control
+
+Speed matters, but speed is secondary. A fast agent that creates brittle code is not a productivity win.
+
+## Set Up a Safe Test Repository
+
+Do not begin with a production-critical branch. Use one of these:
+
+- A real internal repo with no secrets and a test branch.
+- A side project that has enough structure to be meaningful.
+- A copied repository with production credentials removed.
+- A small service that includes tests, linting, routing, and data access.
+
+The repository should not be too clean. Agents need to prove they can work with realistic code: uneven naming, existing conventions, shared helpers, partial tests, and historical decisions.
+
+Before testing:
+
+- Remove `.env` files and secrets.
+- Confirm tests can run locally.
+- Confirm lint or build commands work.
+- Create a clean branch.
+- Write down expected behavior for each task.
+
+## Evaluation Task 1: Explain the System
+
+Prompt:
+
+> Read this repository and explain how the main user flow works. Identify the entry points, data flow, important modules, and files I should inspect first.
+
+Score the agent on:
+
+| Criterion | What Good Looks Like |
+|----------|----------------------|
+| File discovery | Finds the correct entry points |
+| Architecture understanding | Explains how modules connect |
+| Accuracy | Avoids inventing nonexistent files or behavior |
+| Prioritization | Tells you what matters first |
+| Clarity | Explains in useful developer language |
+
+This is the lowest-risk test and one of the most revealing. If the agent cannot explain the repo accurately, do not trust it to change the repo.
+
+## Evaluation Task 2: Make a Small Bug Fix
+
+Choose a bug with a clear expected result. Avoid vague tasks.
+
+Good examples:
+
+- Fix a form validation edge case.
+- Correct a date formatting bug.
+- Repair a broken filter.
+- Fix a failing test.
+- Update an API response mapper.
+
+Prompt:
+
+> Fix this bug. First explain the likely cause, then make the smallest change that solves it. Run the relevant tests or tell me why you cannot.
+
+Score the agent on:
+
+- Finds the root cause
+- Keeps the change small
+- Avoids unrelated refactors
+- Runs or recommends relevant tests
+- Explains the fix clearly
+- Does not break adjacent behavior
+
+Watch for over-editing. Many agents try to "improve" the surrounding code. That can create review cost.
+
+## Evaluation Task 3: Add a Small Feature
+
+Pick a feature that requires touching multiple files but is still bounded.
+
+Examples:
+
+- Add a new filter to a directory page.
+- Add a new field to a settings panel.
+- Add a small analytics event.
+- Add a new content type to a static site.
+- Add a UI state for empty results.
+
+Prompt:
+
+> Add this feature using the repository's existing patterns. Keep the implementation scoped. Update tests or validation where appropriate.
+
+Score:
+
+| Criterion | Questions |
+|----------|-----------|
+| Pattern matching | Did it follow existing style? |
+| Scope control | Did it avoid unrelated changes? |
+| Type safety | Did it satisfy types? |
+| UX behavior | Did it handle loading, empty, and error states if relevant? |
+| Maintainability | Would another developer understand the change? |
+
+This test is useful because it shows whether the agent can work within a codebase rather than generate isolated snippets.
+
+## Evaluation Task 4: Write or Improve Tests
+
+Agents often look strong until you ask for tests.
+
+Prompt:
+
+> Add tests for this behavior. Cover the normal case, one edge case, and one failure case. Use the existing test style.
+
+Score:
+
+- Tests actually run.
+- Tests fail for the right reason before the fix, if possible.
+- Tests are not over-mocked.
+- Tests check behavior, not implementation trivia.
+- Test names explain intent.
+- The agent does not hide failures.
+
+If the agent writes tests that pass but do not protect behavior, it is generating reassurance rather than quality.
+
+## Evaluation Task 5: Review a Pull Request
+
+Use the agent as a reviewer.
+
+Prompt:
+
+> Review this diff for bugs, security issues, missing tests, regressions, and unclear behavior. Prioritize findings by severity and cite exact files.
+
+Score:
+
+- Finds real risks.
+- Avoids fake issues.
+- Distinguishes severity.
+- Mentions missing tests only when meaningful.
+- Understands product behavior.
+- Does not rewrite the whole codebase as a "review."
+
+This is especially useful for teams. Even if an agent is not trusted to write code independently, it may still be valuable as a reviewer.
+
+## The Scoring Sheet
+
+Use a 1-5 score for each category:
+
+| Category | 1 Point | 5 Points |
+|----------|---------|----------|
+| Repo understanding | Misses entry points | Accurately maps architecture |
+| Scope control | Large unrelated edits | Minimal relevant changes |
+| Code quality | Brittle or generic | Fits existing patterns |
+| Test behavior | Skips or fakes tests | Runs meaningful checks |
+| Debugging | Guesses randomly | Investigates systematically |
+| Communication | Vague | Clear, concise, reviewable |
+| Safety | Touches risky files casually | Respects secrets, branches, commands |
+| Review value | Mostly noise | Finds useful issues |
+
+Interpretation:
+
+- 32-40: Strong candidate for real work with review.
+- 24-31: Useful assistant, but keep tasks bounded.
+- 16-23: Good for explanation and snippets, not delegation.
+- Under 16: Do not use on production code.
+
+## Safety Rules During Evaluation
+
+Never allow a coding agent to:
+
+- Read secrets from `.env` files.
+- Modify production configuration.
+- Push code without review.
+- Delete files without confirmation.
+- Run destructive shell commands.
+- Modify generated build output manually.
+- Change payment, auth, or data deletion logic without senior review.
+
+For sensitive areas, require a human plan before code changes.
+
+## What Good Agent Output Looks Like
+
+Good output usually has these traits:
+
+- It names the files it inspected.
+- It explains the change before making it.
+- It uses existing helpers and conventions.
+- It avoids changing unrelated files.
+- It runs tests or names the exact validation command.
+- It leaves a clear diff.
+- It admits uncertainty.
+
+Weak output often looks confident but shallow:
+
+- Generic explanations.
+- Large rewrites.
+- Missing tests.
+- Invented architecture.
+- New abstractions without need.
+- "Should work" language without validation.
+
+## Tool Fit by Workflow
+
+Different coding tools fit different teams.
+
+### Terminal-native agents
+
+Best for developers comfortable with command-line workflows, large refactors, test-driven debugging, and multi-step implementation. See [Claude Code](/blog/claude-code-review/).
+
+### IDE-native assistants
+
+Best for developers who want inline help, codebase chat, autocomplete, and fast edits inside an editor. See [Cursor](/blog/cursor-review/).
+
+### Open-source or model-agnostic tools
+
+Best for teams that care about model choice, local control, or custom workflows. See [Continue.dev](/blog/continue-dev-review/) and [Cody](/blog/cody-review/).
+
+### Cloud or async coding agents
+
+Best for background implementation, PR review, or delegated tasks that can run away from your local machine. See [OpenAI Codex](/blog/openai-codex-review/).
+
+## A Two-Week Rollout Plan
+
+If a tool scores well, do not roll it out to everyone immediately.
+
+Week 1:
+
+- Two developers test it on bounded tasks.
+- Keep work on non-critical branches.
+- Track time saved and review time added.
+- Record failure cases.
+
+Week 2:
+
+- Add one real feature task.
+- Add one test-writing task.
+- Add one PR review task.
+- Compare output against human baseline.
+
+At the end, decide:
+
+- Keep for individual use.
+- Approve for team use.
+- Restrict to review and explanation.
+- Reject for production work.
+
+## Final Recommendation
+
+Do not choose an AI coding agent based on leaderboard claims or launch demos. Choose it based on how it behaves inside your repository.
+
+The best agent is the one that:
+
+- Understands your codebase.
+- Keeps scope under control.
+- Improves tests.
+- Reduces rework.
+- Makes review easier.
+- Respects your safety boundaries.
+
+For a broader buying perspective, read [How to Choose an AI Coding Tool](/blog/how-to-choose-ai-coding-tool/) and [Free vs Paid AI Tools](/blog/free-vs-paid-ai-tools-decision-guide/).

@@ -1,0 +1,225 @@
+---
+title: 'AI Tool Vendor Security Questionnaire: 35 Questions Before You Approve a Tool'
+date: '2026-06-04'
+tags: ['AI Tools', 'Security', 'Enterprise AI', 'Privacy', 'Buying Guide']
+draft: false
+summary: 'A practical security questionnaire for evaluating AI tools before teams upload source code, customer data, documents, prompts, or private business context.'
+authors: ['default']
+lastUpdated: '2026-06-04'
+images: ['/static/images/twitter-card.png']
+---
+
+## Why AI Tool Security Reviews Need Their Own Checklist
+
+Most software security reviews assume the product stores data, processes it for a known feature, and returns a predictable result. AI tools are different. Users may upload source code, customer notes, contracts, screenshots, prompts, documents, meeting transcripts, product plans, or support tickets. The tool may send that input to a model provider, keep it in conversation history, use it for retrieval, expose it to plugins, or turn it into generated output that other users copy into production work.
+
+That does not mean AI tools are unsafe by default. It means teams need a clearer review process before adopting them.
+
+This questionnaire is designed for founders, operators, security reviewers, engineering leads, agencies, schools, and small businesses that need a practical way to approve AI tools without building a heavy enterprise procurement process.
+
+Use it when you are evaluating a new AI assistant, coding agent, writing platform, image generator, AI search engine, knowledge-base assistant, meeting bot, or workflow agent.
+
+## The Short Version
+
+Before approving any AI tool, answer these five questions:
+
+1. What data will users put into it?
+2. Where does that data go?
+3. Can the vendor use inputs or outputs for model training?
+4. Who can access conversations, files, workspaces, and generated output?
+5. What happens if the tool gives a wrong answer or changes a file incorrectly?
+
+If the vendor cannot answer those questions in plain language, treat the tool as unapproved for sensitive work.
+
+## Step 1: Define the Data Boundary
+
+Start with the data your team expects to use. Do not review the tool in the abstract.
+
+Create three buckets:
+
+| Data Type | Examples | Default Rule |
+|-----------|----------|--------------|
+| Public data | Website copy, public docs, public product pages, public code | Usually acceptable |
+| Internal data | Strategy notes, draft campaigns, internal docs, meeting summaries | Needs policy review |
+| Sensitive data | Customer records, private source code, credentials, legal files, financial data | Needs explicit approval |
+
+The same AI tool may be fine for public marketing drafts and unacceptable for customer records. The security review should approve use cases, not just brands.
+
+## Step 2: Ask About Model Training
+
+Ask the vendor:
+
+- Are customer inputs used to train models?
+- Are generated outputs used for training?
+- Are conversations reviewed by humans?
+- Does the answer change by plan type?
+- Is there a zero-retention or no-training option?
+- Can admins disable training or human review for the workspace?
+
+The important detail is not only whether the vendor says "we do not train on your data." You also need to know whether that promise applies to your exact plan, workspace setting, region, API path, and connected model provider.
+
+For example, a consumer plan may have different defaults from a team or enterprise plan. A browser-based product may have different retention than an API integration. A plugin may send context to a third party even if the main vendor has strong controls.
+
+## Step 3: Map Data Flow
+
+For each approved use case, ask:
+
+- Does the tool process data in the vendor's own infrastructure?
+- Does it send data to a third-party model provider?
+- Does it call external tools, plugins, search providers, or storage services?
+- Does it store uploaded files?
+- Does it store prompts and conversations?
+- Does it index data for retrieval?
+- Does it allow workspace members to search each other's content?
+
+If a tool uses retrieval or "memory," ask what is indexed and who can retrieve it. A document that is safe for one user may not be safe if it becomes searchable by a whole team.
+
+## Step 4: Review Access Controls
+
+Small teams often skip admin controls because they feel like enterprise overhead. That is a mistake when AI tools handle broad context.
+
+Check whether the tool supports:
+
+- Workspace-level roles
+- Single sign-on or identity controls
+- Admin visibility into active users
+- Ability to remove inactive seats
+- Ability to export or delete user data
+- Sharing permissions for chats, files, and generated assets
+- Audit logs for sensitive actions
+- Separate personal and company workspaces
+
+The biggest practical risk is often not a sophisticated attack. It is a user pasting sensitive material into a personal account, sharing an output link publicly, or keeping access after leaving the team.
+
+## Step 5: Review File and Code Handling
+
+For coding agents and document tools, ask extra questions:
+
+- Can the tool read the entire repository or only selected files?
+- Can it execute shell commands?
+- Can it create commits or pull requests?
+- Can it access environment variables?
+- Can it read production logs?
+- Can it upload private files to a remote workspace?
+- Can admins restrict which repositories or folders are available?
+- Are generated code changes reviewable before they are merged?
+
+For coding tools, the safest workflow is usually:
+
+1. Use non-production branches.
+2. Require human review before merging.
+3. Run tests and linting before accepting changes.
+4. Never expose production secrets.
+5. Treat generated code as a draft, not as trusted output.
+
+If you are comparing coding tools, start with [How to Choose an AI Coding Tool](/blog/how-to-choose-ai-coding-tool/) and [Claude Code vs Cursor](/blog/claude-code-vs-cursor-comparison/).
+
+## Step 6: Check Output Risk
+
+AI security is not only about what goes into the tool. It is also about what comes out.
+
+Ask:
+
+- Can the output create legal, medical, financial, or employment risk?
+- Does the tool produce citations or sources for factual claims?
+- Does it label generated media clearly?
+- Can users accidentally publish copyrighted, private, or misleading material?
+- Does the tool generate code that could introduce vulnerabilities?
+- Does it provide confidence signals or uncertainty warnings?
+
+For research tools, require source verification. For writing tools, require editorial review. For coding tools, require tests. For design tools, require commercial-use and brand review.
+
+## Step 7: Evaluate Retention and Deletion
+
+Ask:
+
+- How long are prompts, uploads, conversations, logs, and outputs retained?
+- Can users delete individual chats or files?
+- Can admins delete workspace data?
+- What happens after account cancellation?
+- Are backups eventually deleted?
+- Is there a documented data deletion process?
+
+Retention is easy to ignore during a trial. It becomes important later when an employee leaves, a client requests deletion, or the team discovers that sensitive material was uploaded by mistake.
+
+## Step 8: Check Compliance Claims Carefully
+
+Vendors may list security badges, but badges are not enough. Ask what they cover.
+
+Useful questions:
+
+- Does the certification cover the AI product or only the company?
+- Does it cover all regions and subprocessors?
+- Does it cover the plan you are buying?
+- Is there a public trust center or security page?
+- Are subprocessors listed?
+- Is there a data processing agreement for business customers?
+
+Do not reject a useful tool just because it lacks enterprise paperwork if your use case is low risk. But do not approve sensitive use simply because the landing page says "secure."
+
+## Step 9: Create an Approval Decision
+
+Use four approval levels:
+
+| Level | Meaning | Example |
+|-------|---------|---------|
+| Approved for public data | Safe for public copy, public research, non-confidential prompts | Marketing brainstorming |
+| Approved for internal data | Safe for internal documents under team rules | Meeting summaries |
+| Approved for sensitive data | Allowed for private code, customer context, regulated files | Enterprise workspace only |
+| Not approved | Do not use for company work | Unclear policy or risky defaults |
+
+This avoids a common mistake: treating a tool as either fully approved or fully banned. Most AI tools sit somewhere in the middle.
+
+## 35 Questions to Send a Vendor
+
+Use this list when you need a vendor response:
+
+1. What customer data is collected?
+2. Are prompts stored?
+3. Are uploaded files stored?
+4. Are outputs stored?
+5. How long is data retained?
+6. Can customers delete conversations and files?
+7. Are inputs or outputs used for model training?
+8. Does training policy differ by plan?
+9. Are conversations reviewed by humans?
+10. Can human review be disabled?
+11. Which model providers or subprocessors are used?
+12. Is customer data sent outside the vendor's infrastructure?
+13. Is there a subprocessor list?
+14. Is there a data processing agreement?
+15. Are enterprise controls available?
+16. Does the tool support SSO?
+17. Does it support role-based access?
+18. Does it support audit logs?
+19. Can admins remove users and seats?
+20. Can admins restrict sharing?
+21. Can admins restrict integrations or plugins?
+22. Can the tool access private repositories?
+23. Can it execute commands?
+24. Can it read environment variables?
+25. Can it write files or create pull requests?
+26. Are generated changes reviewable before being applied?
+27. Does the product have a security page or trust center?
+28. Which compliance reports are available?
+29. Are backups encrypted?
+30. Is data encrypted in transit and at rest?
+31. How are incidents reported to customers?
+32. Can the product be used without uploading sensitive data?
+33. Can workspaces be separated by client or project?
+34. Can customer data be exported?
+35. What happens to data after cancellation?
+
+## Practical Recommendation
+
+For most small teams, the best policy is simple:
+
+- Approve one general assistant for public and low-risk internal work.
+- Approve one coding or workflow tool only after testing file access and review controls.
+- Use AI search tools for research, but verify sources before decisions.
+- Keep sensitive customer, legal, financial, medical, education, and credential data out of consumer AI tools.
+- Write a one-page usage policy and review it every quarter.
+
+Security review should not block useful AI adoption. It should make adoption boring, predictable, and recoverable.
+
+For related guidance, read the [AI Tool Privacy Checklist](/blog/ai-tool-privacy-checklist/), the [AI Tool Adoption Checklist for Teams](/blog/ai-tool-adoption-checklist-for-teams/), and [Best AI Tools for Privacy-Conscious Users](/blog/best-ai-tools-for-privacy-conscious-users-2026/).
