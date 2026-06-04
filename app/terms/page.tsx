@@ -1,6 +1,11 @@
 import { genPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ title: 'Terms of Service' })
+export const metadata = genPageMetadata({
+  title: 'Terms of Service',
+  description:
+    'Review the terms for using Next Happy AI Tools, including content accuracy, third-party links, advertising disclosures, and affiliate transparency.',
+  path: '/terms',
+})
 
 export default function TermsOfService() {
   return (
@@ -10,9 +15,9 @@ export default function TermsOfService() {
 
       <h2>1. Acceptance of Terms</h2>
       <p>
-        By accessing and using AI Tool Directory (<strong>next-happy.com</strong>), you accept and
-        agree to be bound by these Terms of Service. If you do not agree to these terms, please do
-        not use the Site.
+        By accessing and using Next Happy AI Tools (<strong>www.next-happy.com</strong>), you accept
+        and agree to be bound by these Terms of Service. If you do not agree to these terms, please
+        do not use the Site.
       </p>
 
       <h2>2. Description of Service</h2>

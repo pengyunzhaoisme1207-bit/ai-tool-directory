@@ -1,6 +1,11 @@
 import { genPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ title: 'Privacy Policy' })
+export const metadata = genPageMetadata({
+  title: 'Privacy Policy',
+  description:
+    'Read how Next Happy AI Tools handles cookies, analytics, Google AdSense advertising, third-party links, and privacy choices for site visitors.',
+  path: '/privacy',
+})
 
 export default function PrivacyPolicy() {
   return (
@@ -12,7 +17,7 @@ export default function PrivacyPolicy() {
       <p>
         AI Tool Directory ("we", "our", or "us") is committed to protecting your privacy. This
         Privacy Policy explains how we collect, use, disclose, and safeguard your information when
-        you visit our website <strong>next-happy.com</strong>.
+        you visit our website <strong>www.next-happy.com</strong>.
       </p>
       <p>
         By accessing or using the Site, you agree to the terms of this Privacy Policy. If you do not

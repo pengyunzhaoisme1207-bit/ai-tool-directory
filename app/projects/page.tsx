@@ -1,6 +1,11 @@
 import { genPageMetadata } from 'app/seo'
 
-export const metadata = genPageMetadata({ title: 'Our Review Process' })
+export const metadata = genPageMetadata({
+  title: 'Our Review Process',
+  description:
+    'See how Next Happy AI Tools selects, tests, scores, updates, and discloses AI tool reviews before publishing recommendations.',
+  path: '/projects',
+})
 
 export default function Projects() {
   return (
