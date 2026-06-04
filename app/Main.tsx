@@ -333,15 +333,15 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
         </div>
       </section>
 
-      <section className="mb-8 grid gap-4 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)]">
-        <div className="rounded-xl border border-sky-200/70 bg-gradient-to-br from-white via-sky-50/70 to-amber-50/70 p-5 shadow-sm dark:border-sky-900/40 dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
-          <div className="mb-4 flex items-center justify-between gap-3">
+      <section className="mb-8 grid items-start gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(340px,0.85fr)]">
+        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+          <div className="mb-3 flex items-center justify-between gap-3">
             <div>
-              <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                Search the directory
+              <h2 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Browse the directory
               </h2>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Filter tools by category, price, and keyword.
+                Search, filter, then jump into a reviewed tool.
               </p>
             </div>
             <Link
@@ -370,7 +370,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
               placeholder="Search tools by name, tag, or keyword..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-gray-200 bg-gray-50 py-3 pr-4 pl-10 text-sm text-gray-900 shadow-sm transition focus:border-blue-400 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-blue-600 dark:focus:ring-blue-900/30"
+              className="w-full rounded-lg border border-gray-200 bg-gray-50 py-2.5 pr-4 pl-10 text-sm text-gray-900 transition focus:border-blue-400 focus:bg-white focus:ring-2 focus:ring-blue-100 focus:outline-none dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 dark:focus:border-blue-600 dark:focus:ring-blue-900/30"
             />
             {searchQuery && (
               <button
@@ -392,7 +392,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
               </button>
             )}
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-wrap gap-2">
             {PRICING_FILTERS.map((f) => (
               <button
                 key={f.key}
@@ -407,15 +407,35 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
               </button>
             ))}
           </div>
-          <div className="mt-5">
+          <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+            {visibleCategories.slice(1, 9).map((cat) => {
+              const count = categoryCounts[cat.key] || 0
+              const isActive = activeCategory === cat.key
+              return (
+                <button
+                  key={cat.key}
+                  onClick={() => {
+                    setActiveCategory(cat.key)
+                    setSearchQuery('')
+                  }}
+                  className={`flex items-center justify-between rounded-lg border px-3 py-2 text-left text-xs font-semibold transition ${
+                    isActive
+                      ? 'border-blue-300 bg-blue-50 text-blue-700 dark:border-blue-700 dark:bg-blue-950/40 dark:text-blue-300'
+                      : 'border-gray-200 bg-gray-50 text-gray-600 hover:border-gray-300 hover:bg-white dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:border-gray-700'
+                  }`}
+                >
+                  <span className="truncate">{cat.label}</span>
+                  <span className={isActive ? 'text-blue-500' : 'text-gray-400'}>{count}</span>
+                </button>
+              )
+            })}
+          </div>
+          <div className="mt-4 border-t border-gray-200 pt-4 dark:border-gray-800">
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
                 <h3 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                  Popular this week
+                  Editor picks
                 </h3>
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                  Fast entry points for the most useful tools.
-                </p>
               </div>
               <Link
                 href="/blog"
@@ -424,12 +444,12 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
                 All reviews
               </Link>
             </div>
-            <div className="grid gap-2 sm:grid-cols-3">
-              {featuredTools.slice(0, 3).map((post, index) => (
+            <div className="grid gap-2 md:grid-cols-3">
+              {topPicks.slice(0, 3).map((post, index) => (
                 <Link
                   key={post.slug}
                   href={`/${post.path}`}
-                  className={`group rounded-xl border p-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${
+                  className={`group rounded-lg border p-3 transition hover:-translate-y-0.5 hover:shadow-sm ${
                     index === 0
                       ? 'border-sky-200 bg-sky-50/80 dark:border-sky-900/50 dark:bg-sky-950/40'
                       : index === 1
@@ -465,49 +485,50 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
           </div>
         </div>
 
-        <div className="rounded-xl border border-gray-200 bg-gradient-to-br from-white via-slate-50 to-indigo-50 p-5 shadow-sm dark:border-gray-800 dark:from-gray-950 dark:via-gray-950 dark:to-slate-900">
-          <h2 className="text-sm font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-            Fresh editorial updates
-          </h2>
-          <div className="mt-4 space-y-3">
-            {editorialUpdates.map((item) => (
+        <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h2 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Fresh updates
+              </h2>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                New guides, comparisons, and AI Briefs.
+              </p>
+            </div>
+            <Link
+              href="/brief"
+              className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+            >
+              AI Brief
+            </Link>
+          </div>
+          <div className="mt-4 grid gap-2">
+            {editorialUpdates.slice(0, 6).map((item) => (
               <Link
                 key={item.slug}
                 href={item.href}
-                className={`block rounded-xl border px-4 py-3 transition hover:-translate-y-0.5 hover:shadow-sm ${
-                  item.kind === 'Guide'
-                    ? 'border-sky-200 bg-white/90 hover:border-sky-300 dark:border-sky-900/40 dark:bg-slate-950/80 dark:hover:border-sky-700'
-                    : item.kind === 'Brief'
-                      ? 'border-amber-200 bg-white/90 hover:border-amber-300 dark:border-amber-900/40 dark:bg-slate-950/80 dark:hover:border-amber-700'
-                      : 'border-emerald-200 bg-white/90 hover:border-emerald-300 dark:border-emerald-900/40 dark:bg-slate-950/80 dark:hover:border-emerald-700'
-                }`}
+                className="group grid grid-cols-[74px_minmax(0,1fr)] gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3 transition hover:border-blue-300 hover:bg-white dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-700 dark:hover:bg-gray-950"
               >
-                <div className="flex items-center justify-between gap-3">
-                  <span
-                    className={`rounded-full px-2 py-0.5 text-[11px] font-semibold tracking-wide uppercase ${
-                      item.kind === 'Guide'
-                        ? 'bg-sky-100 text-sky-700 dark:bg-sky-950/60 dark:text-sky-300'
-                        : item.kind === 'Brief'
-                          ? 'bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300'
-                          : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300'
-                    }`}
-                  >
+                <div>
+                  <span className="rounded-md bg-white px-2 py-1 text-[11px] font-bold tracking-wide text-gray-600 uppercase ring-1 ring-gray-200 dark:bg-gray-950 dark:text-gray-300 dark:ring-gray-800">
                     {item.kind}
                   </span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">
+                  <div className="mt-2 text-xs text-gray-400 dark:text-gray-500">
                     {item.date
                       ? new Date(item.date).toLocaleDateString('en-US', {
                           month: 'short',
                           day: 'numeric',
                         })
                       : ''}
-                  </span>
+                  </div>
                 </div>
-                <div className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                  {item.title}
-                </div>
-                <div className="mt-1 line-clamp-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
-                  {item.summary}
+                <div className="min-w-0">
+                  <div className="line-clamp-1 text-sm font-semibold text-gray-900 group-hover:text-blue-700 dark:text-gray-100 dark:group-hover:text-blue-400">
+                    {item.title}
+                  </div>
+                  <div className="mt-1 line-clamp-2 text-xs leading-5 text-gray-600 dark:text-gray-400">
+                    {item.summary}
+                  </div>
                 </div>
               </Link>
             ))}
@@ -597,7 +618,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
               </Link>
             ))}
             <Link
-              href="/blog"
+              href="/brief"
               className="block rounded-xl border border-dashed border-gray-200 px-3 py-2 text-center text-sm font-medium text-gray-600 hover:border-blue-300 hover:text-blue-700 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-400"
             >
               View all briefs
