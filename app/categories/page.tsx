@@ -9,20 +9,70 @@ export const metadata = genPageMetadata({
     'Browse AI tools by category, including coding, writing, image generation, video, audio, search, productivity, and AI agents.',
 })
 
-const CATEGORY_DESCRIPTIONS: Record<string, string> = {
-  Coding:
-    'AI coding assistants, code search engines, UI generators, debugging tools, and developer agents.',
-  LLM: 'General-purpose AI assistants and language models for writing, reasoning, research, and everyday work.',
-  'Image Gen':
-    'AI image generation and visual creation tools for designers, marketers, creators, and product teams.',
-  Creative:
-    'Creative AI tools for music, voice, video, presentations, visuals, and campaign production.',
-  Productivity:
-    'AI tools that improve documents, knowledge management, planning, collaboration, and team workflows.',
-  Writing:
-    'AI writing assistants for marketing, sales, content operations, brand voice, and long-form drafts.',
-  Search:
-    'AI search and research tools that help users find, verify, and synthesize information faster.',
+const CATEGORY_GUIDES: Record<
+  string,
+  {
+    description: string
+    bestFor: string
+    check: string
+  }
+> = {
+  Coding: {
+    description:
+      'AI coding assistants, code search engines, UI generators, debugging tools, and developer agents.',
+    bestFor:
+      'Best for developers and technical teams trying to reduce repetitive coding, review, debugging, and repository navigation work.',
+    check:
+      'Check repository access, diff quality, test behavior, terminal permissions, and whether the tool keeps changes scoped.',
+  },
+  LLM: {
+    description:
+      'General-purpose AI assistants and language models for writing, reasoning, research, and everyday work.',
+    bestFor:
+      'Best for users who need a broad assistant for drafting, summarizing, brainstorming, analysis, and lightweight research.',
+    check:
+      'Check model access, memory controls, data retention, source handling, export options, and paid-plan limits.',
+  },
+  'Image Gen': {
+    description:
+      'AI image generation and visual creation tools for designers, marketers, creators, and product teams.',
+    bestFor:
+      'Best for teams producing concept art, social assets, campaign visuals, product mockups, and creative exploration.',
+    check:
+      'Check commercial-use rights, brand control, editing tools, consistency, prompt safety, and image export quality.',
+  },
+  Creative: {
+    description:
+      'Creative AI tools for music, voice, video, presentations, visuals, and campaign production.',
+    bestFor:
+      'Best for creators and marketing teams turning ideas into media assets, scripts, demos, music, or presentations.',
+    check:
+      'Check licensing, watermark rules, export formats, editing control, voice rights, and whether generated output can be used commercially.',
+  },
+  Productivity: {
+    description:
+      'AI tools that improve documents, knowledge management, planning, collaboration, and team workflows.',
+    bestFor:
+      'Best for individuals and teams trying to reduce meeting, note-taking, documentation, and planning overhead.',
+    check:
+      'Check workspace permissions, document export, collaboration controls, privacy settings, and whether it fits existing habits.',
+  },
+  Writing: {
+    description:
+      'AI writing assistants for marketing, sales, content operations, brand voice, and long-form drafts.',
+    bestFor:
+      'Best for writers, marketers, sales teams, and content operators who need faster drafts without losing editorial control.',
+    check:
+      'Check factuality, brand voice controls, plagiarism risk, workflow integrations, and whether human editing remains easy.',
+  },
+  Search: {
+    description:
+      'AI search and research tools that help users find, verify, and synthesize information faster.',
+    bestFor:
+      'Best for researchers, students, analysts, and knowledge workers who need sourced answers rather than generic summaries.',
+    check:
+      'Check citation quality, freshness, source diversity, hallucination handling, and whether the tool links back to primary material.',
+  },
 }
 
 export default function CategoriesPage() {
@@ -58,13 +108,34 @@ export default function CategoriesPage() {
               <div>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">{category}</h2>
                 <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
-                  {CATEGORY_DESCRIPTIONS[category] ||
+                  {CATEGORY_GUIDES[category]?.description ||
                     'AI tools grouped by a shared user workflow and decision context.'}
                 </p>
               </div>
               <span className="rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
                 {posts.length}
               </span>
+            </div>
+
+            <div className="mt-5 grid gap-3 border-t border-gray-100 pt-5 dark:border-gray-800">
+              <div className="rounded-lg bg-gray-50 p-3 dark:bg-gray-900">
+                <h3 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                  Best for
+                </h3>
+                <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                  {CATEGORY_GUIDES[category]?.bestFor ||
+                    'Readers comparing tools for a focused workflow and a clear buying decision.'}
+                </p>
+              </div>
+              <div className="rounded-lg bg-gray-50 p-3 dark:bg-gray-900">
+                <h3 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                  What to check
+                </h3>
+                <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                  {CATEGORY_GUIDES[category]?.check ||
+                    'Check pricing, privacy, usability, export, and whether the tool solves a repeated workflow.'}
+                </p>
+              </div>
             </div>
 
             <div className="mt-5 space-y-3">

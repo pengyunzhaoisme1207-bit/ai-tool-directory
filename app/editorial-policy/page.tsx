@@ -34,6 +34,19 @@ export default function EditorialPolicyPage() {
         no public product information, or no obvious user value may be skipped until they mature.
       </p>
 
+      <h2>What We Remove or Reclassify</h2>
+      <p>
+        A page can be updated, reclassified, or removed from active recommendation if the product
+        changes too much to remain accurately described. Common reasons include pricing becoming
+        misleading, a free tier disappearing, major workflow changes, a weaker privacy posture, a
+        better competing product emerging, or a product no longer being maintained in a way that
+        supports a recommendation.
+      </p>
+      <p>
+        This keeps the directory useful over time. It also prevents the site from turning into an
+        archive of stale opinions.
+      </p>
+
       <h2>Review Method</h2>
       <p>Each review is structured around practical questions:</p>
       <ul>
@@ -49,12 +62,28 @@ export default function EditorialPolicyPage() {
         encourage readers to verify final pricing and legal terms with the official provider.
       </p>
 
+      <h2>Source Priority</h2>
+      <p>
+        When we write or update a page, we prefer primary sources first: the vendor's own website,
+        pricing page, changelog, documentation, and release notes. We may use secondary reporting to
+        understand market context, but final recommendation language should still rest on the
+        product itself.
+      </p>
+
       <h2>Ratings</h2>
       <p>
         Ratings are editorial judgments, not user-review averages. We consider output quality,
         usability, feature depth, pricing fairness, workflow fit, privacy signals, and ecosystem
         integration. A high rating does not mean a tool is right for every reader; it means the tool
         performs strongly for its intended use case.
+      </p>
+
+      <h2>Update Cadence</h2>
+      <p>
+        Reviews are revisited when the product changes in a way that affects buying decisions.
+        Briefs are published to capture broader market shifts that may affect several reviews at
+        once. Category pages and guides are refreshed when they can help readers make faster, better
+        decisions.
       </p>
 
       <h2>Updates and Corrections</h2>
