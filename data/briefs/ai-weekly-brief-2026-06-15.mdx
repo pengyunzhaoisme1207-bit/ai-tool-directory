@@ -1,0 +1,123 @@
+---
+title: 'AI Brief #13 — Agent platforms move from demos to governed workflows'
+date: '2026-06-15'
+tags: ['AI News', 'AI Agents', 'Enterprise AI', 'Google Gemini', 'OpenAI', 'Microsoft Foundry']
+draft: false
+summary: 'This week, the strongest AI product signal is not a single chatbot release. OpenAI, Google, Microsoft, and Anthropic are all turning agents into governed systems that can use tools, run workflows, and stay under human control.'
+sources:
+  - 'https://openai.com/index/introducing-agentkit/'
+  - 'https://openai.com/index/new-tools-for-building-agents/'
+  - 'https://blog.google/innovation-and-ai/products/gemini-app/next-evolution-gemini-app/'
+  - 'https://gemini.google/overview/agent/spark/'
+  - 'https://learn.microsoft.com/en-us/azure/foundry/agents/overview'
+  - 'https://blogs.microsoft.com/blog/2025/05/19/microsoft-build-2025-the-age-of-ai-agents-and-building-the-open-agentic-web/'
+  - 'https://code.claude.com/'
+authors: ['default']
+---
+
+## The Agent Market Is Becoming Infrastructure
+
+The AI product market is moving past the first wave of agent demos. The current pattern is clearer: major platforms are trying to make agents reliable enough for everyday work, not just impressive enough for a launch video.
+
+OpenAI is packaging agent building around tools, evaluations, and production workflows. Google is pushing Gemini toward proactive assistance through Daily Brief and Spark. Microsoft is turning Foundry Agent Service into a managed platform for building, deploying, and scaling agents. Anthropic is positioning Claude Code as a developer agent that can operate inside a real codebase with human permission.
+
+For buyers, the implication is simple: the important question is no longer "Can this AI answer a prompt?" The better question is "Can this system safely take action inside a workflow?"
+
+## OpenAI: From Chat Interface to Agent Tooling
+
+OpenAI's agent direction is built around practical developer primitives. The company's agent tooling focuses on components that help developers build systems that can reason, use tools, take actions, and be evaluated before production use.
+
+That matters because agent products fail in predictable ways. They may choose the wrong tool, skip a required approval, lose context halfway through a workflow, or appear confident while taking an unsafe action. A stronger agent platform needs more than a model. It needs tool access, memory boundaries, state handling, observability, and repeatable evaluation.
+
+For teams comparing AI tools, OpenAI's direction suggests a new buying standard:
+
+- Does the product expose what the agent did?
+- Can you test the agent before it touches real users or real data?
+- Can you restrict tools and permissions?
+- Can you measure success and failure cases?
+- Can a human approve high-impact steps?
+
+If a vendor sells "autonomous agents" but cannot answer these questions, treat the product as experimental.
+
+## Google: Gemini Becomes More Proactive
+
+Google's Gemini updates show the consumer side of the same trend. Daily Brief is designed to organize information before the user asks, while Gemini Spark is positioned as a 24/7 personal agent that can work in the background under user direction.
+
+The shift is important because users increasingly expect AI tools to be contextual. A simple chatbot waits for instructions. A proactive assistant understands goals, connected apps, timing, and next steps. That creates a higher bar for standalone productivity tools.
+
+For an AI tool directory, this changes how productivity products should be reviewed. A writing assistant, research tool, or task manager now needs a sharper reason to exist:
+
+- Better workflow depth than a built-in assistant.
+- Better privacy or data boundaries.
+- Better output quality for a specific profession.
+- Better integrations with the user's actual work stack.
+- Better control over what the AI can and cannot do.
+
+Generic "AI assistant" positioning is becoming weaker. Domain-specific workflow value is becoming stronger.
+
+## Microsoft: Foundry Turns Agents into a Managed Platform
+
+Microsoft Foundry Agent Service is the enterprise version of the agent trend. It is described as a managed platform for building, deploying, and scaling AI agents, with support for multiple frameworks, supported models from the Foundry model catalog, and the Responses API as a single entry point.
+
+That framing matters for teams. Enterprise buyers do not only need an agent that can complete a task. They need a place to run agents with consistent identity, security, monitoring, and governance. An agent that can draft a report is useful. An agent that can read internal systems, trigger actions, and explain what happened under policy controls is much more valuable.
+
+This is why enterprise AI evaluation should include platform questions:
+
+| Question | Why it matters |
+| --- | --- |
+| What models can the agent use? | Teams may need different models for cost, latency, accuracy, or compliance. |
+| How are tools and permissions controlled? | Agents should not have unlimited access to business systems. |
+| Can behavior be monitored? | Production agents need logs, traces, and failure review. |
+| How are data sources grounded? | Bad retrieval creates bad actions. |
+| What happens when the agent is uncertain? | Escalation and approval flows are part of reliability. |
+
+The winners in enterprise AI will not be the flashiest demos. They will be the systems that make agent behavior governable.
+
+## Anthropic: Claude Code Shows What Agentic Work Looks Like for Developers
+
+Claude Code is a useful example because it gives a concrete picture of agentic work. It works in a developer's environment, understands a codebase, edits files, runs commands, and asks for permission before high-impact actions.
+
+That pattern is likely to spread beyond coding. A useful agent should operate close to the work, not only in a generic chat window. It should understand the surrounding files, tools, processes, and constraints. It should also make its actions inspectable.
+
+For software teams comparing coding agents, the real evaluation is not only output quality. A good test plan should include:
+
+- Can the agent understand the existing architecture?
+- Does it keep changes scoped?
+- Does it run tests and respond to failures?
+- Does it explain risky changes?
+- Does it avoid modifying unrelated files?
+- Can a reviewer inspect the diff before merging?
+
+These questions also apply to operations, marketing, analytics, and support agents. The surface changes; the governance pattern stays similar.
+
+## What This Means for Tool Buyers
+
+The AI tool market is splitting into three layers.
+
+First, general assistants are becoming operating-system and browser features. Google, Microsoft, OpenAI, and Anthropic all want users to spend more time inside their own assistant ecosystems.
+
+Second, workflow tools need to specialize. A product for sales, design, coding, research, support, or finance must solve a concrete job better than a general assistant.
+
+Third, agent platforms need trust infrastructure. Tool use, permissions, monitoring, evaluation, and human approval are no longer enterprise extras. They are core product requirements.
+
+For a buyer, the safest approach is to avoid the word "agent" as a decision shortcut. Instead, ask what the agent can actually do, where it gets context, what it is allowed to change, how failures are handled, and whether the workflow still works when a human needs to step in.
+
+## Practical Watchlist
+
+Here is what we will track in the next few weeks:
+
+1. Whether OpenAI's agent tooling becomes easier for non-enterprise teams to deploy.
+2. Whether Gemini Spark and Daily Brief create real daily usage or remain premium showcase features.
+3. Whether Microsoft Foundry Agent Service becomes the default enterprise agent runtime for Microsoft-heavy companies.
+4. Whether Claude Code-style local agent workflows become the standard for developer tooling.
+5. Whether smaller AI tools can defend their value against platform-level assistants.
+
+The agent era is not just about autonomy. It is about controlled delegation. The tools that make delegation understandable, reversible, and measurable will be the ones worth adopting.
+
+## Related Next Happy Reviews and Guides
+
+- [Claude Code review](/blog/claude-code-review/)
+- [Claude Code vs Cursor comparison](/blog/claude-code-vs-cursor-comparison/)
+- [AI tool adoption checklist for teams](/blog/ai-tool-adoption-checklist-for-teams/)
+- [How to choose the right AI operations tool in 2026](/blog/how-to-choose-ai-operations-tool-2026/)
+- [Free vs paid AI tools decision guide](/blog/free-vs-paid-ai-tools-decision-guide/)

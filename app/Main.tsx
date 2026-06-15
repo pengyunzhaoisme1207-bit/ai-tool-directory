@@ -276,10 +276,12 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
             </div>
             <div className="max-w-3xl">
               <h1 className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl xl:text-5xl dark:text-gray-50">
-                Search, compare, and track the AI tools people actually use.
+                Independent AI tool reviews for real buying decisions.
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-gray-600 dark:text-gray-400">
-                {siteMetadata.description}
+                Compare AI tools by workflow, pricing, privacy, model access, and practical fit.
+                Every listing links to a deeper review, guide, brief, or comparison so readers can
+                move from discovery to a confident decision.
               </p>
             </div>
             <div className="flex flex-wrap gap-2 text-xs text-gray-500 dark:text-gray-400">
@@ -293,6 +295,9 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
                 {guides.length + briefs.length + comparisons.length} editorial updates
               </span>
               <span className="rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
+                Updated Jun 15, 2026
+              </span>
+              <span className="rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
                 {freeCount + freemiumCount} free or freemium tools
               </span>
             </div>
@@ -300,18 +305,18 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
             <Link
-              href="/submit"
+              href="/projects"
               className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
             >
               <div className="text-xs font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
-                Submit or correct a tool
+                Review methodology
               </div>
               <div className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                Send a new listing, pricing update, or editorial fix.
+                See how tools are selected, tested, scored, and updated.
               </div>
               <div className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
-                Keep the directory current when a product changes, launches a new plan, or needs a
-                better category fit.
+                Ratings are based on workflow fit, output quality, pricing fairness, privacy
+                signals, and practical adoption risk.
               </div>
             </Link>
             <Link
@@ -492,7 +497,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
                 Fresh updates
               </h2>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                New guides, comparisons, and AI Briefs.
+                New guides, comparisons, and AI Briefs. The latest issue is dated Jun 15, 2026.
               </p>
             </div>
             <Link
@@ -659,20 +664,29 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
             <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100">
-              Browse by workflow, then drill into the tools.
+              A directory is useful only when it helps people choose.
             </h2>
             <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-400">
-              Directory sites like this work best when the user can move from category to shortlist
-              to decision without friction. That is why the homepage now balances tool cards,
-              editorial updates, comparisons, and submission routes in one view.
+              Next Happy AI Tools combines a searchable directory with long-form reviews, buyer
+              guides, comparisons, and weekly market briefs. The goal is not to list every launch.
+              The goal is to explain which tools are useful, who should use them, what they cost,
+              and what risks to check before adopting them.
             </p>
           </div>
-          <Link
-            href="/submit"
-            className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
-          >
-            Submit a tool update
-          </Link>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/blog/ai-agent-platform-buying-guide-2026"
+              className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+            >
+              Read the agent buying guide
+            </Link>
+            <Link
+              href="/submit"
+              className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+            >
+              Submit a tool update
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -1,0 +1,186 @@
+---
+title: 'AI Agent Platform Buying Guide 2026: How to Evaluate Tools That Take Action'
+date: '2026-06-15'
+tags: ['AI Agents', 'Buying Guide', 'Enterprise AI', 'AI Tools', 'Workflow']
+draft: false
+summary: 'A practical buying guide for evaluating AI agent platforms in 2026. Learn how to compare tool access, permissions, evals, human approval, integrations, pricing, and workflow fit.'
+authors: ['default']
+lastUpdated: '2026-06-15'
+images: ['/static/images/twitter-card.png']
+---
+
+## Why Agent Platforms Need a Different Buying Process
+
+An AI agent platform is not just another chatbot subscription. A chatbot answers questions. An agent may read files, call tools, edit documents, send messages, trigger workflows, create code, or update records in another system.
+
+That difference changes the buying process. When software can take action, the evaluation must include control, visibility, failure handling, and governance. A beautiful demo is not enough.
+
+This guide is for teams comparing products such as coding agents, workflow agents, research agents, support agents, operations agents, and enterprise agent runtimes. It gives you a practical checklist for deciding whether an agent platform is ready for real work.
+
+## The Short Version
+
+Choose an AI agent platform only when it can pass these five tests:
+
+1. **Clear job fit** — the agent improves a specific workflow, not a vague promise to "automate work."
+2. **Controlled tool access** — the platform lets you decide what the agent can read, write, call, or change.
+3. **Human approval points** — high-impact actions can be reviewed before they execute.
+4. **Observable behavior** — you can inspect what the agent did, which tools it used, and where it failed.
+5. **Repeatable evaluation** — you can test the agent against real tasks before expanding usage.
+
+If a product cannot satisfy these requirements, use it as an experiment, not as production infrastructure.
+
+## Step 1: Define the Workflow Before Choosing the Agent
+
+The most common agent buying mistake is starting with a vendor demo instead of a workflow.
+
+Bad evaluation question:
+
+> Which agent platform looks most advanced?
+
+Better evaluation question:
+
+> Which platform can handle our weekly support triage workflow with human approval before customer-facing messages are sent?
+
+The second question gives you a testable scenario. You can prepare sample tickets, documents, policies, and expected outcomes. You can compare agent output against human work. You can also define what the agent is not allowed to do.
+
+Useful workflow categories include:
+
+| Workflow | Agent task | Risk to check |
+| --- | --- | --- |
+| Coding | Edit files, run tests, prepare pull requests | Unrelated code changes, weak tests, hidden breakage |
+| Research | Search, read sources, summarize findings | Outdated sources, weak citations, unsupported claims |
+| Support | Draft replies, route tickets, find policy answers | Customer data exposure, wrong advice |
+| Operations | Update records, prepare reports, route approvals | Permission sprawl, poor audit trail |
+| Sales | Research accounts, draft outreach, update CRM | Bad personalization, compliance issues |
+| Finance | Classify spend, summarize invoices, flag anomalies | Sensitive data, incorrect categorization |
+
+Do not buy a general-purpose agent until you know which row of the table matters most.
+
+## Step 2: Evaluate Tool Access and Permissions
+
+Agents become useful when they can use tools. They also become risky for the same reason.
+
+Ask every vendor:
+
+- What can the agent read by default?
+- What can the agent write or modify?
+- Can permissions be scoped by user, workspace, role, or workflow?
+- Can the agent access private files, customer data, code repositories, or financial systems?
+- Can tool access be disabled for specific actions?
+- Can the platform separate sandbox, staging, and production environments?
+
+A strong platform makes permissions boring and explicit. A weak platform treats tool access as a magic feature.
+
+For developer teams, compare this with how you already think about deployment permissions. A junior developer should not be able to deploy to production without review. An AI agent should not have broader authority than a human teammate with the same responsibility.
+
+## Step 3: Look for Human Approval and Escalation
+
+The best agents do not remove humans from every decision. They remove repetitive work while keeping humans in the right approval points.
+
+Good approval patterns include:
+
+- Review before sending external messages.
+- Review before changing production systems.
+- Review before deleting, overwriting, or publishing content.
+- Review before spending money or calling paid APIs at scale.
+- Review when confidence is low or sources conflict.
+
+Escalation is just as important. The platform should have a clear way to say: "I cannot complete this safely." A tool that always produces an answer may feel smooth in a demo but create more review burden in real work.
+
+## Step 4: Require Logs, Traces, and Explainability
+
+If an agent changes something, your team should be able to reconstruct what happened.
+
+Minimum observability requirements:
+
+- Prompt or task input.
+- Tools called.
+- Data sources used.
+- Files or records changed.
+- Final output.
+- Errors or retries.
+- Human approvals.
+
+This is not only for compliance. It is for practical debugging. When an agent gives a wrong answer or makes a poor edit, logs help you improve the workflow instead of guessing.
+
+For coding agents, this means readable diffs, command history, test output, and clear commit summaries. For business agents, it means action logs, source references, and approval history.
+
+## Step 5: Test Evaluation Before Rollout
+
+Agent platforms should be evaluated with a small task set before purchase or team-wide rollout.
+
+Create 10 to 20 realistic tasks from your actual workflow. Include easy cases, ambiguous cases, edge cases, and tasks the agent should refuse or escalate.
+
+Score each task on:
+
+| Criterion | What to look for |
+| --- | --- |
+| Completion | Did the agent finish the task? |
+| Accuracy | Was the answer or action correct? |
+| Scope control | Did it avoid unrelated changes? |
+| Source quality | Did it use reliable context? |
+| Approval behavior | Did it ask before risky actions? |
+| Recovery | Did it handle errors without inventing facts? |
+| Review burden | Did it save time after human review? |
+
+The last row matters most. A tool that produces impressive drafts but doubles review time is not a productivity tool.
+
+## Step 6: Compare Pricing by Workflow Volume
+
+Agent pricing can be harder to understand than ordinary SaaS pricing because costs may depend on seats, credits, tokens, tool calls, model choice, storage, workflow runs, or enterprise add-ons.
+
+Before buying, model three usage levels:
+
+1. **Pilot usage** — one team, a few workflows, light automation.
+2. **Normal usage** — weekly work by the expected user group.
+3. **Heavy usage** — peak periods, background runs, multiple agents, large files.
+
+Ask vendors whether usage limits reset daily or monthly, whether background agents consume credits, whether expensive models are used automatically, and whether admins can set budget caps.
+
+For small teams, predictable pricing can be more valuable than raw power. A slightly less capable agent with clear spending limits may be safer than a powerful agent that creates surprise costs.
+
+## Step 7: Decide What Should Stay Manual
+
+Not every workflow should be automated. Some work should remain human-led because the cost of a bad action is high or the context is too ambiguous.
+
+Keep humans in control when:
+
+- The task involves legal, medical, financial, or employment decisions.
+- The agent would handle sensitive customer data.
+- The workflow includes irreversible actions.
+- The answer depends on fresh facts that are difficult to verify.
+- The task requires judgment about reputation, ethics, or policy.
+
+The goal is not full autonomy. The goal is controlled delegation.
+
+## Recommended Evaluation Path
+
+Here is a practical rollout sequence:
+
+1. Choose one workflow with clear success criteria.
+2. Prepare sample tasks and expected outcomes.
+3. Test the agent in a sandbox.
+4. Restrict tool access to the minimum needed.
+5. Require approval for external or destructive actions.
+6. Measure review time, error rate, and user satisfaction.
+7. Expand only after the workflow is repeatable.
+
+This avoids the biggest AI adoption trap: buying a powerful platform before the team knows how it will be used.
+
+## How This Applies to Current Tools
+
+Different agent products solve different jobs.
+
+- [Claude Code](/blog/claude-code-review/) is strongest when the workflow is inside a codebase and the user wants a local, developer-controlled agent.
+- [Claude Code vs Cursor](/blog/claude-code-vs-cursor-comparison/) is the right comparison if your main question is terminal-native delegation versus IDE-native collaboration.
+- [OpenAI Codex](/blog/openai-codex-review/) is relevant when a team is already invested in OpenAI tooling and wants code generation or agentic software work.
+- [Replit Agent](/blog/replit-agent-review/) is useful for fast prototypes and browser-based app building.
+- [AI tool adoption checklist](/blog/ai-tool-adoption-checklist-for-teams/) is the broader team rollout checklist once you know which workflow matters.
+
+No agent platform is the best choice for every team. The right one is the tool that matches your workflow, risk tolerance, data policy, and review process.
+
+## Final Recommendation
+
+Treat agent platforms as workflow infrastructure, not productivity toys. A good agent platform should make work faster, but it should also make decisions easier to inspect. It should expose permissions, sources, actions, and failure modes clearly enough that a human can stay accountable.
+
+If a platform only shows the final answer, it is not ready for sensitive work. If it shows the work, scopes permissions, supports evaluation, and respects human approval, it may be worth piloting.

@@ -1,5 +1,5 @@
 {
-  "ai-news": 12,
+  "ai-news": 13,
   "safety": 1,
   "security": 1,
   "regulation": 2,
@@ -17,18 +17,19 @@
   "eu": 1,
   "agents": 1,
   "ai-coding": 1,
-  "enterprise-ai": 3,
+  "enterprise-ai": 4,
   "agentic-ai": 1,
   "google-io": 1,
-  "ai-agents": 3,
+  "ai-agents": 4,
   "ai-infrastructure": 1,
   "microsoft-build": 1,
   "ai-governance": 1,
-  "openai": 1,
+  "openai": 2,
   "ai-safety": 1,
   "policy": 1,
   "frontier-models": 1,
-  "google-gemini": 1,
+  "google-gemini": 2,
   "android": 1,
-  "ai-search": 1
+  "ai-search": 1,
+  "microsoft-foundry": 1
 }

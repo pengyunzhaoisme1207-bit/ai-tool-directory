@@ -168,6 +168,36 @@ export default function Projects() {
             workflow.
           </p>
 
+          <h2>How We Avoid Thin Directory Content</h2>
+          <p>
+            AI tool directories become low value when they only repeat vendor descriptions. Our
+            editorial process is designed to avoid that. A listing must connect a tool to a real
+            workflow, explain who should use it, describe pricing and adoption trade-offs, and link
+            to related reviews, comparisons, or guides. If a product cannot be explained beyond its
+            marketing tagline, it is not ready for a full recommendation page.
+          </p>
+          <p>
+            We also separate tool discovery from tool evaluation. The homepage helps readers filter
+            by category, pricing, and use case. Individual review pages explain the product in more
+            depth. Guides cover broader buying decisions, such as how to adopt AI tools safely or
+            how to evaluate agent platforms. Weekly briefs track market changes that may affect
+            existing recommendations.
+          </p>
+
+          <div className="not-prose my-8 rounded-xl border border-emerald-200 bg-emerald-50 p-5 dark:border-emerald-900/50 dark:bg-emerald-950/30">
+            <h3 className="mt-0 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              Minimum quality bar before a page is published
+            </h3>
+            <ul className="mb-0 grid gap-2 text-sm leading-6 text-gray-700 md:grid-cols-2 dark:text-gray-300">
+              <li>Clear target user and workflow fit.</li>
+              <li>Pricing model or pricing uncertainty explained.</li>
+              <li>At least one practical use case, not only features.</li>
+              <li>Visible update date and editorial context.</li>
+              <li>Relevant internal links to related tools or guides.</li>
+              <li>Privacy, safety, licensing, or export concerns noted when relevant.</li>
+            </ul>
+          </div>
+
           <h2>What We Test Before Publishing</h2>
           <p>
             A review is not published from a product homepage alone. Before a tool receives a full
@@ -216,6 +246,16 @@ export default function Projects() {
             repeated tasks. Others are excellent for specialists but frustrating for casual users.
             Our ratings intentionally separate raw capability from practical value so readers can
             choose based on their own constraints.
+          </p>
+
+          <h2>Update Cadence</h2>
+          <p>
+            AI products change quickly, so each review includes a publication date and, when
+            relevant, a last-updated field. We prioritize updates when a tool changes pricing,
+            launches a major model integration, adds or removes a free plan, changes data retention
+            terms, or becomes meaningfully stronger or weaker compared with alternatives. Weekly AI
+            Brief pages are used to capture broader market changes that may affect several reviews
+            at once.
           </p>
 
           <h2>Transparency</h2>
