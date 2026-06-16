@@ -1,5 +1,5 @@
 {
-  "ai-news": 13,
+  "ai-news": 14,
   "safety": 1,
   "security": 1,
   "regulation": 2,
@@ -20,16 +20,16 @@
   "enterprise-ai": 4,
   "agentic-ai": 1,
   "google-io": 1,
-  "ai-agents": 4,
+  "ai-agents": 5,
   "ai-infrastructure": 1,
   "microsoft-build": 1,
-  "ai-governance": 1,
-  "openai": 2,
+  "ai-governance": 2,
+  "openai": 3,
   "ai-safety": 1,
   "policy": 1,
   "frontier-models": 1,
-  "google-gemini": 2,
+  "google-gemini": 3,
   "android": 1,
   "ai-search": 1,
-  "microsoft-foundry": 1
+  "microsoft-foundry": 2
 }

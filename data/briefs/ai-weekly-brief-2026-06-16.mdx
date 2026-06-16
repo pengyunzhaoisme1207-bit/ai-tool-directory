@@ -1,0 +1,109 @@
+---
+title: 'AI Brief #14 — Agent products get harder to evaluate as platforms shift under them'
+date: '2026-06-16'
+tags: ['AI News', 'AI Agents', 'OpenAI', 'Google Gemini', 'Microsoft Foundry', 'AI Governance']
+draft: false
+summary: 'OpenAI is steering builders from Agent Builder toward SDK and Workspace Agents, Google is changing Gemini API image endpoints, Microsoft is turning Foundry into an agent runtime, and AI Search is becoming a default user experience.'
+sources:
+  - 'https://openai.com/index/introducing-agentkit/'
+  - 'https://openai.com/news/'
+  - 'https://ai.google.dev/gemini-api/docs/changelog'
+  - 'https://blog.google/products-and-platforms/products/search/search-io-2026/'
+  - 'https://learn.microsoft.com/en-us/azure/foundry/agents/overview'
+  - 'https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-build-2026/'
+authors: ['default']
+---
+
+## The Quiet Problem: AI Tool Decisions Are Becoming Platform Decisions
+
+The latest AI product updates are less about a single impressive model and more about platform direction. OpenAI, Google, and Microsoft are all making changes that affect how teams should choose AI tools, especially tools that claim to be "agentic."
+
+OpenAI's AgentKit page now includes a June 3, 2026 update saying Agent Builder and Evals are being wound down, with developers pointed toward the Agents SDK for code-based workflows and Workspace Agents in ChatGPT for natural-language workflows. Google Gemini API release notes include a June 15, 2026 deprecation notice for older image generation endpoints. Microsoft Foundry Agent Service is positioned as a managed platform for building, deploying, and scaling agents. Google Search is also moving AI Mode deeper into the default search experience.
+
+For buyers, this means a simple question like "Which AI tool should we use?" now depends on a deeper question: "Which platform direction are we willing to depend on?"
+
+## OpenAI: Builders Are Being Pushed Toward Code and Workspace Agents
+
+OpenAI's AgentKit update is important because it shows how quickly AI product surfaces can change. A visual builder may look like the future in one product cycle, then become a migration path in the next.
+
+The practical lesson is not that builders should avoid OpenAI. The lesson is that teams should avoid depending on a workflow they cannot move.
+
+When evaluating OpenAI-based tools, ask:
+
+- Is the workflow stored as code, configuration, or only inside a hosted visual builder?
+- Can the team export prompts, tool definitions, eval cases, and routing logic?
+- If a product surface changes, can the workflow be rebuilt with the Agents SDK or another framework?
+- Does the vendor explain migration plans clearly?
+
+This matters for no-code agent tools too. If a product is just a thin interface over a platform that changes underneath it, buyers need to know what happens when that platform changes direction.
+
+## Google: Gemini API Deprecations Are a Reminder to Track Model Endpoints
+
+Google's Gemini API changelog includes a June 15 deprecation announcement for older image generation models and points developers toward newer stable or preview endpoints. That is normal platform maintenance, but it has a real impact on buyers and builders.
+
+AI tools often market themselves by output quality. Behind the scenes, that quality may depend on a specific model endpoint. If the endpoint changes, the tool may become faster, cheaper, better, worse, or simply different.
+
+For AI image and creative tools, buyers should ask:
+
+- Which model family powers the product today?
+- Does the vendor disclose major model migrations?
+- Are old projects reproducible if the underlying model changes?
+- Are commercial-use rules tied to model version, account tier, or output type?
+- Can teams lock a workflow to a stable endpoint for production use?
+
+The best AI tools will not only add new models. They will explain how model changes affect existing workflows.
+
+## Google Search: AI Mode Raises the Bar for Directory Sites
+
+Google's Search update says Gemini 3.5 Flash is being used as the default model in AI Mode globally. Whether a reader arrives through classic search, AI Mode, or a summarized answer, the expectation is shifting toward direct decision support.
+
+That is bad news for thin directories. A page that only lists tool names can be summarized away. A page that explains trade-offs, pricing, privacy, use cases, and risks has a better reason to exist.
+
+For Next Happy AI Tools, this reinforces the editorial direction:
+
+- category pages should explain who each category is for;
+- shortlists should include recommendation logic;
+- reviews should include "who should use it" and "when to skip it";
+- briefs should explain what market changes mean for tool buyers;
+- comparison pages should help users choose, not just repeat specs.
+
+The AI search era rewards pages that make decisions easier.
+
+## Microsoft Foundry: Enterprise Agents Need Runtime, Identity, and Governance
+
+Microsoft Foundry Agent Service is described as a managed platform for building, deploying, and scaling AI agents. The key phrase is not "agent." It is "managed platform."
+
+Enterprise teams do not only need an agent that can answer questions. They need identity, tool access, monitoring, model choice, grounding, deployment, and policy controls. Microsoft is also pushing Foundry agents toward the places employees already work, including Microsoft Teams and Microsoft 365 Copilot experiences.
+
+This is a strong signal for enterprise AI buyers:
+
+| Buying question                                      | Why it matters                                                   |
+| ---------------------------------------------------- | ---------------------------------------------------------------- |
+| Can agents be deployed where employees already work? | Adoption is easier when users do not need a new tool surface.    |
+| Does identity flow through automatically?            | Agent permissions should follow existing controls.               |
+| Can the team choose models and frameworks?           | Different workflows need different cost and accuracy trade-offs. |
+| Are logs and monitoring available?                   | Production agents need observability and review.                 |
+| Can data be grounded in trusted systems?             | Agents without reliable context create risky output.             |
+
+The strongest enterprise AI platforms will make governance boring. That is a good thing.
+
+## What Tool Buyers Should Do This Week
+
+If your team is evaluating AI tools right now, update your checklist:
+
+1. Ask whether the vendor depends on a changing platform feature.
+2. Ask how workflows can be exported, migrated, or rebuilt.
+3. Ask what happens when model endpoints are deprecated.
+4. Ask whether agent actions are logged and reviewable.
+5. Ask whether a human can approve high-impact actions.
+6. Ask whether the tool still works if the underlying model changes.
+
+The market is moving from "try this AI feature" to "operate this AI workflow." That shift is good for serious buyers, but only if they evaluate tools like software infrastructure rather than novelty apps.
+
+## Related Next Happy Reading
+
+- [Best AI Tools by Workflow](/best-ai-tools/)
+- [AI Agent Platform Buying Guide 2026](/blog/ai-agent-platform-buying-guide-2026/)
+- [AI Tool Adoption Checklist for Teams](/blog/ai-tool-adoption-checklist-for-teams/)
+- [How to Choose the Right AI Operations Tool in 2026](/blog/how-to-choose-ai-operations-tool-2026/)
+- [Claude Code vs Cursor comparison](/blog/claude-code-vs-cursor-comparison/)
