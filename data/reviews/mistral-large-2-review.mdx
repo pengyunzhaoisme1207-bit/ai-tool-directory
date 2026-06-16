@@ -1,5 +1,5 @@
 ---
-title: 'Mistral Large 3 - Europe''s Multimodal Open-Weight Frontier'
+title: "Mistral Large 3 - Europe's Multimodal Open-Weight Frontier"
 date: '2026-05-11'
 tags: ['LLM', 'Enterprise', 'European AI', 'Open Weight', 'Multimodal']
 draft: false
@@ -21,12 +21,19 @@ mainFeatures:
   - '256k Context Window'
   - '94.2% Function Calling'
 lastUpdated: '2026-05-11'
-images: ['/static/images/mistral-review.jpg']
+images: ['/static/images/screenshots/mistral-official.png']
 ---
 
 ## Overview
 
 Mistral Large 3 (released December 2025) is Mistral AI''s most capable model — a 675B total / 41B active MoE that adds multimodal image understanding and native agentic tool use to the Large family. Trained from scratch on 3,000 NVIDIA H200 GPUs, it achieves parity with the best instruction-tuned open-weight models while offering best-in-class multilingual conversation support. Available under Apache 2.0 for unrestricted commercial use.
+
+<ScreenshotFigure
+  src="/static/images/screenshots/mistral-official.png"
+  alt="Mistral official website screenshot"
+  caption="Mistral's site emphasizes enterprise deployment, models, and infrastructure. That matches its positioning as a serious platform rather than a consumer chatbot."
+  source="mistral.ai"
+/>
 
 ## Architecture & Model Specs
 
@@ -58,12 +65,12 @@ Mistral Large 3 (released December 2025) is Mistral AI''s most capable model —
 
 ## Pricing Breakdown
 
-| Plan | Price | Features |
-|------|-------|----------|
-| Mistral API | $4/1M input, $12/1M output | Full Large 3 access, function calling |
-| Azure Foundry | $0.50/1M input, $1.50/1M output | Global Standard, West US 3 |
-| AWS Bedrock | Custom | Managed deployment, regional options |
-| Self-Hosted | Free + infra | Apache 2.0 weights, your infrastructure |
+| Plan          | Price                           | Features                                |
+| ------------- | ------------------------------- | --------------------------------------- |
+| Mistral API   | $4/1M input, $12/1M output      | Full Large 3 access, function calling   |
+| Azure Foundry | $0.50/1M input, $1.50/1M output | Global Standard, West US 3              |
+| AWS Bedrock   | Custom                          | Managed deployment, regional options    |
+| Self-Hosted   | Free + infra                    | Apache 2.0 weights, your infrastructure |
 
 ## Privacy & Safety
 
@@ -79,6 +86,7 @@ Mistral Large 3 (released December 2025) is Mistral AI''s most capable model —
 ## Pros & Cons
 
 **Pros:**
+
 - Full Apache 2.0 — zero licensing restrictions
 - Native multimodal (text + image) understanding
 - 94.2% function calling success rate
@@ -86,11 +94,28 @@ Mistral Large 3 (released December 2025) is Mistral AI''s most capable model —
 - EU data sovereignty and GDPR compliance
 
 **Cons:**
+
 - Dense MoE = higher inference cost than lighter models
 - 256k context (500k sliding) trails DeepSeek-V4''s 1M
 - Smaller ecosystem than OpenAI/Anthropic
 - Reasoning variant still forthcoming
 
+## Best Use Cases
+
+Mistral Large 3 is best for enterprises that want strong model capability without giving up deployment flexibility. It suits multilingual internal assistants, document-heavy enterprise workflows, and product teams that need tool use plus image understanding without locking into a fully closed ecosystem.
+
+It is particularly relevant for European teams where data residency, procurement comfort, and regional AI policy are real buying criteria rather than abstract talking points.
+
+## Who Should Skip It
+
+Skip Mistral if you want the broadest third-party integrations, the deepest consumer ecosystem, or the simplest path for non-technical teams. OpenAI and Anthropic still have stronger mindshare and often easier internal adoption.
+
+## What to Verify Before Buying
+
+Before standardizing on Mistral, verify which deployment channel you actually want to use, how much multimodal work matters in practice, and whether your team values open-weight optionality enough to justify a smaller surrounding ecosystem.
+
 ## Verdict
 
-Mistral Large 3 is the most versatile open-weight model for enterprise use. Native tool use, multimodal understanding, and Apache 2.0 licensing make it ideal for building production agentic systems. At $0.50/1M input tokens on Azure, it''s remarkably affordable for a frontier-class model.
+Mistral Large 3 is a practical enterprise model when licensing, deployment control, and multimodal support matter together. It is not the loudest model on the market, but it is one of the cleanest fits for teams that care about sovereignty and predictable usage.
+
+If you need the broadest consumer-friendly experience, compare it with [ChatGPT](/blog/chatgpt-review/). If you need long-context open weights, [DeepSeek-V4](/blog/deepseek-v3-review/) is the closer rival.
