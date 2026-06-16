@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
@@ -108,7 +109,10 @@ export default function ListLayoutWithTags({
   pagination,
 }: ListLayoutProps) {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const initialSearch = searchParams.get('s')?.trim() || ''
   const [activeType, setActiveType] = useState('all')
+  const [searchValue, setSearchValue] = useState(initialSearch)
 
   const typeCounts = useMemo(() => {
     const counts: Record<string, number> = {
@@ -126,9 +130,16 @@ export default function ListLayoutWithTags({
   }, [posts])
 
   const filteredPosts = useMemo(() => {
-    if (activeType === 'all') return posts
-    return posts.filter((post) => getContentType(post) === activeType)
-  }, [posts, activeType])
+    const q = searchValue.toLowerCase()
+    return posts.filter((post) => {
+      const matchesType = activeType === 'all' || getContentType(post) === activeType
+      const category = 'category' in post && typeof post.category === 'string' ? post.category : ''
+      const searchContent =
+        `${post.title} ${post.summary || ''} ${(post.tags || []).join(' ')} ${category}`.toLowerCase()
+      const matchesSearch = !q || searchContent.includes(q)
+      return matchesType && matchesSearch
+    })
+  }, [posts, activeType, searchValue])
 
   const displayPosts =
     initialDisplayPosts.length > 0 && activeType === 'all' ? initialDisplayPosts : filteredPosts
@@ -151,6 +162,24 @@ export default function ListLayoutWithTags({
                   comparisons, and decision notes written for real AI workflows rather than launch
                   hype.
                 </p>
+                <div className="mt-5 flex max-w-2xl gap-2">
+                  <input
+                    type="search"
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    placeholder="Search reviews, guides, comparisons..."
+                    className="w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-900 focus:border-blue-400 focus:ring-2 focus:ring-blue-100 focus:outline-none dark:border-gray-800 dark:bg-gray-950 dark:text-gray-100 dark:focus:border-blue-600 dark:focus:ring-blue-900/30"
+                  />
+                  {searchValue && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchValue('')}
+                      className="rounded-lg border border-gray-200 bg-white px-4 text-sm font-medium text-gray-600 hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-gray-900"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
                 <div className="mt-4 flex flex-wrap gap-2 text-xs text-gray-600 dark:text-gray-400">
                   <span className="rounded-full bg-white px-3 py-1 ring-1 ring-gray-200 dark:bg-gray-950 dark:ring-gray-800">
                     {typeCounts.review} reviews
@@ -230,6 +259,7 @@ export default function ListLayoutWithTags({
                 {CONTENT_TYPES.map((type) => (
                   <li key={type.key}>
                     <button
+                      type="button"
                       onClick={() => setActiveType(type.key)}
                       className={`w-full rounded px-3 py-2 text-left text-sm font-medium transition-colors ${
                         activeType === type.key

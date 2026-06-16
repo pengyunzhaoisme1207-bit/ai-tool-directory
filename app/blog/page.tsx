@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { allReviews, allGuides, allComparisons } from 'contentlayer/generated'
 import { genPageMetadata } from 'app/seo'
@@ -18,5 +19,9 @@ export default function BlogPage() {
 
   const sorted = allContent.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-  return <ListLayoutWithTags posts={sorted} title="AI Tool Reviews and Guides" />
+  return (
+    <Suspense fallback={<div className="py-10 text-sm text-gray-500">Loading search...</div>}>
+      <ListLayoutWithTags posts={sorted} title="AI Tool Reviews and Guides" />
+    </Suspense>
+  )
 }
