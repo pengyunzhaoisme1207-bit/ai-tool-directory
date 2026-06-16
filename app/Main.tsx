@@ -690,6 +690,69 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
         </div>
       </section>
 
+      <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+              Scene-based shortlists
+            </p>
+            <h2 className="mt-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              Start with the job, not the logo.
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-400">
+              Professional directory sites work best when readers can jump from a real problem to a
+              credible shortlist. These links do that without making the homepage feel crowded.
+            </p>
+          </div>
+          <Link
+            href="/best-ai-tools"
+            className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+          >
+            View all shortlists
+          </Link>
+        </div>
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+          {[
+            {
+              title: 'Coding',
+              body: 'Code editors, agents, and review tools for repo-level work.',
+              href: '/best-ai-tools',
+            },
+            {
+              title: 'Research',
+              body: 'Search and answer tools that surface sources and citations.',
+              href: '/blog/perplexity-review/',
+            },
+            {
+              title: 'Writing',
+              body: 'Drafting and editing tools for content, docs, and brand voice.',
+              href: '/blog/notion-ai-review/',
+            },
+            {
+              title: 'Images & Video',
+              body: 'Creative tools for production visuals, clips, and campaign assets.',
+              href: '/blog/midjourney-review/',
+            },
+            {
+              title: 'Teams',
+              body: 'Rollout-ready tools with controls, pricing, and collaboration fit.',
+              href: '/blog/ai-tool-adoption-checklist-for-teams/',
+            },
+          ].map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              className="rounded-lg border border-gray-200 bg-gray-50 p-4 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900/70 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+            >
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{item.body}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-gray-950">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="max-w-2xl">

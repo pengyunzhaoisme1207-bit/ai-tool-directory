@@ -37,6 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     '',
+    'best-ai-tools',
     'blog',
     'brief',
     'categories',
