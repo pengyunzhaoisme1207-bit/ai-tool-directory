@@ -44,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'comparisons',
     'projects',
     'editorial-policy',
+    'disclosure',
     'submit',
     'about',
     'privacy',

@@ -10,13 +10,60 @@ export const metadata = genPageMetadata({
 export default function Projects() {
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
-      <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-        <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-          Our Review Process
-        </h1>
-        <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-          How we test, rate, and compare AI tools — so you can trust our recommendations.
-        </p>
+      <div className="pt-6 pb-8">
+        <section className="rounded-2xl border border-gray-200 bg-[linear-gradient(135deg,#f8fafc_0%,#ffffff_50%,#eef6ff_100%)] p-6 shadow-sm dark:border-gray-800 dark:bg-[linear-gradient(135deg,#020617_0%,#111827_55%,#0f172a_100%)]">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
+            <div>
+              <p className="text-xs font-semibold tracking-wide text-blue-700 uppercase dark:text-blue-400">
+                Review methodology
+              </p>
+              <h1 className="mt-2 text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
+                Our Review Process
+              </h1>
+              <p className="mt-4 text-lg leading-7 text-gray-600 dark:text-gray-400">
+                How we test, rate, compare, update, and disclose AI tools so readers can make better
+                software decisions.
+              </p>
+            </div>
+            <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950">
+              <h2 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                What this page proves
+              </h2>
+              <div className="mt-4 grid gap-3">
+                {[
+                  [
+                    'Original evaluation',
+                    'Pages are written from editorial criteria, not copied vendor copy.',
+                  ],
+                  [
+                    'Update discipline',
+                    'Reviews and briefs are refreshed when pricing or product direction changes.',
+                  ],
+                  [
+                    'Disclosure',
+                    'Ads, affiliate links, and editorial independence are publicly documented.',
+                  ],
+                  [
+                    'Decision support',
+                    'The site is built to help readers choose, not just browse logos.',
+                  ],
+                ].map(([title, note]) => (
+                  <div
+                    key={title}
+                    className="rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900"
+                  >
+                    <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                      {title}
+                    </div>
+                    <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                      {note}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
       <div className="container py-12">
         <div className="prose prose-gray dark:prose-invert mx-auto max-w-none">
@@ -29,6 +76,23 @@ export default function Projects() {
               count. When a product changes pricing, model access, licensing, or a major workflow,
               we update the relevant page and keep a visible trail of how we evaluate it.
             </p>
+          </div>
+
+          <div className="not-prose mb-8 grid gap-4 md:grid-cols-4">
+            {[
+              ['1. Select', 'Choose tools with clear workflow value and public product substance.'],
+              ['2. Test', 'Review onboarding, output quality, pricing, and obvious risks.'],
+              ['3. Compare', 'Place tools next to real alternatives and explain trade-offs.'],
+              ['4. Update', 'Refresh pages when pricing, access, or product direction shifts.'],
+            ].map(([title, body]) => (
+              <div
+                key={title}
+                className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-950"
+              >
+                <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">{title}</h2>
+                <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{body}</p>
+              </div>
+            ))}
           </div>
 
           <h2>What We Review</h2>
@@ -195,6 +259,22 @@ export default function Projects() {
               <li>Visible update date and editorial context.</li>
               <li>Relevant internal links to related tools or guides.</li>
               <li>Privacy, safety, licensing, or export concerns noted when relevant.</li>
+            </ul>
+          </div>
+
+          <div className="not-prose my-8 rounded-xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-900/50 dark:bg-amber-950/30">
+            <h3 className="mt-0 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              AdSense readiness checkpoints
+            </h3>
+            <ul className="mb-0 grid gap-2 text-sm leading-6 text-gray-700 md:grid-cols-2 dark:text-gray-300">
+              <li>Original review summaries and decision guidance.</li>
+              <li>
+                Visible About, Contact, Privacy, Terms, Editorial Policy, and Disclosure pages.
+              </li>
+              <li>Category, shortlist, guide, and comparison pages with distinct user value.</li>
+              <li>Updated content, not abandoned archive pages.</li>
+              <li>No fake ads, misleading buttons, or auto-generated filler.</li>
+              <li>Clear outbound-link disclosure and correction path.</li>
             </ul>
           </div>
 

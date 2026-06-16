@@ -30,6 +30,9 @@ export default function Footer() {
           >
             Editorial Policy
           </Link>
+          <Link href="/disclosure" className="hover:text-primary-500 dark:hover:text-primary-400">
+            Disclosure
+          </Link>
           <Link href="/submit" className="hover:text-primary-500 dark:hover:text-primary-400">
             Submit a Tool
           </Link>

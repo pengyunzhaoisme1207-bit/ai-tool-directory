@@ -18,17 +18,23 @@ export function genPageMetadata({
   ...rest
 }: PageSEOProps): Metadata {
   const pageDescription = description || siteMetadata.description
+  const canonicalPath =
+    path === './'
+      ? siteMetadata.siteUrl
+      : path.startsWith('http')
+        ? path
+        : `${siteMetadata.siteUrl}${path.startsWith('/') ? path : `/${path}`}`
 
   return {
     title,
     description: pageDescription,
     alternates: {
-      canonical: path,
+      canonical: canonicalPath,
     },
     openGraph: {
       title: `${title} | ${siteMetadata.title}`,
       description: pageDescription,
-      url: path,
+      url: canonicalPath,
       siteName: siteMetadata.title,
       images: image ? [image] : [siteMetadata.socialBanner],
       locale: 'en_US',
