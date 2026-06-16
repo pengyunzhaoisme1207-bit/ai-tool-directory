@@ -13,7 +13,15 @@ targetUser: 'Experienced developers who want autonomous coding partner with deep
 category: 'Coding'
 rating: 4.8
 underlyingModel: 'Claude Opus 4.5'
-mainFeatures: ['Terminal-Native Agent', 'Full Codebase Understanding', 'Autonomous Multi-Step Planning', 'Git Workflow Management', 'PR Submission', 'IDE Integration (VS Code, JetBrains)']
+mainFeatures:
+  [
+    'Terminal-Native Agent',
+    'Full Codebase Understanding',
+    'Autonomous Multi-Step Planning',
+    'Git Workflow Management',
+    'PR Submission',
+    'IDE Integration (VS Code, JetBrains)',
+  ]
 lastUpdated: '2026-05-12'
 images: ['/static/images/claude-code-review.jpg']
 ---
@@ -24,20 +32,41 @@ Claude Code launched by Anthropic in early 2025 as an AI-powered coding assistan
 
 The tool represents a fundamentally different paradigm from GitHub Copilot (autocomplete-first) and even Cursor (AI-integrated IDE). Claude Code is an **autonomous agent** — you describe what you want, it reads your codebase, plans the implementation, writes the code, runs tests, and submits a pull request.
 
+<ScreenshotFigure
+  src="/static/images/screenshots/claude-code-official.png"
+  alt="Claude Code official website screenshot"
+  caption="Official Claude Code product page snapshot. The page positions Claude Code as a local, terminal-native coding agent rather than a traditional editor extension."
+  source="anthropic.com/claude-code"
+/>
+
 ## Key Features
 
 ### Terminal-Native Architecture
 
 Claude Code lives in your terminal, giving it direct access to:
+
 - **File system** — reads and writes files across your entire project
 - **Shell commands** — runs tests, builds, linting, git operations
 - **Local environment** — uses your existing toolchain, not a sandbox
 
 This is significant. Most AI coding assistants operate within a constrained environment. Claude Code works exactly like a senior developer sitting at your machine.
 
+## Visual Workflow Notes
+
+Claude Code does not win because it has the prettiest interface. It wins when the terminal workflow is already where the developer makes decisions. The useful review question is whether the command history, file diff, test output, and Git state are visible enough for a human to stay in control.
+
+| Review surface     | What we look for                                         |
+| ------------------ | -------------------------------------------------------- |
+| Terminal output    | Clear plans, command results, and failure recovery       |
+| File diffs         | Scoped changes that follow local project conventions     |
+| Test runs          | Evidence that generated code was actually checked        |
+| Git workflow       | Meaningful commits and reviewable pull request summaries |
+| Permission prompts | Human control before risky commands or broad edits       |
+
 ### Full Codebase Understanding
 
 Claude Code doesn't just read open files. It builds a mental model of your entire project:
+
 - Imports and dependencies across all modules
 - Architectural patterns and conventions
 - Existing test coverage and quality standards
@@ -48,6 +77,7 @@ When you ask "how does authentication work?", Claude Code traces the middleware,
 ### Autonomous Multi-Step Planning
 
 The killer feature. Claude Code can:
+
 1. Parse a high-level feature description
 2. Break it into implementation steps
 3. Execute each step (writing code, running tests)
@@ -59,6 +89,7 @@ This is not autocomplete. This is delegation.
 ### Git Workflow Management
 
 Claude Code handles the full Git workflow:
+
 - Creates feature branches
 - Makes atomic commits
 - Writes meaningful commit messages
@@ -67,27 +98,28 @@ Claude Code handles the full Git workflow:
 ### IDE Integration
 
 Despite being terminal-native, Claude Code integrates with:
+
 - **VS Code** — via extension
 - **JetBrains IDEs** — via plugin
 - **Terminal workflows** — native CLI operation
 
 ## Architecture & Model Specs
 
-| Spec | Details |
-|------|---------|
-| Underlying Model | Claude Opus 4.5 |
-| Context Window | 200K tokens |
-| Execution Environment | Local terminal |
-| IDE Support | VS Code, JetBrains, CLI |
-| Privacy | Code stays local (no cloud execution) |
+| Spec                  | Details                               |
+| --------------------- | ------------------------------------- |
+| Underlying Model      | Claude Opus 4.5                       |
+| Context Window        | 200K tokens                           |
+| Execution Environment | Local terminal                        |
+| IDE Support           | VS Code, JetBrains, CLI               |
+| Privacy               | Code stays local (no cloud execution) |
 
 ## Pricing Breakdown
 
-| Plan | Price | Includes |
-|------|-------|----------|
-| Claude Pro | $20/month | Claude Code access, Opus 4.5, limited usage |
-| Claude Max | $100-200/month | Higher usage limits, priority access |
-| API Access | Pay-per-use | Via Anthropic console |
+| Plan       | Price          | Includes                                    |
+| ---------- | -------------- | ------------------------------------------- |
+| Claude Pro | $20/month      | Claude Code access, Opus 4.5, limited usage |
+| Claude Max | $100-200/month | Higher usage limits, priority access        |
+| API Access | Pay-per-use    | Via Anthropic console                       |
 
 **Value assessment**: At $20/month, Claude Code is competitively priced against Cursor Pro ($20/month, usage-based since June 2025) and GitHub Copilot ($10/month). The $100-200/month Max tier is steep but targets power users who delegate most of their coding to AI.
 
@@ -107,6 +139,7 @@ Developer feedback consistently highlights one thing: Claude Code's output requi
 ## Pros & Cons
 
 ### Pros
+
 - Deepest codebase understanding among AI coding tools
 - Production-ready code with minimal rework
 - Full Git workflow automation
@@ -115,6 +148,7 @@ Developer feedback consistently highlights one thing: Claude Code's output requi
 - Integrates with existing IDE workflows
 
 ### Cons
+
 - Steep learning curve for terminal workflows
 - Requires Claude Pro ($20+/month) — no free tier
 - Less visual feedback than IDE-integrated tools

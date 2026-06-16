@@ -180,6 +180,34 @@ const sortByUpdated = (a: DirectoryPost, b: DirectoryPost) => {
   return bTime - aTime
 }
 
+const HOME_SCREENSHOTS = [
+  {
+    title: 'Claude Code',
+    label: 'Terminal agent',
+    src: '/static/images/screenshots/claude-code-official.png',
+    href: '/blog/claude-code-review/',
+  },
+  {
+    title: 'Cursor',
+    label: 'AI coding workspace',
+    src: '/static/images/screenshots/cursor-official.png',
+    href: '/blog/cursor-review/',
+  },
+  {
+    title: 'Microsoft Foundry',
+    label: 'Agent runtime docs',
+    src: '/static/images/screenshots/microsoft-foundry-agents.png',
+    href: '/blog/ai-agent-platform-buying-guide-2026/',
+  },
+]
+
+const REVIEW_SIGNALS = [
+  ['Fit', 'Does it solve a repeated workflow?'],
+  ['Quality', 'Is output reliable after review?'],
+  ['Cost', 'Can pricing scale predictably?'],
+  ['Control', 'Are privacy and permissions clear?'],
+]
+
 export default function Home({ posts, guides = [], briefs = [], comparisons = [] }: HomeProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
@@ -244,6 +272,17 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
     [briefs, comparisons, guides]
   )
 
+  const latestUpdateLabel = useMemo(() => {
+    const latest = [...guides, ...briefs, ...comparisons].sort(sortByUpdated)[0]
+    return latest?.date
+      ? new Date(latest.date).toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        })
+      : 'recently'
+  }, [briefs, comparisons, guides])
+
   // Filtered posts
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
@@ -295,7 +334,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
                 {guides.length + briefs.length + comparisons.length} editorial updates
               </span>
               <span className="rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
-                Updated Jun 15, 2026
+                Updated {latestUpdateLabel}
               </span>
               <span className="rounded-full bg-gray-100 px-3 py-1 dark:bg-gray-800">
                 {freeCount + freemiumCount} free or freemium tools
@@ -303,35 +342,63 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          <div className="space-y-3">
+            <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-950">
+              <div className="grid grid-cols-3 gap-1 border-b border-gray-200 bg-gray-100 p-1 dark:border-gray-800 dark:bg-gray-900">
+                {HOME_SCREENSHOTS.map((shot) => (
+                  <Link key={shot.title} href={shot.href} className="group relative block">
+                    <Image
+                      src={shot.src}
+                      alt={`${shot.title} official product screenshot`}
+                      width={1440}
+                      height={900}
+                      className="aspect-[4/3] w-full rounded-lg object-cover object-top transition duration-200 group-hover:opacity-90"
+                    />
+                    <span className="absolute right-1 bottom-1 rounded bg-black/70 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                      {shot.title}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+              <div className="p-4">
+                <div className="text-xs font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
+                  Visual review library
+                </div>
+                <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                  Official snapshots and original scorecards are added to priority reviews so
+                  readers can inspect product surfaces instead of reading plain text only.
+                </p>
+              </div>
+            </div>
             <Link
               href="/projects"
-              className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
+              className="block rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md dark:border-gray-800 dark:bg-gray-950"
             >
-              <div className="text-xs font-semibold tracking-wide text-blue-600 uppercase dark:text-blue-400">
-                Review methodology
+              <div className="mb-3 flex items-center justify-between">
+                <div className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                  Score before ranking
+                </div>
+                <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+                  4 signals
+                </span>
               </div>
-              <div className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                See how tools are selected, tested, scored, and updated.
-              </div>
-              <div className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
-                Ratings are based on workflow fit, output quality, pricing fairness, privacy
-                signals, and practical adoption risk.
-              </div>
-            </Link>
-            <Link
-              href="/categories"
-              className="rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:-translate-y-0.5 hover:border-gray-300 hover:bg-white dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700"
-            >
-              <div className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                Browse categories
-              </div>
-              <div className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">
-                Move by workflow, not by hype.
-              </div>
-              <div className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
-                Use category pages to compare coding, search, writing, design, image, and agent
-                tools in one place.
+              <div className="grid gap-2">
+                {REVIEW_SIGNALS.map(([label, note], index) => (
+                  <div key={label} className="grid grid-cols-[64px_1fr] items-center gap-2">
+                    <div className="text-xs font-bold text-gray-800 dark:text-gray-200">
+                      {label}
+                    </div>
+                    <div className="h-2 rounded-full bg-gray-100 dark:bg-gray-800">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-blue-500 to-emerald-500"
+                        style={{ width: `${88 - index * 8}%` }}
+                      />
+                    </div>
+                    <div className="col-span-2 text-xs leading-5 text-gray-500 dark:text-gray-400">
+                      {note}
+                    </div>
+                  </div>
+                ))}
               </div>
             </Link>
           </div>
@@ -497,7 +564,7 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
                 Fresh updates
               </h2>
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                New guides, comparisons, and AI Briefs. The latest issue is dated Jun 15, 2026.
+                New guides, comparisons, and AI Briefs. Latest update: {latestUpdateLabel}.
               </p>
             </div>
             <Link
@@ -660,6 +727,57 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
         </div>
       </section>
 
+      <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <p className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+              Product surfaces
+            </p>
+            <h2 className="mt-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              Screenshots make the reviews easier to verify.
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-400">
+              For open source projects, developer tools, and public AI products, we add official
+              website snapshots alongside original notes. They help readers see the real product
+              surface, while the written review explains workflow fit, pricing, privacy, and risk.
+            </p>
+          </div>
+          <Link
+            href="/blog/ai-tool-evaluation-scorecard-2026"
+            className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+          >
+            Read the visual review framework
+          </Link>
+        </div>
+        <div className="mt-5 grid gap-4 lg:grid-cols-3">
+          {HOME_SCREENSHOTS.map((shot) => (
+            <Link
+              key={shot.title}
+              href={shot.href}
+              className="group overflow-hidden rounded-xl border border-gray-200 bg-gray-50 transition hover:-translate-y-0.5 hover:border-blue-300 hover:bg-blue-50 hover:shadow-md dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+            >
+              <div className="border-b border-gray-200 bg-gray-100 p-2 dark:border-gray-800 dark:bg-gray-950">
+                <Image
+                  src={shot.src}
+                  alt={`${shot.title} official screenshot`}
+                  width={1440}
+                  height={900}
+                  className="aspect-[16/10] w-full rounded-lg object-cover object-top"
+                />
+              </div>
+              <div className="p-4">
+                <div className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                  {shot.label}
+                </div>
+                <h3 className="mt-1 text-sm font-semibold text-gray-900 group-hover:text-blue-700 dark:text-gray-100 dark:group-hover:text-blue-300">
+                  {shot.title}
+                </h3>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="mb-8 rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-gray-800 dark:bg-gray-900/60">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
@@ -692,6 +810,57 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
             >
               Use the scorecard
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mb-8 rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center">
+          <div>
+            <p className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+              Decision map
+            </p>
+            <h2 className="mt-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
+              We map each tool to the decision a reader actually needs to make.
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-gray-600 dark:text-gray-400">
+              Thin directories stop at a logo and a link. Next Happy adds context: what workflow the
+              tool serves, where pricing gets complicated, whether data controls are visible, and
+              which alternatives deserve comparison.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              {
+                title: 'Workflow fit',
+                body: 'Use case, audience, setup effort, and daily adoption friction.',
+                tone: 'border-blue-200 bg-blue-50 dark:border-blue-900/50 dark:bg-blue-950/30',
+              },
+              {
+                title: 'Model and output',
+                body: 'Model access, source handling, speed, quality, and repeatability.',
+                tone: 'border-emerald-200 bg-emerald-50 dark:border-emerald-900/50 dark:bg-emerald-950/30',
+              },
+              {
+                title: 'Pricing reality',
+                body: 'Free limits, credits, seats, overages, and business-plan gates.',
+                tone: 'border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-950/30',
+              },
+              {
+                title: 'Privacy and control',
+                body: 'Data use, export, permissions, admin settings, and review logs.',
+                tone: 'border-rose-200 bg-rose-50 dark:border-rose-900/50 dark:bg-rose-950/30',
+              },
+            ].map((item) => (
+              <div key={item.title} className={`rounded-xl border p-4 ${item.tone}`}>
+                <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                  {item.body}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

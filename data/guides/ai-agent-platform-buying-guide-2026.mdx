@@ -29,6 +29,8 @@ Choose an AI agent platform only when it can pass these five tests:
 
 If a product cannot satisfy these requirements, use it as an experiment, not as production infrastructure.
 
+<AgentWorkflowVisual />
+
 ## Step 1: Define the Workflow Before Choosing the Agent
 
 The most common agent buying mistake is starting with a vendor demo instead of a workflow.
@@ -45,16 +47,23 @@ The second question gives you a testable scenario. You can prepare sample ticket
 
 Useful workflow categories include:
 
-| Workflow | Agent task | Risk to check |
-| --- | --- | --- |
-| Coding | Edit files, run tests, prepare pull requests | Unrelated code changes, weak tests, hidden breakage |
-| Research | Search, read sources, summarize findings | Outdated sources, weak citations, unsupported claims |
-| Support | Draft replies, route tickets, find policy answers | Customer data exposure, wrong advice |
-| Operations | Update records, prepare reports, route approvals | Permission sprawl, poor audit trail |
-| Sales | Research accounts, draft outreach, update CRM | Bad personalization, compliance issues |
-| Finance | Classify spend, summarize invoices, flag anomalies | Sensitive data, incorrect categorization |
+| Workflow   | Agent task                                         | Risk to check                                        |
+| ---------- | -------------------------------------------------- | ---------------------------------------------------- |
+| Coding     | Edit files, run tests, prepare pull requests       | Unrelated code changes, weak tests, hidden breakage  |
+| Research   | Search, read sources, summarize findings           | Outdated sources, weak citations, unsupported claims |
+| Support    | Draft replies, route tickets, find policy answers  | Customer data exposure, wrong advice                 |
+| Operations | Update records, prepare reports, route approvals   | Permission sprawl, poor audit trail                  |
+| Sales      | Research accounts, draft outreach, update CRM      | Bad personalization, compliance issues               |
+| Finance    | Classify spend, summarize invoices, flag anomalies | Sensitive data, incorrect categorization             |
 
 Do not buy a general-purpose agent until you know which row of the table matters most.
+
+<ScreenshotFigure
+  src="/static/images/screenshots/microsoft-foundry-agents.png"
+  alt="Microsoft Foundry agents documentation screenshot"
+  caption="Official Microsoft Foundry agents documentation snapshot. Enterprise buyers need runtime, identity, and governance signals, not only a flashy demo."
+  source="learn.microsoft.com/en-us/azure/ai-foundry/agents/overview"
+/>
 
 ## Step 2: Evaluate Tool Access and Permissions
 
@@ -113,17 +122,32 @@ Create 10 to 20 realistic tasks from your actual workflow. Include easy cases, a
 
 Score each task on:
 
-| Criterion | What to look for |
-| --- | --- |
-| Completion | Did the agent finish the task? |
-| Accuracy | Was the answer or action correct? |
-| Scope control | Did it avoid unrelated changes? |
-| Source quality | Did it use reliable context? |
-| Approval behavior | Did it ask before risky actions? |
-| Recovery | Did it handle errors without inventing facts? |
-| Review burden | Did it save time after human review? |
+| Criterion         | What to look for                              |
+| ----------------- | --------------------------------------------- |
+| Completion        | Did the agent finish the task?                |
+| Accuracy          | Was the answer or action correct?             |
+| Scope control     | Did it avoid unrelated changes?               |
+| Source quality    | Did it use reliable context?                  |
+| Approval behavior | Did it ask before risky actions?              |
+| Recovery          | Did it handle errors without inventing facts? |
+| Review burden     | Did it save time after human review?          |
 
 The last row matters most. A tool that produces impressive drafts but doubles review time is not a productivity tool.
+
+## What to Capture During a Pilot
+
+Strong pilot notes make the final buying decision easier. For each platform, collect a small evidence pack:
+
+| Evidence               | Why it matters                                                            |
+| ---------------------- | ------------------------------------------------------------------------- |
+| Task transcript        | Shows whether the agent understood the job or drifted into adjacent work. |
+| Tool-call log          | Reveals which files, APIs, searches, or integrations were used.           |
+| Before/after output    | Helps reviewers judge improvement instead of relying on vibes.            |
+| Screenshot of settings | Confirms permissions, model selection, and data controls.                 |
+| Cost snapshot          | Prevents hidden usage patterns from appearing after rollout.              |
+| Human review time      | Shows whether the platform actually reduced workload.                     |
+
+This evidence pack is also useful later when the vendor changes pricing, model routing, or product surfaces.
 
 ## Step 6: Compare Pricing by Workflow Volume
 

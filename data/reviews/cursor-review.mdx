@@ -28,6 +28,13 @@ images: ['/static/images/cursor-review.jpg']
 
 Cursor has evolved from a VS Code fork into a full agentic coding platform. Cursor 3 (April 2026) introduced a unified workspace with agent-first interface, cloud/local agent handoff, and built-in browser control. Composer 2 (March 2026), Cursor''s own in-house model fine-tuned from Kimi K2.5, delivers frontier-level coding performance at 1/7th the cost of previous generations.
 
+<ScreenshotFigure
+  src="/static/images/screenshots/cursor-official.png"
+  alt="Cursor official website screenshot"
+  caption="Official Cursor homepage snapshot. Cursor is best evaluated as a full coding workspace: editor, model router, agent loop, diff review, and team controls."
+  source="cursor.com"
+/>
+
 ## Key Features
 
 - **Cursor 3 Workspace**: Agent-first interface with IDE fallback — see what agents produce at a higher level, then dig into diffs and LSP
@@ -46,13 +53,13 @@ Cursor has evolved from a VS Code fork into a full agentic coding platform. Curs
 
 ## Pricing Breakdown
 
-| Plan | Price | Features |
-|------|-------|----------|
-| Hobby | Free | 50 slow requests/mo, basic completions |
-| Pro | $20/mo | $20 API credit, generous Composer 2 usage |
-| Pro Plus | $60/mo | $70 API credit, higher Composer limits |
-| Ultra | $200/mo | $400 API credit, maximum usage |
-| Business | $40/user/mo | Admin controls, team marketplace |
+| Plan     | Price       | Features                                  |
+| -------- | ----------- | ----------------------------------------- |
+| Hobby    | Free        | 50 slow requests/mo, basic completions    |
+| Pro      | $20/mo      | $20 API credit, generous Composer 2 usage |
+| Pro Plus | $60/mo      | $70 API credit, higher Composer limits    |
+| Ultra    | $200/mo     | $400 API credit, maximum usage            |
+| Business | $40/user/mo | Admin controls, team marketplace          |
 
 ## Privacy & Safety
 
@@ -65,15 +72,29 @@ Cursor has evolved from a VS Code fork into a full agentic coding platform. Curs
 
 **Composer 2 + Cursor 3 Agents** — Cursor''s own model at $0.50/M input is dramatically cheaper than routing to Claude or GPT, while scoring competitive on coding benchmarks. Combined with the agent-first workspace, you can describe a multi-file refactoring, let the cloud agent plan and execute it, then seamlessly continue locally to test and iterate. The MCP plugin marketplace means agents can integrate with your database, CI/CD, and deployment tools directly.
 
+## Visual Evaluation Checklist
+
+For an AI editor, screenshots are not just decoration. They show whether the product makes the agent loop understandable enough to trust during real development.
+
+| Interface area       | Why it matters                                                                 |
+| -------------------- | ------------------------------------------------------------------------------ |
+| Chat and agent panel | Shows how tasks are scoped and whether context is visible                      |
+| Diff view            | Determines how easily developers can reject or refine generated changes        |
+| Model selector       | Reveals cost, speed, and quality trade-offs in daily work                      |
+| Terminal/test panel  | Confirms whether generated code can be validated without leaving the workspace |
+| Team settings        | Shows whether privacy, usage, and admin controls are practical                 |
+
 ## Pros & Cons
 
 **Pros:**
+
 - Composer 2 offers frontier coding quality at fraction of the cost
 - Cursor 3 agents handle complex multi-repo workflows
 - Seamless cloud-to-local agent handoff
 - Growing plugin ecosystem via MCP
 
 **Cons:**
+
 - Competing with Claude Code and OpenAI Codex directly
 - Requires downloading a separate editor
 - Token-based pricing on teams plans adds complexity
