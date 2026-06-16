@@ -5,6 +5,7 @@ import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Brief } from 'contentlayer/generated'
 import Link from '@/components/Link'
+import Image from '@/components/Image'
 import siteMetadata from '@/data/siteMetadata'
 
 interface PaginationProps {
@@ -78,6 +79,28 @@ export default function BriefListLayout({
 
   // Determine current path for active state
   const currentSlug = pathname.split('/').filter(Boolean).pop() || ''
+  const latestBrief = briefs[0]
+
+  const spotlightCards = [
+    {
+      title: 'Agent platforms',
+      body: 'When product direction changes, buyers need migration and governance clues.',
+      href: '/blog/ai-agent-platform-buying-guide-2026/',
+      src: '/static/images/screenshots/microsoft-foundry-agents.png',
+    },
+    {
+      title: 'Coding workflows',
+      body: 'Terminal and IDE agents are now the most active part of the market.',
+      href: '/blog/claude-code-review/',
+      src: '/static/images/screenshots/claude-code-official.png',
+    },
+    {
+      title: 'Workspace editors',
+      body: 'Editor-native AI products need to prove diff quality and team fit.',
+      href: '/blog/cursor-review/',
+      src: '/static/images/screenshots/cursor-official.png',
+    },
+  ]
 
   return (
     <>
@@ -96,6 +119,12 @@ export default function BriefListLayout({
                   Concise updates on model launches, agent platforms, pricing shifts, enterprise
                   adoption, safety policy, and workflow implications.
                 </p>
+                {latestBrief && (
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-200 dark:bg-gray-950 dark:text-gray-300 dark:ring-gray-800">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                    Latest: {latestBrief.title}
+                  </div>
+                )}
               </div>
               <div className="grid grid-cols-3 gap-2 text-center">
                 <div className="rounded-lg border border-gray-200 bg-white px-4 py-3 dark:border-gray-800 dark:bg-gray-950">
@@ -123,6 +152,32 @@ export default function BriefListLayout({
             </div>
           </div>
         </div>
+
+        <section className="mb-6 grid gap-3 md:grid-cols-3">
+          {spotlightCards.map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              className="overflow-hidden rounded-xl border border-gray-200 bg-white transition hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-sm dark:border-gray-800 dark:bg-gray-950 dark:hover:border-blue-700"
+            >
+              <Image
+                src={item.src}
+                alt={`${item.title} visual`}
+                width={1440}
+                height={900}
+                className="aspect-[16/9] w-full object-cover object-top"
+              />
+              <div className="p-4">
+                <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  {item.title}
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                  {item.body}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </section>
 
         <div className="grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
           <aside className="hidden lg:block">

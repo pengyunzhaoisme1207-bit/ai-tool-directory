@@ -7,6 +7,7 @@ import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Review, Guide, Comparison, Brief } from 'contentlayer/generated'
 import Link from '@/components/Link'
 import Tag from '@/components/Tag'
+import Image from '@/components/Image'
 import siteMetadata from '@/data/siteMetadata'
 
 interface PaginationProps {
@@ -71,6 +72,27 @@ const CONTENT_TYPES = [
   { key: 'brief', label: 'Briefs' },
 ]
 
+const ARCHIVE_VISUALS = [
+  {
+    title: 'Claude Code',
+    src: '/static/images/screenshots/claude-code-official.png',
+    href: '/blog/claude-code-review/',
+    note: 'Terminal-native agent review',
+  },
+  {
+    title: 'Cursor',
+    src: '/static/images/screenshots/cursor-official.png',
+    href: '/blog/cursor-review/',
+    note: 'AI coding workspace review',
+  },
+  {
+    title: 'Microsoft Foundry',
+    src: '/static/images/screenshots/microsoft-foundry-agents.png',
+    href: '/blog/ai-agent-platform-buying-guide-2026/',
+    note: 'Agent platform buying guide',
+  },
+]
+
 function getContentType(post: CoreContent<Review | Guide | Comparison | Brief>): string {
   const filePath = 'filePath' in post && typeof post.filePath === 'string' ? post.filePath : ''
   if (filePath.includes('reviews/')) return 'review'
@@ -115,14 +137,92 @@ export default function ListLayoutWithTags({
     <>
       <div>
         <div className="pt-6 pb-6">
-          <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-5xl md:leading-13 dark:text-gray-100">
-            {title}
-          </h1>
-          <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-400">
-            Browse the full editorial archive: hands-on reviews, buyer guides, product comparisons,
-            and decision notes written for real AI workflows rather than launch hype.
-          </p>
+          <section className="rounded-2xl border border-gray-200 bg-[linear-gradient(135deg,#f8fafc_0%,#ffffff_46%,#eef6ff_100%)] p-5 shadow-sm dark:border-gray-800 dark:bg-[linear-gradient(135deg,#020617_0%,#111827_55%,#0f172a_100%)]">
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-start">
+              <div>
+                <div className="text-xs font-bold tracking-wide text-blue-600 uppercase dark:text-blue-400">
+                  Editorial archive
+                </div>
+                <h1 className="mt-2 text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-5xl md:leading-13 dark:text-gray-100">
+                  {title}
+                </h1>
+                <p className="mt-4 max-w-3xl text-base leading-7 text-gray-600 dark:text-gray-400">
+                  Browse the full editorial archive: hands-on reviews, buyer guides, product
+                  comparisons, and decision notes written for real AI workflows rather than launch
+                  hype.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2 text-xs text-gray-600 dark:text-gray-400">
+                  <span className="rounded-full bg-white px-3 py-1 ring-1 ring-gray-200 dark:bg-gray-950 dark:ring-gray-800">
+                    {typeCounts.review} reviews
+                  </span>
+                  <span className="rounded-full bg-white px-3 py-1 ring-1 ring-gray-200 dark:bg-gray-950 dark:ring-gray-800">
+                    {typeCounts.guide} guides
+                  </span>
+                  <span className="rounded-full bg-white px-3 py-1 ring-1 ring-gray-200 dark:bg-gray-950 dark:ring-gray-800">
+                    {typeCounts.comparison} comparisons
+                  </span>
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-950">
+                <div className="grid grid-cols-3 gap-1 bg-gray-100 p-1 dark:bg-gray-900">
+                  {ARCHIVE_VISUALS.map((item) => (
+                    <Link key={item.title} href={item.href} className="group relative block">
+                      <Image
+                        src={item.src}
+                        alt={`${item.title} official screenshot`}
+                        width={1440}
+                        height={900}
+                        className="aspect-[4/3] w-full rounded-lg object-cover object-top"
+                      />
+                      <span className="absolute right-1 bottom-1 rounded bg-black/70 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+                        {item.title}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+                <div className="p-4">
+                  <div className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                    Visual evidence
+                  </div>
+                  <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                    Priority articles combine screenshots, scorecards, pricing notes, and workflow
+                    context so readers can verify more than a short summary.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
+        <section className="mb-6 grid gap-3 md:grid-cols-3">
+          {[
+            {
+              title: 'How we review',
+              body: 'Workflow fit, output quality, pricing fairness, privacy controls, and ecosystem value.',
+              href: '/projects',
+            },
+            {
+              title: 'How to compare',
+              body: 'Use side-by-side decisions when two tools solve the same job in different ways.',
+              href: '/comparisons',
+            },
+            {
+              title: 'How to shortlist',
+              body: 'Start from coding, research, writing, creative work, or team rollout needs.',
+              href: '/best-ai-tools',
+            },
+          ].map((item) => (
+            <Link
+              key={item.title}
+              href={item.href}
+              className="rounded-xl border border-gray-200 bg-white p-4 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-950 dark:hover:border-blue-700 dark:hover:bg-blue-950/30"
+            >
+              <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                {item.title}
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">{item.body}</p>
+            </Link>
+          ))}
+        </section>
         <div className="flex sm:space-x-24">
           <div className="hidden h-full max-h-screen max-w-[280px] min-w-[280px] flex-wrap overflow-auto rounded-lg border border-gray-200 bg-gray-50 pt-5 shadow-sm sm:flex dark:border-gray-800 dark:bg-gray-900/70">
             <div className="px-6 py-4">

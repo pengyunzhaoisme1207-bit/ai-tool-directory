@@ -1,4 +1,5 @@
 import Link from '@/components/Link'
+import Image from '@/components/Image'
 import { allReviews } from 'contentlayer/generated'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { genPageMetadata } from 'app/seo'
@@ -88,14 +89,55 @@ export default function CategoriesPage() {
 
   return (
     <div className="divide-y divide-gray-200 dark:divide-gray-700">
-      <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-        <h1 className="text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
-          AI Tool Categories
-        </h1>
-        <p className="max-w-3xl text-lg leading-7 text-gray-500 dark:text-gray-400">
-          Browse the directory by workflow. Each category groups reviews around a real decision:
-          what to use, when to use it, what it costs, and which risks to check before adopting it.
-        </p>
+      <div className="pt-6 pb-8">
+        <section className="rounded-2xl border border-gray-200 bg-[linear-gradient(135deg,#f8fafc_0%,#ffffff_48%,#f0fdf4_100%)] p-6 shadow-sm dark:border-gray-800 dark:bg-[linear-gradient(135deg,#020617_0%,#111827_55%,#052e2b_100%)]">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-center">
+            <div>
+              <p className="text-xs font-bold tracking-wide text-emerald-700 uppercase dark:text-emerald-400">
+                Workflow index
+              </p>
+              <h1 className="mt-2 text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14 dark:text-gray-100">
+                AI Tool Categories
+              </h1>
+              <p className="mt-4 max-w-3xl text-lg leading-7 text-gray-600 dark:text-gray-400">
+                Browse the directory by workflow. Each category groups reviews around a real
+                decision: what to use, when to use it, what it costs, and which risks to check
+                before adopting it.
+              </p>
+            </div>
+            <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-gray-950">
+              <h2 className="text-xs font-bold tracking-wide text-gray-500 uppercase dark:text-gray-400">
+                Category decision signals
+              </h2>
+              <div className="mt-4 grid gap-3">
+                {[
+                  ['User intent', 'Is the reader trying to buy, compare, learn, or replace?'],
+                  [
+                    'Workflow risk',
+                    'Could the tool touch code, customer data, media rights, or spend?',
+                  ],
+                  ['Update need', 'Does pricing, model access, or policy change often?'],
+                  [
+                    'Internal links',
+                    'Can readers move to reviews, guides, comparisons, and briefs?',
+                  ],
+                ].map(([title, body]) => (
+                  <div
+                    key={title}
+                    className="rounded-lg border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900"
+                  >
+                    <div className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                      {title}
+                    </div>
+                    <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                      {body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
 
       <div className="grid gap-6 py-10 md:grid-cols-2">
@@ -115,6 +157,27 @@ export default function CategoriesPage() {
               <span className="rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-300">
                 {posts.length}
               </span>
+            </div>
+
+            <div className="mt-5 flex items-center gap-2">
+              {posts.slice(0, 5).map((post) =>
+                post.logo ? (
+                  <Link
+                    key={post.slug}
+                    href={`/${post.path}`}
+                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-2 transition hover:border-blue-300 hover:bg-blue-50 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-blue-700"
+                    title={post.title}
+                  >
+                    <Image
+                      src={post.logo}
+                      alt={`${post.title} logo`}
+                      width={28}
+                      height={28}
+                      className="h-7 w-7 object-contain"
+                    />
+                  </Link>
+                ) : null
+              )}
             </div>
 
             <div className="mt-5 grid gap-3 border-t border-gray-100 pt-5 dark:border-gray-800">
