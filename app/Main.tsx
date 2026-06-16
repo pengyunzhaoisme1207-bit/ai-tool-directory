@@ -686,6 +686,12 @@ export default function Home({ posts, guides = [], briefs = [], comparisons = []
             >
               Submit a tool update
             </Link>
+            <Link
+              href="/blog/ai-tool-evaluation-scorecard-2026"
+              className="text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+            >
+              Use the scorecard
+            </Link>
           </div>
         </div>
       </section>

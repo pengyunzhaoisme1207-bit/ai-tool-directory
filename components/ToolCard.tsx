@@ -119,6 +119,17 @@ export default function ToolCard({ post }) {
           {targetUser && <span className="ml-2 truncate">{targetUser}</span>}
         </div>
 
+        {lastUpdated && (
+          <div className="mb-2 text-xs text-gray-400 dark:text-gray-500">
+            Updated{' '}
+            {new Date(lastUpdated).toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+            })}
+          </div>
+        )}
+
         {/* Tags */}
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
