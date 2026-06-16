@@ -1,7 +1,7 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'Next Happy AI Tools',
-  author: 'AI Tool Directory',
+  author: 'Next Happy AI Tools',
   headerTitle: 'Next Happy AI Tools',
   description:
     'Independent AI tool reviews, comparisons, and weekly briefs for choosing software across coding, writing, search, design, video, and team workflows.',
