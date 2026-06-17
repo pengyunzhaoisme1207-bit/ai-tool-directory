@@ -3,6 +3,8 @@ import 'pliny/search/algolia.css'
 import 'remark-github-blockquote-alert/alert.css'
 
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
+import type { SearchConfig } from 'pliny/search'
+import { SearchProvider } from 'pliny/search'
 import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
@@ -94,14 +96,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className="bg-white pl-[calc(100vw-100%)] text-black antialiased dark:bg-gray-950 dark:text-white"
         suppressHydrationWarning
       >
-        <ThemeProviders>
-          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-          <SectionContainer>
-            <Header />
-            <main className="mb-auto">{children}</main>
-            <Footer />
-          </SectionContainer>
-        </ThemeProviders>
+        <SearchProvider searchConfig={siteMetadata.search as SearchConfig}>
+          <ThemeProviders>
+            <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+            <SectionContainer>
+              <Header />
+              <main className="mb-auto">{children}</main>
+              <Footer />
+            </SectionContainer>
+          </ThemeProviders>
+        </SearchProvider>
       </body>
     </html>
   )
